@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Control & DJ | Reproductor MusicTV</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body class="bg-[#0c0e12] text-gray-100 min-h-screen flex flex-col font-sans">
+
+  <!-- Topbar Minimalista -->
+  <header class="glass-header px-4 lg:px-6 py-2.5 flex items-center justify-between border-b border-white/10 z-30 shrink-0">
+    <div class="flex items-center gap-3">
+      <!-- Botón móvil para abrir sidebar -->
+      <button onclick="toggleSidebarMobile()" class="lg:hidden text-gray-300 hover:text-white p-1.5 rounded-xl bg-white/5 border border-white/10" aria-label="Abrir Menú">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-extrabold text-sm shadow-[0_0_12px_rgba(245,158,11,0.3)]">
+          ⚡
+        </div>
+        <div>
+          <h1 class="text-sm sm:text-base font-extrabold text-white tracking-wider flex items-center gap-2">
+            <span id="adminBarName">Reproductor MusicTV</span>
+            <span class="text-[9px] uppercase tracking-widest font-black px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 animate-pulse">
+              EN VIVO
+            </span>
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accesos Rápidos Header -->
+    <div class="flex items-center gap-2">
+      <button id="btnMicMode" onclick="toggleMicMode()" class="btn-secondary text-xs flex items-center gap-1.5 py-1.5 px-3 transition" title="Atenuar música para hablar">
+        <span id="micModeIcon" class="w-2 h-2 rounded-full bg-gray-400 inline-block"></span>
+        <span id="micModeText" class="hidden sm:inline">Modo Micrófono</span>
+      </button>
+      <a href="/player.html" target="_blank" class="tactile-btn-dark text-xs py-1.5 px-3 flex items-center gap-1.5" title="Abrir pantalla para la TV">
+        <span>📺</span> <span class="hidden sm:inline">Pantalla TV</span>
+      </a>
+      <a href="/qrs.html" target="_blank" class="btn-secondary text-xs py-1.5 px-3 flex items-center gap-1.5" title="Ver e imprimir códigos QR">
+        <span>🖨️</span> <span class="hidden sm:inline">QRs</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Layout Principal: Sidebar Izquierda + Área de Trabajo -->
+  <div class="flex-1 flex overflow-hidden relative">
+    
+    <!-- Sidebar de Navegación Estilo Pro -->
+    <aside id="adminSidebar" class="w-64 bg-[#11141b] border-r border-white/10 flex flex-col justify-between shrink-0 transition-transform duration-300 -translate-x-full lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-40 lg:z-auto pt-14 lg:pt-0">
+      
+      <!-- Menú Vertical -->
+      <div class="p-3.5 space-y-1.5 overflow-y-auto">
+        <div class="px-3 py-2 text-[10px] font-black uppercase tracking-widest text-gray-500 flex items-center justify-between">
+          <span>CONSOLA DEL BAR</span>
+          <button onclick="toggleSidebarMobile()" class="lg:hidden text-gray-400 hover:text-white p-1">✕</button>
+        </div>
+
+        <button onclick="switchTab('queue')" id="tabBtnQueue" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.15)]">
+          <div class="flex items-center gap-2.5">
+            <span class="text-base">📻</span>
+            <span>En Vivo & Consola</span>
+          </div>
+          <span id="queueCounterBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500 text-black font-extrabold">0</span>
+        </button>
+
+        <button onclick="switchTab('playlists')" id="tabBtnPlaylists" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/5 border border-transparent transition">
+          <span class="text-base">📂</span>
+          <span>Listas Maestras</span>
+        </button>
+
+        <button onclick="switchTab('control')" id="tabBtnControl" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/5 border border-transparent transition">
+          <span class="text-base">🎛️</span>
+          <span>Mesas, Horarios & TV</span>
+        </button>
+
+        <button onclick="switchTab('ai')" id="tabBtnAI" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/5 border border-transparent transition">
+          <span class="text-base">🤖</span>
+          <span>DJ Inteligente IA</span>
+        </button>
+
+        <button onclick="switchTab('stats')" id="tabBtnStats" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/5 border border-transparent transition">
+          <span class="text-base">📈</span>
+          <span>Tendencias & Historial</span>
+        </button>
+
+        <button onclick="switchTab('settings')" id="tabBtnSettings" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/5 border border-transparent transition">
+          <span class="text-base">⚙️</span>
+          <span>Ajustes del Bar</span>
+        </button>
+      </div>
+
+      <!-- Mini Tarjeta Persistente al Fondo del Sidebar -->
+      <div class="p-3 border-t border-white/10 bg-black/40 m-3 rounded-2xl border border-white/5">
+        <div class="flex items-center gap-2.5 mb-2">
+          <img id="adminSidebarMiniThumb" src="" class="w-10 h-10 rounded-xl object-cover border border-amber-500/40 shrink-0">
+          <div class="min-w-0 flex-1">
+            <p id="adminSidebarMiniTitle" class="text-xs font-bold text-white truncate">Cargando...</p>
+            <p id="adminSidebarMiniArtist" class="text-[10px] text-amber-400 truncate font-semibold">Artista</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between text-[10px] text-gray-400 font-mono">
+          <span id="adminSidebarMiniTime">00:00</span>
+          <span class="text-emerald-400 font-bold tracking-wider text-[9px] flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> AL AIRE
+          </span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Overlay oscuro para cerrar sidebar en móviles -->
+    <div id="sidebarBackdrop" onclick="toggleSidebarMobile()" class="fixed inset-0 bg-black/70 z-30 hidden lg:hidden"></div>
+
+    <!-- Área de Trabajo Principal -->
+    <main class="flex-1 overflow-y-auto p-3.5 sm:p-6 lg:p-7 space-y-6 w-full">
+
+      <!-- ============================================== -->
+      <!-- PESTAÑA 1: COLA EN VIVO & CONSOLA DJ -->
+      <!-- ============================================== -->
+      <div id="tabContentQueue" class="space-y-6">
+
+        <!-- ============================================================ -->
+        <!-- REPRODUCTOR PRO HARDWARE DECK (ESTILO DARK GOLD TRAKTOR/DJ) -->
+        <!-- ============================================================ -->
+        <div class="relative bg-gradient-to-b from-[#181b24] via-[#12141c] to-[#0e1017] rounded-3xl p-4 sm:p-7 border border-amber-500/30 shadow-[0_10px_35px_rgba(0,0,0,0.6),0_0_25px_rgba(245,158,11,0.08)] space-y-4 sm:space-y-5">
+          
+          <!-- Header del Deck -->
+          <div class="flex items-center justify-between border-b border-white/10 pb-2.5 sm:pb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_#facc15] animate-pulse"></span>
+              <span class="text-[10px] sm:text-xs font-black tracking-[0.2em] text-amber-400 uppercase">NOW PLAYING • CONSOLA DJ</span>
+            </div>
+            <div class="flex items-center gap-1.5 sm:gap-2">
+              <span id="adminNowGenre" class="genre-badge genre-Salsa text-[9px] sm:text-[10px]">Salsa</span>
+              <span id="adminNowRequested" class="text-[10px] sm:text-[11px] text-gray-400"></span>
+            </div>
+          </div>
+
+          <!-- Info Principal del Tema (Carátula grande con bisel dorado + Título impactante) -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-6">
+            <div class="flex items-center gap-3 sm:gap-6 min-w-0 flex-1 w-full sm:w-auto">
+              <div class="relative shrink-0 group">
+                <div class="absolute -inset-1 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 opacity-40 blur-sm group-hover:opacity-75 transition"></div>
+                <img id="adminNowThumb" src="" class="relative w-16 h-16 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-amber-400 shadow-2xl">
+              </div>
+              <div class="min-w-0 flex-1">
+                <h2 id="adminNowTitle" class="text-base sm:text-2xl lg:text-3xl font-black text-white tracking-wide truncate leading-tight">
+                  Cargando...
+                </h2>
+                <p id="adminNowArtist" class="text-xs sm:text-base text-amber-400 font-bold truncate mt-0.5">
+                  Artista
+                </p>
+                <p class="text-[11px] sm:text-xs text-gray-400 mt-1 flex items-center gap-1.5">
+                  <span>🎵</span> <span id="adminNowOriginText">Lista Base</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Tiempo Numérico Grande (Estilo Display Digital) -->
+            <div class="bg-black/60 border border-white/10 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-right shrink-0 w-full sm:w-auto flex sm:flex-col items-center sm:items-end justify-between sm:justify-center">
+              <div class="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-400 font-bold sm:mb-0.5">TIEMPO TRANSCURRIDO</div>
+              <div class="font-mono text-lg sm:text-2xl font-black tracking-wider text-amber-400">
+                <span id="adminCurrentTime">00:00</span> <span class="text-gray-500 text-sm sm:text-base">/</span> <span id="adminTotalDuration" class="text-gray-300">00:00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Barra de Progreso / Scrubber Interactivo -->
+          <div class="space-y-1.5 pt-1">
+            <div class="relative flex items-center">
+              <input type="range" id="adminPlayerScrubber" min="0" max="100" value="0" class="scrubber-slider" oninput="onScrubberInput(this.value)" onchange="onScrubberChange(this.value)">
+            </div>
+            <div class="flex justify-between text-[11px] font-mono text-gray-400">
+              <span id="scrubberElapsedLabel">0:00</span>
+              <span class="text-[10px] uppercase text-gray-500 tracking-wider hidden md:inline">Haz clic o arrastra en la barra para adelantar o retroceder</span>
+              <span id="scrubberTotalLabel">0:00</span>
+            </div>
+          </div>
+
+          <!-- Botonera Táctil Neomórfica de Transporte (Estilo Hardware Físico) -->
+          <div class="pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+            
+            <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+              
+              <!-- REWIND -->
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[9px] font-black uppercase text-gray-400 tracking-wider">REWIND</span>
+                <button onclick="remoteSeek(-10)" class="tactile-btn-dark px-3.5 sm:px-4 py-2 text-xs sm:text-sm" title="Retroceder 10 segundos">
+                  ⏪ -10s
+                </button>
+              </div>
+
+              <!-- PLAY / PAUSE (GRANDE Y DORADO AL CENTRO) -->
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[9px] font-black uppercase text-amber-400 tracking-wider">PLAY / PAUSE</span>
+                <button id="btnPlayPause" onclick="togglePlayPauseRemote()" class="tactile-btn-gold px-7 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg flex items-center gap-2" title="Pausar o Reanudar">
+                  <span id="btnPlayPauseIcon">⏸️</span>
+                  <span id="btnPlayPauseText" class="text-xs sm:text-sm uppercase tracking-wider font-black">PAUSAR</span>
+                </button>
+              </div>
+
+              <!-- FAST FORWARD -->
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[9px] font-black uppercase text-gray-400 tracking-wider">FAST FORWARD</span>
+                <button onclick="remoteSeek(10)" class="tactile-btn-dark px-3.5 sm:px-4 py-2 text-xs sm:text-sm" title="Adelantar 10 segundos">
+                  +10s ⏩
+                </button>
+              </div>
+
+              <!-- NEXT / SALTAR -->
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[9px] font-black uppercase text-gray-400 tracking-wider">NEXT</span>
+                <button onclick="skipCurrentSong()" class="tactile-btn-dark px-4 sm:px-5 py-2 text-xs sm:text-sm hover:border-amber-400/60" title="Saltar a la siguiente canción">
+                  ⏭️ Saltar
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Controles Secundarios: Micrófono y Volumen TV -->
+            <div class="flex items-center gap-3 sm:gap-4 ml-auto">
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[9px] font-black uppercase text-gray-400 tracking-wider">VOZ / MIC</span>
+                <button onclick="toggleMicMode()" id="btnDeckMic" class="tactile-btn-dark px-3.5 py-2 text-xs flex items-center gap-1.5" title="Atenuar música para hablar">
+                  🎙️ <span id="deckMicLabel">Mic</span>
+                </button>
+              </div>
+
+              <div class="flex flex-col items-start gap-1 bg-black/40 px-3.5 py-1.5 rounded-xl border border-white/10">
+                <span class="text-[9px] font-black uppercase text-gray-400 tracking-wider">VOLUMEN TV</span>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-gray-400">🔊</span>
+                  <input type="range" id="adminVolumeSlider" min="0" max="100" value="100" oninput="onVolumeChange(this.value)" class="w-20 sm:w-28 accent-amber-500 cursor-pointer h-1.5 bg-white/20 rounded-lg">
+                  <span id="adminVolumeDisplay" class="text-[10px] font-mono text-amber-400 font-bold w-7">100%</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Buscador Manual para el DJ / Barman -->
+        <div class="glass-card p-4 sm:p-5 space-y-3 border-white/10">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+              <span>🔍</span> Agregar canción rápida a la cola (como DJ)
+            </h3>
+            <button id="adminClearSearchBtn" onclick="clearAdminSearch()" class="text-xs text-gray-400 hover:text-white hidden">
+              Limpiar búsqueda
+            </button>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <div class="relative flex-1">
+              <input type="text" id="adminSearchInput" onkeydown="handleAdminSearchKey(event)" placeholder="Buscar canción, artista o pegar enlace de YouTube..." class="w-full bg-black/40 border border-white/15 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white outline-none focus:border-amber-400 pr-9">
+              <button id="adminSearchInputClear" onclick="clearAdminSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white text-xs hidden" title="Limpiar">✕</button>
+            </div>
+            <button id="adminSearchBtn" onclick="adminSearchSong()" class="btn-secondary text-xs sm:text-sm px-4 py-2.5 flex items-center justify-center gap-1.5 font-bold">
+              <span id="adminSearchBtnLabel">Buscar</span>
+            </button>
+          </div>
+          <div id="adminSearchResults" class="hidden space-y-2 pt-2">
+            <!-- Inyectado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN UP NEXT / QUEUE (ESTILO EXACTO DE LA REFERENCIA)     -->
+        <!-- ============================================================ -->
+        <div class="glass-card p-4 sm:p-6 space-y-4 border-white/10">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
+            <div class="flex items-center gap-2.5">
+              <span class="text-amber-400 font-bold text-base">≡</span>
+              <h3 class="font-black text-sm sm:text-base text-white tracking-wider uppercase flex items-center gap-2">
+                COLA DE REPRODUCCIÓN (<span id="queueCounter">0</span>)
+              </h3>
+              <span id="queueCustomerBadge" class="hidden text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                0 de mesas
+              </span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <button onclick="clearWaitingQueue()" class="btn-secondary text-[11px] py-1 px-2.5 flex items-center gap-1.5 text-rose-300 hover:text-rose-100 hover:bg-rose-500/20 border-rose-500/30 transition" title="Elimina todos los pedidos y canciones en espera para cambiar de tanda o empezar de cero">
+                <span>🗑️</span> Vaciar Lista de Espera
+              </button>
+              <button onclick="refreshPlaybackQueue()" class="btn-secondary text-[11px] py-1 px-2.5 flex items-center gap-1.5 text-gray-300 hover:text-white" title="Regenerar la mezcla de 50 temas base">
+                <span>🔄</span> Regenerar Mezcla
+              </button>
+              <span class="text-[11px] sm:text-xs text-gray-400 hidden md:inline">
+                Arrastra o usa <strong class="text-amber-400">▲ ▼</strong> para mover
+              </span>
+            </div>
+          </div>
+
+          <div id="adminQueueList" class="space-y-2">
+            <!-- Inyectado dinámicamente -->
+          </div>
+        </div>
+
+      </div>
+
+    <!-- ============================================== -->
+    <!-- PESTAÑA 2: LISTAS MAESTRAS (EL NORTE) -->
+    <!-- ============================================== -->
+    <div id="tabContentPlaylists" class="hidden space-y-4 sm:space-y-6">
+      <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-white">Listas Base del Bar</h2>
+          <p class="text-[11px] sm:text-xs text-gray-400">Música de fondo cuando nadie está pidiendo canciones.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+          <button onclick="exportPlaylistsBackup()" class="btn-secondary text-xs flex items-center gap-1 py-1.5 px-2.5" title="Descargar copia de seguridad de tus listas">
+            Respaldar
+          </button>
+          <button onclick="triggerImportBackup()" class="btn-secondary text-xs flex items-center gap-1 py-1.5 px-2.5" title="Restaurar listas desde archivo de copia">
+            Restaurar
+          </button>
+          <input type="file" id="importBackupFileInput" accept=".json" class="hidden" onchange="handleBackupFileSelected(event)">
+          <button onclick="autoClassifyAllPlaylists()" class="btn-secondary text-xs flex items-center gap-1 py-1.5 px-2.5 text-amber-300 hover:text-amber-200 border-amber-500/30" title="Analiza todas tus listas y actualiza temas en Crossover al género correcto">
+            Auto-Detectar Géneros
+          </button>
+          <button onclick="openImportModal()" class="btn-secondary text-xs flex items-center gap-1 py-1.5 px-2.5">
+            Importar
+          </button>
+          <button onclick="openNewPlaylistModal()" class="btn-primary text-xs flex items-center gap-1 py-1.5 px-3 font-bold">
+            + Nueva Lista
+          </button>
+        </div>
+      </div>
+ 
+      <!-- Panel de Control de Modo de Reproducción de Listas Base -->
+      <div class="glass-card p-4 sm:p-5 space-y-3.5 border-amber-500/30 bg-amber-500/5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
+          <div>
+            <h3 class="text-sm font-bold text-amber-400">
+              Modo de Reproducción Base (Cuando no hay pedidos)
+            </h3>
+            <p class="text-[11px] sm:text-xs text-gray-300">Elige cómo rota la música de fondo entre tus listas.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="basePlaybackModeBadge" class="text-xs px-2.5 py-1 rounded-lg bg-black/40 border border-white/15 text-white font-mono font-bold">
+              Modo: Lista Única
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+          <!-- Opción 1: Lista Única -->
+          <label class="cursor-pointer border border-white/10 p-3 rounded-xl bg-black/30 hover:border-amber-400/50 transition flex items-start gap-3">
+            <input type="radio" name="basePlaybackModeRadio" value="single" class="mt-0.5 accent-amber-500" onchange="changeBasePlaybackMode('single')">
+            <div class="text-xs">
+              <p class="font-bold text-white">Lista Única</p>
+              <p class="text-[11px] text-gray-400 mt-0.5">Suena únicamente la lista activa.</p>
+            </div>
+          </label>
+
+          <!-- Opción 2: Crossover Multilistas -->
+          <label class="cursor-pointer border border-white/10 p-3 rounded-xl bg-black/30 hover:border-amber-400/50 transition flex items-start gap-3">
+            <input type="radio" name="basePlaybackModeRadio" value="crossover" class="mt-0.5 accent-amber-500" onchange="changeBasePlaybackMode('crossover')">
+            <div class="text-xs">
+              <p class="font-bold text-amber-400">Crossover Multilistas</p>
+              <p class="text-[11px] text-gray-400 mt-0.5">Mezcla tandas automáticas (ej: 2 de cada lista).</p>
+            </div>
+          </label>
+
+          <!-- Opción 3: Secuencial / Consecutivo -->
+          <label class="cursor-pointer border border-white/10 p-3 rounded-xl bg-black/30 hover:border-amber-400/50 transition flex items-start gap-3">
+            <input type="radio" name="basePlaybackModeRadio" value="sequential" class="mt-0.5 accent-amber-500" onchange="changeBasePlaybackMode('sequential')">
+            <div class="text-xs">
+              <p class="font-bold text-sky-400">Consecutivo en Cadena</p>
+              <p class="text-[11px] text-gray-400 mt-0.5">Suena una lista completa tras otra.</p>
+            </div>
+          </label>
+
+          <!-- Opción 4: Género Específico Multilistas -->
+          <label class="cursor-pointer border border-white/10 p-3 rounded-xl bg-black/30 hover:border-amber-400/50 transition flex items-start gap-3">
+            <input type="radio" name="basePlaybackModeRadio" value="genre_focus" class="mt-0.5 accent-amber-500" onchange="changeBasePlaybackMode('genre_focus')">
+            <div class="text-xs">
+              <p class="font-bold text-emerald-400">Género Específico</p>
+              <p class="text-[11px] text-gray-400 mt-0.5">Todas las canciones de un solo género.</p>
+            </div>
+          </label>
+        </div>
+
+        <!-- Panel 1: Opciones de Crossover -->
+        <div id="crossoverSettingsPanel" class="hidden p-3.5 rounded-xl bg-black/40 border border-amber-500/20 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-2.5">
+            <div>
+              <p class="text-xs font-bold text-white">Método de Distribución Crossover:</p>
+              <p class="text-[11px] text-gray-400">Elige si mezclar por tandas fijas de temas o por porcentaje de presencia %.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <select id="crossoverDistTypeSelect" onchange="updateCrossoverDistType(this.value)" class="bg-black/60 border border-white/15 rounded-xl px-3 py-1.5 text-xs text-white outline-none focus:border-amber-400 font-semibold">
+                <option value="batch">Por Tandas (1 a 5 temas seguidos)</option>
+                <option value="percentage">Por Porcentajes % (Ponderación)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Opciones para Tandas -->
+          <div id="crossoverBatchOption" class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-semibold text-gray-200">Temas seguidos por lista antes de saltar a otra:</p>
+              <p class="text-[11px] text-gray-400">Ejemplo: Con 2 temas, sonarán 2 de Lista A, luego 2 de Lista B, etc.</p>
+            </div>
+            <select id="crossoverBatchSizeSelect" onchange="updateCrossoverBatchSize(this.value)" class="bg-black/60 border border-white/15 rounded-xl px-3 py-1.5 text-xs text-white outline-none focus:border-amber-400 font-semibold">
+              <option value="1">1 canción por lista</option>
+              <option value="2">2 canciones por lista</option>
+              <option value="3">3 canciones por lista (Recomendado)</option>
+              <option value="4">4 canciones por lista</option>
+              <option value="5">5 canciones por lista</option>
+            </select>
+          </div>
+
+          <!-- Información para Porcentajes (Punto 3) -->
+          <div id="crossoverPercentageOption" class="hidden space-y-2 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20">
+            <p class="text-xs font-bold text-amber-300">📊 Modo Porcentajes Activo (Distribución Proporcional):</p>
+            <p class="text-[11px] text-gray-300 leading-relaxed">
+              Asigna en cada tarjeta de lista el porcentaje deseado (ej: <strong>60%</strong> Salsa, <strong>30%</strong> Reggaetón, <strong>10%</strong> Vallenato). El sistema distribuirá armónicamente los temas a lo largo de la cola sin saturar la pista.
+            </p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1">
+            <p class="text-[11px] text-amber-300">
+              💡 Marca abajo con el botón <strong>"En Rotación"</strong> las listas que quieres que participen.
+            </p>
+            <button onclick="changeBasePlaybackMode('sequential')" class="text-[11px] px-2.5 py-1 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/30 transition font-bold shrink-0">
+              Cambiar a sonar seguidas una tras otra (Consecutivo)
+            </button>
+          </div>
+        </div>
+
+        <!-- Panel 2: Opciones de Consecutivo en Cadena -->
+        <div id="sequentialSettingsPanel" class="hidden p-3.5 rounded-xl bg-black/40 border border-sky-500/20 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-2.5">
+            <div>
+              <p class="text-xs font-bold text-sky-300">
+                Configuración de la Cadena de Listas
+              </p>
+              <p class="text-[11px] text-gray-400">Elige si la cadena va en orden natural o en el orden que tú definas.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <select id="sequentialOrderTypeSelect" onchange="updateSequentialOrderType(this.value)" class="bg-black/60 border border-white/15 rounded-xl px-3 py-1.5 text-xs text-white outline-none focus:border-sky-400 font-semibold">
+                <option value="natural">Orden Natural (de primera a última)</option>
+                <option value="custom">Orden Personalizado (manual)</option>
+              </select>
+              <button onclick="changeBasePlaybackMode('crossover')" class="text-[11px] px-2.5 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 transition font-bold whitespace-nowrap">
+                Cambiar a mezclar por tandas
+              </button>
+            </div>
+          </div>
+
+          <!-- Secuencia interactiva de listas ordenables -->
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between">
+              <p class="text-[11px] text-gray-300 font-bold">Secuencia de reproducción en cadena:</p>
+              <button id="btnResetNaturalOrder" onclick="resetSequentialToNaturalOrder()" class="text-[10px] text-sky-400 hover:underline">
+                Restablecer a orden natural
+              </button>
+            </div>
+            <div id="sequentialChainList" class="space-y-1 max-h-48 overflow-y-auto pr-1 text-xs">
+              <!-- Renderizado dinámicamente con botones subir y bajar -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Opciones de Género Específico Multilistas -->
+        <div id="genreFocusSettingsPanel" class="hidden p-3.5 rounded-xl bg-black/40 border border-emerald-500/20 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-2.5">
+            <div>
+              <p class="text-xs font-bold text-emerald-300">
+                Sonar solo canciones de este género (de cualquier lista):
+              </p>
+              <p class="text-[11px] text-gray-400">Reúne todas las canciones clasificadas en este género de todas tus listas.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <select id="focusGenreSelect" onchange="updateFocusGenre(this.value)" class="bg-black/60 border border-emerald-500/40 rounded-xl px-3 py-1.5 text-xs text-emerald-300 outline-none focus:border-emerald-400 font-bold">
+                <option value="Salsa">100% Salsa</option>
+                <option value="Popular">100% Cantina y Despecho</option>
+                <option value="Vallenato">100% Vallenato</option>
+                <option value="Reggaetón">100% Reggaetón</option>
+                <option value="Merengue / Bachata">100% Merengue / Bachata</option>
+                <option value="Rock / Pop">100% Rock / Pop</option>
+              </select>
+
+              <select id="genrePlaybackStyleSelect" onchange="updateGenrePlaybackStyle(this.value)" class="bg-black/60 border border-white/15 rounded-xl px-3 py-1.5 text-xs text-white outline-none focus:border-emerald-400 font-medium">
+                <option value="shuffle">Mezclado sin repetir (Aleatorio)</option>
+                <option value="sequential">En orden por listas</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-xs">
+            <span id="genreFocusStats" class="text-emerald-400 font-semibold">Buscando canciones disponibles...</span>
+            <span class="text-[11px] text-gray-400">Anti-repetición inteligente activa</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="playlistsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Inyectado dinámicamente -->
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- PESTAÑA 3: DJ INTELIGENTE CON IA -->
+    <!-- ============================================== -->
+    <div id="tabContentAI" class="hidden space-y-6">
+      <div class="glass-card p-6 space-y-4 max-w-2xl">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div>
+            <h2 class="text-lg font-bold text-white">Generador Musical con Inteligencia Artificial (Gemini)</h2>
+            <p class="text-xs text-gray-400">Dile a la IA qué ambiente quieres armar y creará la lista perfecta en YouTube al instante.</p>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="block text-xs font-semibold text-gray-300">Instrucción para el DJ IA:</label>
+          <textarea id="aiPromptInput" rows="3" placeholder="Ej: Ármame una lista de 8 canciones para viernes en la noche, con 50% salsa brava y 50% música popular de cantina..." class="w-full bg-black/40 border border-white/15 rounded-2xl p-3 text-sm text-white outline-none focus:border-amber-400"></textarea>
+          <p class="text-[11px] text-gray-400">Funciona automáticamente sin necesidad de clave. (Opcional: Si quieres razonamiento conversacional avanzado, puedes ingresar tu clave gratuita de Gemini en Ajustes del Bar).</p>
+        </div>
+
+        <button id="generateAIBtn" onclick="generatePlaylistAI()" class="btn-primary text-sm py-3 px-6 flex items-center gap-2">
+          Generar Lista Automática con IA
+        </button>
+
+        <div id="aiGeneratedResults" class="hidden space-y-3 pt-4 border-t border-white/10">
+          <h4 class="text-sm font-bold text-amber-400">Canciones sugeridas por la IA:</h4>
+          <div id="aiTracksList" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
+          <button onclick="saveAIGeneratedPlaylist()" class="btn-primary text-xs py-2 px-4">Guardar como Lista Base</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- PESTAÑA 4: TENDENCIAS & HISTORIAL -->
+    <!-- ============================================== -->
+    <div id="tabContentStats" class="hidden space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Top Canciones -->
+        <div class="glass-card p-5 space-y-3">
+          <h3 class="font-bold text-sm text-amber-400 flex items-center gap-2">
+            Lo Más Pedido por los Clientes
+          </h3>
+          <div id="topSongsList" class="space-y-2 text-xs"></div>
+        </div>
+
+        <!-- Top Géneros -->
+        <div class="glass-card p-5 space-y-3">
+          <h3 class="font-bold text-sm text-amber-400 flex items-center gap-2">
+            Géneros Más Populares
+          </h3>
+          <div id="topGenresList" class="space-y-2 text-xs"></div>
+        </div>
+      </div>
+
+      <!-- Historial Reciente -->
+      <div class="glass-card p-5 space-y-3">
+        <h3 class="font-bold text-sm text-white">Historial de Canciones Reproducidas</h3>
+        <div id="historyList" class="space-y-2 text-xs max-h-96 overflow-y-auto"></div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- PESTAÑA: CONTROL DE MESAS, HORARIOS & TV -->
+    <!-- ============================================== -->
+    <div id="tabContentControl" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- 1. Control de Mesas & Anti-Spam -->
+        <div class="glass-card p-6 space-y-4">
+          <div class="border-b border-white/10 pb-3">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              Control de Mesas (Pausar / Bloquear)
+            </h3>
+            <p class="text-xs text-gray-400">Pausa los pedidos de mesas problemáticas o que hagan spam de canciones.</p>
+          </div>
+
+          <!-- Formulario para pausar mesa -->
+          <div class="flex flex-wrap gap-2">
+            <input type="text" id="banTableInput" placeholder="N° de mesa (ej: 4)" class="w-32 bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
+            <select id="banTableMinutes" class="bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
+              <option value="15">15 minutos</option>
+              <option value="30" selected>30 minutos</option>
+              <option value="60">1 hora</option>
+              <option value="120">2 horas</option>
+              <option value="480">Toda la noche</option>
+            </select>
+            <button onclick="executeBanTable()" class="btn-primary text-xs px-4 py-2 font-bold whitespace-nowrap">
+              Pausar Mesa
+            </button>
+          </div>
+
+          <!-- Mesas actualmente pausadas -->
+          <div class="space-y-2 pt-2">
+            <h4 class="text-xs font-bold text-gray-300">Mesas pausadas actualmente:</h4>
+            <div id="bannedTablesList" class="space-y-1.5 text-xs max-h-40 overflow-y-auto pr-1">
+              <p class="text-xs text-gray-500 py-2">No hay ninguna mesa pausada.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Filtro Anti-Trolls / Palabras Prohibidas -->
+        <div class="glass-card p-6 space-y-4">
+          <div class="border-b border-white/10 pb-3">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              Filtro de Palabras Prohibidas (Anti-Trolls)
+            </h3>
+            <p class="text-xs text-gray-400">Bloquea canciones y dedicatorias con gemidos, bromas virales o groserías.</p>
+          </div>
+
+          <div class="flex gap-2">
+            <input type="text" id="newBlacklistWordInput" placeholder="Nueva palabra o término prohibido..." class="flex-1 bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
+            <button onclick="addBlacklistWord()" class="btn-secondary text-xs px-4">Agregar</button>
+          </div>
+
+          <div>
+            <div id="blacklistWordsTags" class="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto pr-1">
+              <!-- Inyectado dinámicamente -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Cinta de Promociones en Pantalla TV -->
+        <div class="glass-card p-6 space-y-4">
+          <div class="border-b border-white/10 pb-3">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              Cinta de Promociones en Pantalla TV
+            </h3>
+            <p class="text-xs text-gray-400">Mensajes de promociones que van rotando en la barra inferior del televisor.</p>
+          </div>
+
+          <div class="flex gap-2">
+            <input type="text" id="newPromoInput" placeholder="Ej: Hoy 2x1 en Cócteles hasta las 10 PM..." class="flex-1 bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
+            <button onclick="addPromoMessage()" class="btn-primary text-xs px-4">Agregar</button>
+          </div>
+
+          <div id="promosAdminList" class="space-y-1.5 text-xs max-h-48 overflow-y-auto pr-1">
+            <!-- Inyectado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- 4. Reloj de Horarios Musicales Automáticos -->
+        <div class="glass-card p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <div>
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                Reloj de Horarios de la Noche
+              </h3>
+              <p class="text-xs text-gray-400">Cambia la lista base automáticamente según la hora de la noche.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-gray-400">Activo:</span>
+              <input type="checkbox" id="settingScheduleEnabled" onchange="toggleScheduleEnabled(this.checked)" class="w-4 h-4 accent-amber-500">
+            </div>
+          </div>
+
+          <!-- Lista de bloques de horarios -->
+          <div id="scheduleBlocksList" class="space-y-2 text-xs">
+            <!-- Inyectado dinámicamente -->
+          </div>
+
+          <!-- Formulario para agregar bloque de horario -->
+          <div class="bg-black/30 p-3.5 rounded-2xl border border-white/10 space-y-2">
+            <p class="text-xs font-bold text-amber-400">Agregar nuevo bloque de horario:</p>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="text-[10px] text-gray-400 block mb-0.5">Desde (Hora):</label>
+                <input type="time" id="newScheduleStart" value="20:00" class="w-full bg-black/40 border border-white/15 rounded-xl px-2.5 py-1.5 text-xs text-white outline-none focus:border-amber-400">
+              </div>
+              <div>
+                <label class="text-[10px] text-gray-400 block mb-0.5">Hasta (Hora):</label>
+                <input type="time" id="newScheduleEnd" value="23:30" class="w-full bg-black/40 border border-white/15 rounded-xl px-2.5 py-1.5 text-xs text-white outline-none focus:border-amber-400">
+              </div>
+            </div>
+            <div>
+              <label class="text-[10px] text-gray-400 block mb-0.5">Nombre de la tanda:</label>
+              <input type="text" id="newScheduleName" placeholder="Ej: Previa y Rumba" class="w-full bg-black/40 border border-white/15 rounded-xl px-2.5 py-1.5 text-xs text-white outline-none focus:border-amber-400">
+            </div>
+            <div>
+              <label class="text-[10px] text-gray-400 block mb-0.5">Lista Base a reproducir:</label>
+              <select id="newSchedulePlaylistSelect" class="w-full bg-black/40 border border-white/15 rounded-xl px-2.5 py-1.5 text-xs text-white outline-none focus:border-amber-400">
+                <!-- Inyectado dinámicamente con las listas disponibles -->
+              </select>
+            </div>
+            <button onclick="addScheduleBlock()" class="btn-primary w-full text-xs py-2 mt-1 font-bold">
+              + Agregar a la Programación
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- PESTAÑA 5: AJUSTES DEL BAR -->
+    <!-- ============================================== -->
+    <div id="tabContentSettings" class="hidden space-y-6 max-w-xl">
+      <div class="glass-card p-6 space-y-4">
+        <h3 class="font-bold text-base text-white flex items-center gap-2">
+          Configuración del Bar
+        </h3>
+
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Nombre del Bar:</label>
+          <input type="text" id="settingBarName" class="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-sm text-white outline-none focus:border-amber-400">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs text-gray-400 mb-1">Máx. pedidos por mesa (Clientes QR):</label>
+            <input type="number" id="settingMaxRequests" min="1" max="50" class="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-sm text-white outline-none focus:border-amber-400">
+            <p class="text-[10px] text-amber-400/80 mt-1">El DJ/Admin puede colocar temas ilimitados.</p>
+          </div>
+          <div>
+            <label class="block text-xs text-gray-400 mb-1">Ventana máx. de espera (canciones):</label>
+            <input type="number" id="settingWindow" min="1" max="10" class="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-sm text-white outline-none focus:border-amber-400">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Total de Mesas en el Bar:</label>
+          <input type="number" id="settingTotalTables" min="1" max="100" class="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-sm text-white outline-none focus:border-amber-400">
+        </div>
+
+        <div class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
+          <div>
+            <p class="text-sm font-bold text-white">DJ Automático Inteligente</p>
+            <p class="text-xs text-gray-400">Agrupa por tandas de género automáticamente</p>
+          </div>
+          <input type="checkbox" id="settingAutoDJ" class="w-5 h-5 accent-amber-500">
+        </div>
+
+        <!-- Tamaño de Tanda de Género -->
+        <div class="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-bold text-white">Canciones por Tanda de Género</p>
+              <p class="text-xs text-gray-400">Cuántos temas del mismo ritmo suenan seguidos antes de pasar a otro</p>
+            </div>
+          </div>
+          <select id="settingGenreBatchSize" class="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
+            <option value="1">1 canción (Rotación inmediata / Cambio continuo)</option>
+            <option value="2">2 canciones (Tandas dinámicas y ágiles)</option>
+            <option value="3">3 canciones (Estándar DJ de bar - Recomendado)</option>
+            <option value="4">4 canciones (Tandas extendidas para prender el ritmo)</option>
+            <option value="5">5 canciones (Bloque largo del mismo género)</option>
+          </select>
+          <p class="text-[11px] text-gray-400">Controla cómo el DJ inteligente agrupa los pedidos de los clientes en la cola.</p>
+        </div>
+
+        <div class="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-bold text-white">Modo de Pedidos para Clientes</p>
+              <p class="text-xs text-gray-400">Define cómo piden música los clientes desde sus mesas</p>
+            </div>
+          </div>
+          <select id="settingRequestMode" class="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
+            <option value="open">Modo Abierto (Búsqueda libre en YouTube)</option>
+            <option value="playlist">Modo Cerrado (Solo canciones de las Listas del Bar)</option>
+          </select>
+          <div class="bg-black/30 p-2.5 rounded-lg border border-white/5 text-[11px] text-gray-300 space-y-1">
+            <p><span class="text-amber-400 font-semibold">• Modo Abierto:</span> Los clientes tienen barra de búsqueda libre en YouTube y pueden pedir cualquier tema.</p>
+            <p><span class="text-amber-400 font-semibold">• Modo Cerrado:</span> Los clientes ven el catálogo de tus Listas Maestras y solo pueden elegir entre esas canciones.</p>
+          </div>
+        </div>
+
+        <!-- Transiciones y Duración de Canciones (Ritmo DJ) -->
+        <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-500/10 via-white/5 to-white/5 border border-amber-500/30 space-y-3">
+          <div class="flex items-center justify-between border-b border-white/10 pb-2">
+            <div>
+              <p class="text-sm font-bold text-amber-400 flex items-center gap-1.5">
+                Transiciones & Duración de Canciones
+              </p>
+              <p class="text-xs text-gray-400">Evita silencios o cortes bruscos y mantén el bar con buena energía</p>
+            </div>
+            <span class="text-xs font-mono bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-md border border-amber-500/30 font-bold">DJ FX</span>
+          </div>
+
+          <!-- Fundido Suave (Fade Out / Fade In) -->
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-black/30 border border-white/5">
+            <div class="pr-2">
+              <p class="text-xs font-bold text-white">Transición Suave (Fade Out 6s / Fade In 2s)</p>
+              <p class="text-[11px] text-gray-400">Baja suavemente el volumen al terminar y sube la nueva sin cortes secos.</p>
+            </div>
+            <input type="checkbox" id="settingFadeTransition" class="w-5 h-5 accent-amber-500">
+          </div>
+
+          <!-- Límite de Duración por Tema -->
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-white">Tiempo Máximo por Canción:</label>
+            <select id="settingMaxSongDuration" class="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
+              <option value="0" selected>Canción Completa (100% del tema - Sin cortes)</option>
+              <option value="150">2:30 minutos (Modo Ultra Dinámico / Hora Pico)</option>
+              <option value="180">3:00 minutos (Modo Rumba y Rápida Rotación)</option>
+              <option value="210">3:30 minutos (Equilibrio DJ)</option>
+              <option value="240">4:00 minutos (Moderado)</option>
+            </select>
+            <p class="text-[10px] text-gray-400">Por defecto suena la canción completa. Si deseas que los temas cambien más rápido, puedes elegir un tiempo aquí.</p>
+          </div>
+
+          <!-- Modo Inteligente Dinámico por Cola -->
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-black/30 border border-white/5">
+            <div class="pr-2">
+              <p class="text-xs font-bold text-amber-300">Recorte Inteligente solo si hay Pedidos</p>
+              <p class="text-[11px] text-gray-400">Si la cola está vacía, deja sonar la lista base completa. Si hay pedidos de mesas, activa el límite de tiempo.</p>
+            </div>
+            <input type="checkbox" id="settingDynamicDuration" class="w-5 h-5 accent-amber-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Clave de API de Gemini (Opcional, para funciones avanzadas de IA):</label>
+          <input type="password" id="settingApiKey" placeholder="AIzaSy..." class="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-sm text-white outline-none focus:border-amber-400">
+        </div>
+
+        <button onclick="saveSettings()" class="btn-primary w-full py-3 text-xs font-bold mt-2">
+          Guardar Cambios de Configuración
+        </button>
+
+      </div>
+    </div>
+
+    </main>
+  </div>
+
+  <!-- Modal Nueva Lista Base -->
+  <div id="newPlaylistModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-[#161b26] border border-white/15 rounded-2xl sm:rounded-3xl w-full max-w-lg p-4 sm:p-6 space-y-4 animate-in fade-in duration-200 max-h-[92vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+          Crear Nueva Lista Base
+        </h3>
+        <button onclick="closeNewPlaylistModal()" class="text-gray-400 hover:text-white p-1">✕</button>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 mb-1">Nombre de la lista:</label>
+          <input type="text" id="newPlaylistName" placeholder="Ej: Sábado Parrandero y Salsa" class="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs sm:text-sm text-white outline-none focus:border-amber-400">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 mb-1">Descripción:</label>
+          <input type="text" id="newPlaylistDesc" placeholder="Ej: Salsa dura, merengue y despecho para fin de semana" class="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs sm:text-sm text-white outline-none focus:border-amber-400">
+        </div>
+
+        <!-- Agregar temas a la nueva lista -->
+        <div class="border-t border-white/10 pt-3 space-y-2">
+          <label class="block text-xs font-semibold text-amber-400">Buscar y agregar canciones de YouTube:</label>
+          <div class="flex gap-2">
+            <input type="text" id="playlistSearchSongInput" placeholder="Buscar canción o artista en YouTube..." class="flex-1 bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
+            <button onclick="searchSongForPlaylist()" class="btn-secondary text-xs px-3 py-2">Buscar</button>
+          </div>
+
+          <div id="playlistSearchResults" class="space-y-1.5 max-h-40 overflow-y-auto hidden"></div>
+
+          <!-- Canciones agregadas a la nueva lista -->
+          <div class="pt-2">
+            <p class="text-xs font-bold text-gray-300 mb-1">Canciones en esta lista (<span id="modalTrackCount">0</span>):</p>
+            <div id="modalAddedTracks" class="space-y-1.5 max-h-44 overflow-y-auto pr-1">
+              <p class="text-xs text-gray-500 py-3 text-center">Aún no has agregado canciones. Busca arriba para agregar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-2 pt-2 border-t border-white/10">
+        <button onclick="closeNewPlaylistModal()" class="btn-secondary text-xs py-2.5 flex-1">Cancelar</button>
+        <button onclick="saveCustomNewPlaylist()" class="btn-primary text-xs py-2.5 flex-1 font-bold">Guardar Lista Base</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ver y Editar Canciones de una Lista Existente -->
+  <div id="viewPlaylistModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-[#161b26] border border-white/15 rounded-2xl sm:rounded-3xl w-full max-w-xl p-4 sm:p-6 space-y-4 max-h-[92vh] overflow-y-auto animate-in fade-in duration-200">
+      
+      <!-- Encabezado de la lista -->
+      <div class="flex flex-col sm:flex-row gap-2 sm:items-start justify-between border-b border-white/10 pb-3">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2">
+            <h3 id="viewPlaylistTitle" class="text-sm sm:text-base font-bold text-white truncate">Nombre de Lista</h3>
+            <span id="viewPlaylistTrackCount" class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 font-bold border border-amber-500/30 whitespace-nowrap">0 temas</span>
+          </div>
+          <p id="viewPlaylistDesc" class="text-[11px] sm:text-xs text-gray-400 mt-0.5 truncate"></p>
+        </div>
+        <div class="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
+          <button id="btnDeleteCurrentPlaylist" onclick="deleteCurrentOpenedPlaylist()" class="btn-secondary text-[11px] sm:text-xs py-1.5 px-2.5 text-red-400 hover:text-red-300 border-red-500/30" title="Eliminar lista completa">
+            Eliminar Lista
+          </button>
+          <button onclick="closeViewPlaylistModal()" class="text-gray-400 hover:text-white text-lg ml-1 p-1">✕</button>
+        </div>
+      </div>
+
+      <!-- Buscador para agregar canciones nuevas a ESTA lista -->
+      <div class="bg-black/30 p-3 rounded-2xl border border-white/10 space-y-2">
+        <label class="block text-xs font-semibold text-amber-400">Agregar nueva canción de YouTube a esta lista:</label>
+        <div class="flex gap-2">
+          <input type="text" id="addSongToPlaylistInput" placeholder="Buscar canción, artista o pegar link de YouTube..." class="flex-1 bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
+          <button onclick="searchSongToAddToCurrentPlaylist()" class="btn-secondary text-xs px-4">Buscar</button>
+        </div>
+        <div id="addSongToPlaylistResults" class="space-y-1.5 max-h-48 overflow-y-auto hidden pt-1"></div>
+      </div>
+
+      <!-- Listado de temas existentes -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <h4 class="text-xs font-bold text-gray-300">Canciones en esta lista:</h4>
+          <button onclick="autoClassifyCurrentPlaylist()" class="text-[11px] px-2.5 py-1 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 font-bold transition flex items-center gap-1" title="Detecta automáticamente Salsa, Reggaetón, Cantina, Vallenato, etc. en todas las canciones de esta lista">
+            Auto-Detectar Géneros
+          </button>
+        </div>
+        <div id="viewPlaylistTracksList" class="space-y-2 text-xs max-h-72 overflow-y-auto pr-1"></div>
+      </div>
+
+      <div class="pt-2 flex justify-end border-t border-white/10">
+        <button onclick="closeViewPlaylistModal()" class="btn-secondary text-xs py-2 px-5">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Importador de Playlists de YouTube (Masivo y por Búsqueda) -->
+  <div id="importPlaylistsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-[#161b26] border border-white/15 rounded-2xl sm:rounded-3xl w-full max-w-xl p-4 sm:p-6 space-y-4 max-h-[92vh] overflow-y-auto animate-in fade-in duration-200">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div>
+          <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+            Importador de Playlists de YouTube
+          </h3>
+          <p class="text-[11px] sm:text-xs text-gray-400">Trae todas las listas de tu cuenta de YouTube a la vez</p>
+        </div>
+        <button onclick="closeImportModal()" class="text-gray-400 hover:text-white text-lg p-1">✕</button>
+      </div>
+
+      <!-- Pestañas internas del modal -->
+      <div class="flex gap-4 border-b border-white/10 text-xs font-bold">
+        <button id="importTabBtnLinks" onclick="switchImportTab('links')" class="pb-2 border-b-2 border-amber-400 text-amber-400">
+          Pegar Varios Enlaces (Masivo)
+        </button>
+        <button id="importTabBtnSearch" onclick="switchImportTab('search')" class="pb-2 border-b-2 border-transparent text-gray-400 hover:text-white">
+          Buscar por Nombre / Canal
+        </button>
+      </div>
+
+      <!-- Vista 1: Pegar Múltiples Enlaces -->
+      <div id="importViewLinks" class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1">
+            Pega los enlaces de las listas de tu cuenta (uno por renglón):
+          </label>
+          <textarea id="multipleUrlsInput" rows="5" placeholder="https://www.youtube.com/playlist?list=PL...&#10;https://www.youtube.com/playlist?list=PL...&#10;https://www.youtube.com/playlist?list=PL..." class="w-full bg-black/40 border border-white/15 rounded-2xl p-3 text-xs text-white outline-none focus:border-amber-400 font-mono"></textarea>
+          <p class="text-[11px] text-gray-400 mt-1">Puedes pegar todos los enlaces que quieras de tu cuenta a la vez. Recuerda que en YouTube las listas deben estar como Públicas o No Listadas.</p>
+        </div>
+
+        <button id="btnImportMultiple" onclick="executeImportMultiple()" class="btn-primary w-full py-3 text-xs font-bold flex items-center justify-center gap-2">
+          Importar Todas las Listas Ahora
+        </button>
+      </div>
+
+      <!-- Vista 2: Buscar por Nombre / Canal -->
+      <div id="importViewSearch" class="hidden space-y-3">
+        <div class="flex gap-2">
+          <input type="text" id="searchChannelPlaylistInput" placeholder="Nombre del bar, canal o tema (ej: MusicTV, Rock, Salsa)..." class="flex-1 bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
+          <button onclick="executeSearchPlaylists()" class="btn-secondary text-xs px-4">Buscar</button>
+        </div>
+
+        <div id="channelPlaylistsResults" class="space-y-2 max-h-60 overflow-y-auto pr-1">
+          <p class="text-xs text-gray-500 text-center py-4">Escribe el nombre de tu canal o bar arriba para buscar tus listas.</p>
+        </div>
+      </div>
+
+      <div class="pt-2 flex justify-end border-t border-white/10">
+        <button onclick="closeImportModal()" class="btn-secondary text-xs py-2 px-4">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

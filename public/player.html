@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pantalla TV & Bar | Reproductor MusicTV</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    /* En pantallas grandes (TV, PC, Proyector): video de fondo full-screen con overlay cinemático */
+    @media (min-width: 768px) {
+      body {
+        height: 100vh;
+        overflow: hidden;
+      }
+      #playerContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: auto;
+      }
+      #playerOverlay {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+        background: linear-gradient(to top, rgba(10,12,16,0.95) 0%, rgba(10,12,16,0.2) 30%, rgba(10,12,16,0.4) 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2rem;
+      }
+    }
+
+    /* En celulares (pantalla vertical): video 16:9 arriba y tarjeta/controles organizados abajo */
+    @media (max-width: 767px) {
+      body {
+        height: auto !important;
+        min-height: 100vh;
+        overflow-y: auto !important;
+        background-color: #0a0c10;
+        padding-bottom: 2rem;
+      }
+      #playerContainer {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        z-index: 40;
+        background: #000;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+      }
+      #playerOverlay {
+        position: relative;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+        background: transparent;
+      }
+    }
+
+    .interactive {
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="bg-black text-white select-none">
+
+  <!-- Contenedor del video de YouTube -->
+  <div id="playerContainer">
+    <div id="ytPlayer"></div>
+  </div>
+
+  <!-- Capa Overlay Informativa para TV y Bar -->
+  <div id="playerOverlay" class="flex flex-col justify-between p-3 sm:p-8">
+
+    <!-- Header Superior: Logo del Bar y QR para pedir -->
+    <header class="flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 sm:gap-3 bg-black/60 backdrop-blur-md px-3 sm:px-5 py-2 sm:py-3 rounded-2xl border border-white/10">
+        <span class="text-2xl sm:text-3xl">🎷</span>
+        <div>
+          <h1 id="barName" class="text-sm sm:text-xl font-bold tracking-tight text-amber-400">Music Bar</h1>
+          <p class="text-[10px] sm:text-xs text-gray-400 flex items-center gap-1.5 sm:gap-2">
+            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500 animate-pulse"></span>
+            En Vivo • YouTube Premium
+          </p>
+        </div>
+      </div>
+
+      <!-- QR en esquina de la TV para que la gente escanee la pantalla -->
+      <div class="flex items-center gap-2 sm:gap-3 bg-black/70 backdrop-blur-md p-2 sm:p-3 rounded-2xl border border-amber-500/30 interactive">
+        <img id="screenQr" src="" alt="QR" class="w-10 h-10 sm:w-16 sm:h-16 rounded-lg bg-white p-0.5 sm:p-1">
+        <div class="hidden sm:block">
+          <p class="text-[11px] font-bold uppercase tracking-wider text-amber-400">¿Quieres música?</p>
+          <p class="text-xs font-semibold text-white">Escanea para pedir</p>
+          <p class="text-[10px] text-gray-400">Desde tu mesa</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Centro: Promoción en Gran Formato para TV (Llamativa y Visible desde lejos) -->
+    <div id="promoBroadcastCard" class="self-center hidden max-w-3xl w-full mx-4 transition-all duration-700 transform translate-y-8 opacity-0 shadow-2xl interactive z-30">
+      <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 p-1 rounded-3xl shadow-[0_0_60px_rgba(245,158,11,0.6)]">
+        <div class="bg-black/90 backdrop-blur-2xl px-6 sm:px-10 py-5 sm:py-7 rounded-[22px] flex items-center gap-5 sm:gap-8 border border-white/20">
+          <div class="text-4xl sm:text-6xl animate-bounce shrink-0" id="promoIcon">🍻</div>
+          <div class="min-w-0 flex-1 space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="bg-amber-500 text-black text-[10px] sm:text-xs font-black uppercase tracking-widest px-3 py-0.5 rounded-full shadow">
+                🔥 PROMOCIÓN ESPECIAL MUSICTV
+              </span>
+              <span class="text-[11px] text-amber-200 font-bold hidden sm:inline">Pide en barra o desde tu mesa</span>
+            </div>
+            <h3 id="promoLargeText" class="text-lg sm:text-2xl md:text-3xl font-black text-white leading-tight">
+              ¡Pregunta por nuestras promociones de cerveza en la barra!
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Centro: Dedicatoria Animada Especial (Visible 15 segundos) -->
+    <div id="dedicationBanner" class="self-center hidden max-w-2xl text-center bg-gradient-to-r from-amber-500 via-pink-500 to-amber-500 p-0.5 rounded-3xl shadow-2xl transition-all duration-700 transform translate-y-6 opacity-0 interactive z-20">
+      <div class="bg-black/90 backdrop-blur-xl px-8 py-5 rounded-3xl space-y-1 border border-white/10 shadow-[0_0_40px_rgba(236,72,153,0.4)]">
+        <p id="dedicationFrom" class="text-xs font-black uppercase tracking-widest text-amber-400 flex items-center justify-center gap-2">
+          <span class="text-base">🎉</span> <span id="dedicationFromText">DEDICATORIA DE LA MESA 4</span>
+        </p>
+        <p id="dedicationText" class="text-lg md:text-2xl font-black text-white leading-snug">"¡Feliz cumpleaños Laura!"</p>
+      </div>
+    </div>
+
+    <!-- Centro: Alerta cuando entra nuevo pedido -->
+    <div id="newRequestNotification" class="self-center hidden animate-bounce bg-amber-500 text-black px-6 py-3 rounded-full font-bold text-sm shadow-2xl flex items-center gap-2 z-20">
+      <span>🎉</span>
+      <span id="newRequestText">¡Nuevo pedido de la Mesa 4!</span>
+    </div>
+
+    <!-- Indicador de Modo Micrófono Activo -->
+    <div id="micModeIndicator" class="self-center hidden bg-red-600 text-white font-extrabold px-6 py-2.5 rounded-full text-xs shadow-2xl flex items-center gap-2 animate-pulse z-20">
+      <span class="w-2.5 h-2.5 rounded-full bg-white animate-ping"></span>
+      <span>🎙️ MODO MICRÓFONO ACTIVO (Música atenuada)</span>
+    </div>
+
+    <!-- Footer Inferior: Información del tema sonando (Auto-ocultable a los 15s para dejar video limpio) -->
+    <footer class="space-y-3">
+      <div id="songInfoFooter" class="transition-all duration-700 ease-in-out transform translate-y-0 opacity-100">
+        <div class="flex items-end justify-between gap-6">
+
+          <!-- Info de la Canción Actual -->
+          <div class="bg-black/80 backdrop-blur-xl p-3 sm:p-5 rounded-2xl sm:rounded-3xl border border-white/15 max-w-2xl flex items-center gap-3 sm:gap-5 shadow-2xl interactive">
+            <img id="currentThumb" src="" class="w-14 h-14 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl object-cover shadow-md border border-white/10 flex-shrink-0">
+            <div class="space-y-0.5 sm:space-y-1 min-w-0 flex-1">
+              <div class="flex items-center gap-2">
+                <span id="currentGenre" class="genre-badge genre-Salsa text-[10px] sm:text-xs">Salsa</span>
+                <span id="requestedByBadge" class="bg-amber-500/20 text-amber-300 text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
+                  ✨ Lista Base
+                </span>
+              </div>
+              <h2 id="currentTitle" class="text-sm sm:text-2xl font-bold tracking-tight text-white leading-tight truncate">Cargando música...</h2>
+              <p id="currentArtist" class="text-xs sm:text-base text-gray-300 font-medium truncate">Conectando al sistema del bar</p>
+            </div>
+          </div>
+
+          <!-- Siguiente Canción -->
+          <div class="hidden lg:flex items-center gap-3 bg-black/70 backdrop-blur-md px-5 py-4 rounded-2xl border border-white/10 max-w-sm interactive">
+            <div class="text-2xl">⏭️</div>
+            <div class="min-w-0">
+              <p class="text-[10px] uppercase font-bold text-gray-400">A continuación:</p>
+              <p id="nextTitle" class="text-xs font-bold text-white truncate">Cargando siguiente tema...</p>
+              <p id="nextGenre" class="text-[11px] text-amber-400 truncate">Salsa</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Barra discreta de controles para el televisor (solo interactiva) -->
+
+      <!-- Barra de Controles Rápidos para el Barman / Encargado -->
+      <div class="flex items-center justify-between pt-1 text-xs text-gray-400 interactive">
+        <div class="flex items-center gap-4">
+          <button id="playPauseBtn" onclick="togglePlayPause()" class="hover:text-amber-400 flex items-center gap-1.5 font-bold">
+            <span id="playPauseIcon">⏸️</span> Pausar
+          </button>
+          <button onclick="skipSong()" class="hover:text-amber-400 flex items-center gap-1.5 font-bold">
+            <span>⏭️</span> Saltar canción
+          </button>
+          <button onclick="toggleFullscreen()" class="hover:text-amber-400 flex items-center gap-1.5">
+            <span>⛶</span> Pantalla Completa
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span>🔊</span>
+          <input type="range" id="volumeSlider" min="0" max="100" value="100" onchange="setVolume(this.value)" class="w-24 accent-amber-500 cursor-pointer">
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="/js/player.js"></script>
+</body>
+</html>
