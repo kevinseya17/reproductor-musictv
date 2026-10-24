@@ -46,7 +46,7 @@
       }
     ],
     "scheduleEnabled": false,
-    "basePlaybackMode": "single",
+    "basePlaybackMode": "genre_focus",
     "crossoverBatchSize": 2,
     "crossoverPlaylists": [
       "imported-1790279255214",
@@ -54,7 +54,7 @@
     ],
     "sequentialOrderType": "custom",
     "sequentialPlaylistOrder": [],
-    "focusGenre": "Salsa",
+    "focusGenre": "Reggaetón",
     "genrePlaybackStyle": "shuffle",
     "maxSongDuration": 0,
     "dynamicDurationOnQueue": false,
@@ -5434,856 +5434,981 @@
   ],
   "queue": [
     {
-      "id": "base_1792034491883_0",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531724_ob3ry",
+      "videoId": "a4xxzUEHKek",
+      "title": "Un Sueño",
+      "artist": "RKM & KEN-Y",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/a4xxzUEHKek/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531724,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_1",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531729_awpyq",
+      "videoId": "LvJcDhDYiXM",
+      "title": "Víctor Manuelle - Tengo Ganas",
+      "artist": "Victor Manuelle",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/LvJcDhDYiXM/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531729,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_2",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531731_hs6i1",
+      "videoId": "AjGVPuc0_jc",
+      "title": "Mi Amor es Pobre",
+      "artist": "Tony Dize",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/AjGVPuc0_jc/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531731,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_3",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531734_tl548",
+      "videoId": "eQcZc_pOuSw",
+      "title": "la razon de mi vida - victor manuelle",
+      "artist": "Cesar Usco Navarro \"ycomolohace\"",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/eQcZc_pOuSw/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531734,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_4",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531737_ytg7e",
+      "videoId": "C3lXxoQPqoA",
+      "title": "Rakata",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/C3lXxoQPqoA/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531737,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_5",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531740_7s92z",
+      "videoId": "8OalWvMJlkc",
+      "title": "Junto al Amanecer",
+      "artist": "J Alvarez",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/8OalWvMJlkc/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531740,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_6",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531744_1mfqo",
+      "videoId": "7KkNxxlN3Nk",
+      "title": "Doncella (Remix) (Remix Mix)",
+      "artist": "Zion & Lennox",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/7KkNxxlN3Nk/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531744,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_7",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531747_6eo3b",
+      "videoId": "TD-_GdjgwKo",
+      "title": "Sensacion Del Bloque",
+      "artist": "De La Ghetto",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/TD-_GdjgwKo/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531747,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_8",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531751_o94eo",
+      "videoId": "caS88zPqCCc",
+      "title": "Abusadora",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/caS88zPqCCc/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531751,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_9",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531755_170k7",
+      "videoId": "a4xxzUEHKek",
+      "title": "Un Sueño",
+      "artist": "RKM & KEN-Y",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/a4xxzUEHKek/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531755,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_10",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531758_eutbj",
+      "videoId": "VnYDuazkyZc",
+      "title": "Pegao",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/VnYDuazkyZc/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531758,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_11",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531764_3ic50",
+      "videoId": "hLos-LP0w9M",
+      "title": "tito nieves - de mi enamorate",
+      "artist": "O. Mauricio Marin V.",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/hLos-LP0w9M/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531764,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_12",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531768_cuzi9",
+      "videoId": "2Vk2U9DqApo",
+      "title": "Fashion Girl",
+      "artist": "Jadiel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/2Vk2U9DqApo/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531768,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_13",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531771_9f50r",
+      "videoId": "_Zila5rLu74",
+      "title": "Don Omar - Pobre Diabla (Original Version)",
+      "artist": "Sandrewification",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/_Zila5rLu74/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531771,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_14",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531774_oez8x",
+      "videoId": "mPOKvZ7yJac",
+      "title": "Baila Morena (with Luny Tunes, Noriega)",
+      "artist": "Luny Tunes",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/mPOKvZ7yJac/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531774,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_15",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531779_lyvz3",
+      "videoId": "yDlQwGN4ku8",
+      "title": "Pa' Que La Pases Bien",
+      "artist": "Arcangel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/yDlQwGN4ku8/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531779,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_16",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531782_q6ynp",
+      "videoId": "57NUUEu1518",
+      "title": "Dejale Caer To' El Peso",
+      "artist": "YomoMusicOfficial",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/57NUUEu1518/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531782,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_17",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531786_pyonx",
+      "videoId": "AjGVPuc0_jc",
+      "title": "Mi Amor es Pobre",
+      "artist": "Tony Dize",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/AjGVPuc0_jc/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531786,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_18",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531789_g8eai",
+      "videoId": "oD5f55ohsc4",
+      "title": "Feid - Normal",
+      "artist": "Feid",
+      "genre": "Reggaetón",
+      "duration": "2:51",
+      "thumbnail": "https://i.ytimg.com/vi/oD5f55ohsc4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDz37cCvj_rwg6A4TTJimbhywtdrA",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (pruebas)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531789,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_19",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531792_vk7xn",
+      "videoId": "aKho-toCrDo",
+      "title": "Tu Príncipe",
+      "artist": "Daddy Yankee",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/aKho-toCrDo/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531792,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_20",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531797_ku8rn",
+      "videoId": "jR_j-LPLBvU",
+      "title": "Yo Voy (feat. Daddy Yankee)",
+      "artist": "Zion & Lennox",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/jR_j-LPLBvU/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531797,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_21",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531800_42869",
+      "videoId": "0lCEsGtlBdI",
+      "title": "Quizas",
+      "artist": "Tony Dize",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/0lCEsGtlBdI/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531800,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_22",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531804_dmwxc",
+      "videoId": "E02NBXm9r9k",
+      "title": "Esta Noche de Travesuras (feat. Héctor \"El Father\")",
+      "artist": "DJ Nelson",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/E02NBXm9r9k/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531804,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_23",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531807_m1s7n",
+      "videoId": "R0d56K_xOLM",
+      "title": "Hola Beba",
+      "artist": "Farruko",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/R0d56K_xOLM/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531807,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_24",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531811_2wmg2",
+      "videoId": "C8t8Uo2fYTI",
+      "title": "Down (Remix)",
+      "artist": "RKM & KEN-Y",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/C8t8Uo2fYTI/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531811,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_25",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531813_98mds",
+      "videoId": "_Zila5rLu74",
+      "title": "Don Omar - Pobre Diabla (Original Version)",
+      "artist": "Sandrewification",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/_Zila5rLu74/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531813,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_26",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531816_ucixc",
+      "videoId": "R0fpd4BOaTk",
+      "title": "House of Pleasure",
+      "artist": "Plan B",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/R0fpd4BOaTk/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531816,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_27",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531818_xh4gk",
+      "videoId": "hLos-LP0w9M",
+      "title": "tito nieves - de mi enamorate",
+      "artist": "O. Mauricio Marin V.",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/hLos-LP0w9M/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531818,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_28",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531821_1mpe7",
+      "videoId": "0lCEsGtlBdI",
+      "title": "Quizas",
+      "artist": "Tony Dize",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/0lCEsGtlBdI/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531821,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_29",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531824_3byo0",
+      "videoId": "AjGVPuc0_jc",
+      "title": "Mi Amor es Pobre",
+      "artist": "Tony Dize",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/AjGVPuc0_jc/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531824,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_30",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531829_gekw4",
+      "videoId": "6FUle57rCuo",
+      "title": "Te Hago El Amor",
+      "artist": "Zion & Lennox",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/6FUle57rCuo/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531829,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_31",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531831_vhrq4",
+      "videoId": "TD0KMO3xNyE",
+      "title": "Realmente Enamorado - Jean Carlos Centeno",
+      "artist": "Yair C",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/TD0KMO3xNyE/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Las Mejores 100 Canciones de Vallenatos (Exitos Vallenatos viejos) 2025 - 2026)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531831,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_32",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531834_n6odu",
+      "videoId": "AHp1XS0CVOs",
+      "title": "Pierdo La Cabeza",
+      "artist": "ZION",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/AHp1XS0CVOs/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531834,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_33",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531836_gm6wk",
+      "videoId": "xB-dMUTLU3U",
+      "title": "Porque Me Tratas Así?",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/xB-dMUTLU3U/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531836,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_34",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531839_1hlka",
+      "videoId": "dbcv0PGOpqU",
+      "title": "Fernando Burbano",
+      "artist": "Ahora Que Puedo",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/dbcv0PGOpqU/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 LOS 100 VIDEOS MAS POPULARES MUSICA POPULAR AGROPECUARIA DESPECHO COLOMBIANA #MusicaPopular #Despecho #LoMejor)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531839,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_35",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531842_tu737",
+      "videoId": "cT6B3EL15JA",
+      "title": "Wisin & Yandel - Besos Mojados (Visualizer)",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "4:25",
+      "thumbnail": "https://i.ytimg.com/vi/cT6B3EL15JA/hq720.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (Regaetoon)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531842,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_36",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531845_o939n",
+      "videoId": "AjGVPuc0_jc",
+      "title": "Mi Amor es Pobre",
+      "artist": "Tony Dize",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/AjGVPuc0_jc/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531845,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_37",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531848_m52c5",
+      "videoId": "RDG85rUM8_E",
+      "title": "Punto Y Aparte",
+      "artist": "Tego Calderón",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/RDG85rUM8_E/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531848,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_38",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531850_zp5u3",
+      "videoId": "hLos-LP0w9M",
+      "title": "tito nieves - de mi enamorate",
+      "artist": "O. Mauricio Marin V.",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/hLos-LP0w9M/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531850,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_39",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531853_68cr7",
+      "videoId": "aKho-toCrDo",
+      "title": "Tu Príncipe",
+      "artist": "Daddy Yankee",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/aKho-toCrDo/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531853,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_40",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531855_beptf",
+      "videoId": "g06C6_UZ-vY",
+      "title": "No Te Veo",
+      "artist": "Jowell & Randy",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/g06C6_UZ-vY/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531855,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_41",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531858_edion",
+      "videoId": "fAKboUOeQ1A",
+      "title": "Fernando Burbano",
+      "artist": "Ahora Me Toca a Mi",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/fAKboUOeQ1A/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 LOS 100 VIDEOS MAS POPULARES MUSICA POPULAR AGROPECUARIA DESPECHO COLOMBIANA #MusicaPopular #Despecho #LoMejor)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531858,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_42",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531862_wrbvy",
+      "videoId": "7KkNxxlN3Nk",
+      "title": "Doncella (Remix) (Remix Mix)",
+      "artist": "Zion & Lennox",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/7KkNxxlN3Nk/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531862,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_43",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531866_18qym",
+      "videoId": "TD0KMO3xNyE",
+      "title": "Realmente Enamorado - Jean Carlos Centeno",
+      "artist": "Yair C",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/TD0KMO3xNyE/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Las Mejores 100 Canciones de Vallenatos (Exitos Vallenatos viejos) 2025 - 2026)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531866,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_44",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531869_sjxn9",
+      "videoId": "SEKimSbyZJg",
+      "title": "Bailando Se Fue",
+      "artist": "Release - Topic",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/SEKimSbyZJg/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531869,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_45",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531872_8e9ob",
+      "videoId": "p_-eHLhdF_0",
+      "title": "Felina",
+      "artist": "Hector & Tito - Topic",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/p_-eHLhdF_0/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531872,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_46",
-      "videoId": "7KxkMLAZlzw",
-      "title": "Cali Pachanguero",
-      "artist": "Grupo Niche",
-      "genre": "Salsa",
-      "duration": "5:10",
-      "thumbnail": "https://i.ytimg.com/vi/7KxkMLAZlzw/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531875_br7eu",
+      "videoId": "5sxwbOeqlPA",
+      "title": "Sacala",
+      "artist": "Héctor El Father - Topic",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/5sxwbOeqlPA/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531875,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_47",
-      "videoId": "JLwmBfrbYR4",
-      "title": "Sobredosis",
-      "artist": "Los Titanes",
-      "genre": "Salsa",
-      "duration": "3:12",
-      "thumbnail": "https://i.ytimg.com/vi/JLwmBfrbYR4/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531878_n3pg2",
+      "videoId": "IAIFvlPsi-0",
+      "title": "Enamorado De Ti",
+      "artist": "Arcangel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/IAIFvlPsi-0/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531878,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_48",
-      "videoId": "gxlB1B9emDc",
-      "title": "Llorarás",
-      "artist": "Oscar D'León",
-      "genre": "Salsa",
-      "duration": "3:50",
-      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814531881_kz8v1",
+      "videoId": "AjGVPuc0_jc",
+      "title": "Mi Amor es Pobre",
+      "artist": "Tony Dize",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/AjGVPuc0_jc/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814531881,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     },
     {
-      "id": "base_1792034491883_49",
-      "videoId": "fIPOjkmMpKk",
-      "title": "El Día de Mi Suerte",
-      "artist": "Héctor Lavoe & Willie Colón",
-      "genre": "Salsa",
-      "duration": "5:28",
-      "thumbnail": "https://i.ytimg.com/vi/fIPOjkmMpKk/hqdefault.jpg",
-      "playlistId": "salsa-pesada",
-      "playlistName": "🎺 Salsa Brava y Clásica",
+      "id": "base_1792814539067_0lobe",
+      "videoId": "dh5OMOTvDsI",
+      "title": "Pam Pam",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/dh5OMOTvDsI/hqdefault.jpg",
       "requestedBy": {
         "table": null,
-        "name": "🎺 Salsa Brava y Clásica"
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
       },
       "isBaseTrack": true,
-      "addedAt": 1792034491883
+      "addedAt": 1792814539067,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     }
   ],
+  "currentlyPlaying": {
+    "id": "base_1792814531721_d9chl",
+    "videoId": "KmCWt4MBuJQ",
+    "title": "Aunque Te Fuiste",
+    "artist": "Don Omar",
+    "genre": "Reggaetón",
+    "duration": "3:30",
+    "thumbnail": "https://i.ytimg.com/vi/KmCWt4MBuJQ/hqdefault.jpg",
+    "requestedBy": {
+      "table": null,
+      "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+    },
+    "isBaseTrack": true,
+    "addedAt": 1792814531721,
+    "energy": 4,
+    "bpm": 96,
+    "vibe": "Clímax & Perreo",
+    "djBadge": "Clímax & Perreo (96 BPM)",
+    "startedAt": 1792814539036,
+    "transition": {
+      "transitionType": "riser_drop",
+      "fx": "riser_drop",
+      "label": "Puente Urbano Riser"
+    }
+  },
   "history": [
     {
       "id": "base_1789597066557_adqdo",
@@ -9031,6 +9156,78 @@
         "name": "DJ 100% Merengue / Bachata (📥 Aventura y Romeo Santos Mejores canciones.)",
         "table": null
       }
+    },
+    {
+      "id": "base_1792035344333",
+      "videoId": "gxlB1B9emDc",
+      "title": "Llorarás",
+      "artist": "Oscar D'León",
+      "genre": "Salsa",
+      "duration": "3:50",
+      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
+      "playlistId": "salsa-pesada",
+      "playlistName": "🎺 Salsa Brava y Clásica",
+      "requestedBy": {
+        "table": null,
+        "name": "🎺 Salsa Brava y Clásica"
+      },
+      "isBaseTrack": true,
+      "startedAt": 1792035344333,
+      "playedAt": "2026-10-24T03:52:01.497Z"
+    },
+    {
+      "id": "base_1792034491883_0",
+      "videoId": "gxlB1B9emDc",
+      "title": "Llorarás",
+      "artist": "Oscar D'León",
+      "genre": "Salsa",
+      "duration": "3:50",
+      "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
+      "playlistId": "salsa-pesada",
+      "playlistName": "🎺 Salsa Brava y Clásica",
+      "requestedBy": {
+        "table": null,
+        "name": "🎺 Salsa Brava y Clásica"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792034491883,
+      "energy": 3,
+      "bpm": 104,
+      "vibe": "Salsa & Baile",
+      "djBadge": "Salsa & Baile (104 BPM)",
+      "startedAt": 1792813921554,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T04:02:18.990Z"
+    },
+    {
+      "id": "base_1792814531721_d9chl",
+      "videoId": "KmCWt4MBuJQ",
+      "title": "Aunque Te Fuiste",
+      "artist": "Don Omar",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/KmCWt4MBuJQ/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531721,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792814539036,
+      "transition": {
+        "transitionType": "riser_drop",
+        "fx": "riser_drop",
+        "label": "Puente Urbano Riser"
+      },
+      "playedAt": "2026-10-24T04:02:30.412Z"
     }
   ],
   "tableRequests": {
@@ -9058,22 +9255,5 @@
       1790539613373
     ]
   },
-  "bannedTables": {},
-  "currentlyPlaying": {
-    "id": "base_1792035344333",
-    "videoId": "gxlB1B9emDc",
-    "title": "Llorarás",
-    "artist": "Oscar D'León",
-    "genre": "Salsa",
-    "duration": "3:50",
-    "thumbnail": "https://i.ytimg.com/vi/gxlB1B9emDc/hqdefault.jpg",
-    "playlistId": "salsa-pesada",
-    "playlistName": "🎺 Salsa Brava y Clásica",
-    "requestedBy": {
-      "table": null,
-      "name": "🎺 Salsa Brava y Clásica"
-    },
-    "isBaseTrack": true,
-    "startedAt": 1792035344333
-  }
+  "bannedTables": {}
 }

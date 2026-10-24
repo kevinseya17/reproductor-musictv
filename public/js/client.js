@@ -91,6 +91,21 @@ function renderStatus(data) {
     document.getElementById('currentArtist').textContent = currentlyPlaying.artist || '';
     document.getElementById('currentThumb').src = currentlyPlaying.thumbnail || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150';
     
+    const mobileCenterArt = document.getElementById('mobileVinylCenterArt');
+    if (mobileCenterArt) {
+      mobileCenterArt.src = currentlyPlaying.thumbnail || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150';
+    }
+
+    const clientVibe = document.getElementById('clientVibeBadge');
+    if (clientVibe) {
+      if (currentlyPlaying.vibe || currentlyPlaying.bpm) {
+        clientVibe.textContent = `⚡ ${currentlyPlaying.vibe || 'Fiesta'}${currentlyPlaying.bpm ? ' • ' + currentlyPlaying.bpm + ' BPM' : ''}`;
+        clientVibe.classList.remove('hidden');
+      } else {
+        clientVibe.classList.add('hidden');
+      }
+    }
+
     const genreBadge = document.getElementById('currentGenreBadge');
     genreBadge.textContent = currentlyPlaying.genre || 'Música';
     genreBadge.className = `genre-badge genre-${currentlyPlaying.genre || 'Crossover'}`;

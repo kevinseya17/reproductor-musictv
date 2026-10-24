@@ -210,8 +210,10 @@ function onPlayerReady(event) {
 
 function onPlayerStateChange(event) {
   const playPauseIcon = document.getElementById('playPauseIcon');
+  const vinylDisc = document.getElementById('vinylRecordDisc');
 
   if (event.data === YT.PlayerState.ENDED) {
+    if (vinylDisc) vinylDisc.classList.add('paused-vinyl');
     if (!hasReportedSongEnded) {
       hasReportedSongEnded = true;
       console.log('Canción terminada por YouTube, solicitando siguiente...');
@@ -219,6 +221,7 @@ function onPlayerStateChange(event) {
     }
   } else if (event.data === YT.PlayerState.PLAYING) {
     if (playPauseIcon) playPauseIcon.textContent = '⏸️';
+    if (vinylDisc) vinylDisc.classList.remove('paused-vinyl');
 
     // Si requiere Fade-In suave al iniciar la canción
     if (isFadingInNewSong && currentSettings.fadeTransitionEnabled !== false) {
@@ -227,6 +230,7 @@ function onPlayerStateChange(event) {
     }
   } else if (event.data === YT.PlayerState.PAUSED) {
     if (playPauseIcon) playPauseIcon.textContent = '▶️';
+    if (vinylDisc) vinylDisc.classList.add('paused-vinyl');
   }
 }
 
@@ -322,6 +326,101 @@ function toggleFullscreen() {
   }
 }
 
+// ==========================================
+// CONTROLES HI-FI DEL REPRODUCTOR (TV DOCK)
+// ==========================================
+function formatTime(sec) {
+  if (isNaN(sec) || sec < 0) return '0:00';
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+function onTvScrubberInput(val) {
+  window._isUserDraggingTvScrubber = true;
+  const tvProgressFill = document.getElementById('tvProgressFill');
+  const tvElapsed = document.getElementById('tvElapsedLabel');
+  if (tvProgressFill) tvProgressFill.style.width = val + '%';
+  if (ytPlayer && isPlayerReady) {
+    const dur = ytPlayer.getDuration() || 0;
+    if (dur > 0 && tvElapsed) {
+      tvElapsed.textContent = formatTime((val / 100) * dur);
+    }
+  }
+}
+
+function onTvScrubberChange(val) {
+  window._isUserDraggingTvScrubber = false;
+  if (!ytPlayer || !isPlayerReady) return;
+  const dur = ytPlayer.getDuration() || 0;
+  if (dur > 0) {
+    const targetSec = (val / 100) * dur;
+    ytPlayer.seekTo(targetSec, true);
+  }
+}
+
+function seekRelativeTv(delta) {
+  if (!ytPlayer || !isPlayerReady) return;
+  try {
+    const current = ytPlayer.getCurrentTime() || 0;
+    const dur = ytPlayer.getDuration() || 0;
+    const target = Math.max(0, Math.min(dur, current + delta));
+    ytPlayer.seekTo(target, true);
+    showSongOverlay(12000);
+  } catch (err) {
+    console.warn('Error en seekRelativeTv:', err);
+  }
+}
+
+let isTvMuted = false;
+let savedTvVolBeforeMute = 100;
+function toggleMuteTv() {
+  if (!ytPlayer || !isPlayerReady) return;
+  const btn = document.getElementById('tvMuteBtn');
+  const slider = document.getElementById('volumeSlider');
+  const display = document.getElementById('tvVolumeDisplay');
+  if (isTvMuted) {
+    isTvMuted = false;
+    masterVolume = savedTvVolBeforeMute;
+    ytPlayer.setVolume(masterVolume);
+    if (slider) slider.value = masterVolume;
+    if (btn) btn.textContent = '🔊';
+    if (display) display.textContent = `${masterVolume}%`;
+  } else {
+    isTvMuted = true;
+    savedTvVolBeforeMute = masterVolume;
+    ytPlayer.setVolume(0);
+    if (slider) slider.value = 0;
+    if (btn) btn.textContent = '🔇';
+    if (display) display.textContent = '0%';
+  }
+}
+
+function updateVolumeLabel(val) {
+  const display = document.getElementById('tvVolumeDisplay');
+  if (display) display.textContent = `${val}%`;
+}
+
+async function triggerTvDjTransition() {
+  try {
+    showDjFxFlash('MEZCLANDO TEMA...', '🎛️');
+    await fetch('/api/admin/dj-transition', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fxType: 'sweep' })
+    });
+  } catch (err) {
+    console.error('Error en transición DJ:', err);
+  }
+}
+
+function hideSongOverlayManual() {
+  const footer = document.getElementById('songInfoFooter');
+  if (!footer) return;
+  footer.classList.remove('opacity-100', 'translate-y-0');
+  footer.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
+}
+
 // 3. Monitor de Progreso, Límite de Duración y Fade-Out
 function startProgressMonitor() {
   if (progressMonitorInterval) clearInterval(progressMonitorInterval);
@@ -345,6 +444,22 @@ function startProgressMonitor() {
         isPlaying: state === YT.PlayerState.PLAYING,
         volume: ytPlayer.getVolume ? ytPlayer.getVolume() : masterVolume
       });
+
+      // Actualizar Scrubber y tiempos de la barra Hi-Fi del televisor
+      const tvScrubber = document.getElementById('tvPlayerScrubber');
+      const tvElapsed = document.getElementById('tvElapsedLabel');
+      const tvRemaining = document.getElementById('tvRemainingLabel');
+      const tvProgressFill = document.getElementById('tvProgressFill');
+
+      if (duration > 0) {
+        const pct = Math.min(100, (currentTime / duration) * 100);
+        if (tvScrubber && !window._isUserDraggingTvScrubber) {
+          tvScrubber.value = pct;
+        }
+        if (tvProgressFill) tvProgressFill.style.width = pct + '%';
+        if (tvElapsed) tvElapsed.textContent = formatTime(currentTime);
+        if (tvRemaining) tvRemaining.textContent = '-' + formatTime(Math.max(0, duration - currentTime));
+      }
 
       // Calcular límite de duración configurado
       let targetMaxDuration = duration;
@@ -509,6 +624,16 @@ socket.on('state-changed', (data) => {
     document.getElementById('currentTitle').textContent = currentlyPlaying.title || 'Música';
     document.getElementById('currentArtist').textContent = currentlyPlaying.artist || '';
     document.getElementById('currentThumb').src = currentlyPlaying.thumbnail || '';
+    
+    const vinylCenterArt = document.getElementById('vinylCenterArt');
+    if (vinylCenterArt) vinylCenterArt.src = currentlyPlaying.thumbnail || '';
+
+    const tvDock = document.getElementById('tvPlayerDock');
+    if (tvDock && currentlyPlaying.genre) {
+      const rawG = currentlyPlaying.genre.split('/')[0].split(' ')[0].trim();
+      tvDock.className = tvDock.className.replace(/ambient-glow-\w+/g, '');
+      tvDock.classList.add(`ambient-glow-${rawG}`);
+    }
 
     const genreEl = document.getElementById('currentGenre');
     genreEl.textContent = currentlyPlaying.genre || 'Música';
@@ -571,6 +696,8 @@ socket.on('state-changed', (data) => {
   if (queue && queue.length > 0) {
     const next = queue[0];
     document.getElementById('nextTitle').textContent = next.title;
+    const nextMiniThumb = document.getElementById('nextMiniThumb');
+    if (nextMiniThumb) nextMiniThumb.src = next.thumbnail || '';
     document.getElementById('nextGenre').textContent = `[${next.genre || 'Música'}] - ${next.requestedBy?.table ? 'Mesa ' + next.requestedBy.table : 'Bar'}`;
   } else {
     document.getElementById('nextTitle').textContent = 'Continuará con la lista base';

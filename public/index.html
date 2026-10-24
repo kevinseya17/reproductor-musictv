@@ -28,9 +28,9 @@
 
   <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
 
-    <!-- Card: Sonando Ahora -->
-    <section class="glass-card p-4 relative overflow-hidden border-amber-500/20">
-      <div class="flex items-center justify-between mb-2">
+    <!-- Card: Sonando Ahora Estilo Mini Reproductor Hi-Fi -->
+    <section class="glass-card p-4 relative overflow-hidden border-amber-500/30 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+      <div class="flex items-center justify-between mb-2.5">
         <div class="flex items-center gap-2">
           <div class="equalizer">
             <div class="bar"></div>
@@ -38,17 +38,28 @@
             <div class="bar"></div>
             <div class="bar"></div>
           </div>
-          <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Sonando Ahora</span>
+          <span class="text-xs font-black uppercase tracking-wider text-amber-400">Sonando en el Bar</span>
         </div>
-        <span id="currentGenreBadge" class="genre-badge genre-Salsa">Salsa</span>
+        <div class="flex items-center gap-1.5">
+          <span id="currentGenreBadge" class="genre-badge genre-Salsa text-[10px]">Salsa</span>
+        </div>
       </div>
 
-      <div class="flex items-center gap-3">
-        <img id="currentThumb" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150" alt="Cover" class="w-16 h-16 rounded-xl object-cover shadow-lg border border-white/10">
+      <div class="flex items-center gap-3.5">
+        <div class="vinyl-wrapper shrink-0">
+          <img id="currentThumb" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150" alt="Cover" class="vinyl-album-cover">
+          <div id="mobileVinylRecord" class="vinyl-record spinning-vinyl">
+            <img id="mobileVinylCenterArt" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150" class="vinyl-center-art">
+            <div class="vinyl-center-hole"></div>
+          </div>
+        </div>
         <div class="flex-1 min-w-0">
-          <h2 id="currentTitle" class="text-base font-bold truncate text-white">Cargando música...</h2>
-          <p id="currentArtist" class="text-xs text-gray-400 truncate">El bar está preparando el ambiente</p>
-          <p id="currentRequestedBy" class="text-[11px] text-amber-400/90 mt-0.5 font-medium"></p>
+          <h2 id="currentTitle" class="text-base font-extrabold truncate text-white leading-tight">Cargando música...</h2>
+          <p id="currentArtist" class="text-xs text-amber-300 font-medium truncate mt-0.5">El bar está preparando el ambiente</p>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <p id="currentRequestedBy" class="text-[11px] text-gray-400 font-medium truncate"></p>
+            <span id="clientVibeBadge" class="hidden text-[10px] bg-purple-900/40 text-purple-300 px-2 py-0.5 rounded-full border border-purple-500/30 font-bold">⚡ Clímax & Perreo</span>
+          </div>
         </div>
       </div>
     </section>
