@@ -5434,82 +5434,6 @@
   ],
   "queue": [
     {
-      "id": "base_1792814531724_ob3ry",
-      "videoId": "a4xxzUEHKek",
-      "title": "Un Sueño",
-      "artist": "RKM & KEN-Y",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/a4xxzUEHKek/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531724,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531729_awpyq",
-      "videoId": "LvJcDhDYiXM",
-      "title": "Víctor Manuelle - Tengo Ganas",
-      "artist": "Victor Manuelle",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/LvJcDhDYiXM/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531729,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531731_hs6i1",
-      "videoId": "AjGVPuc0_jc",
-      "title": "Mi Amor es Pobre",
-      "artist": "Tony Dize",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/AjGVPuc0_jc/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531731,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531734_tl548",
-      "videoId": "eQcZc_pOuSw",
-      "title": "la razon de mi vida - victor manuelle",
-      "artist": "Cesar Usco Navarro \"ycomolohace\"",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/eQcZc_pOuSw/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531734,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
       "id": "base_1792814531737_ytg7e",
       "videoId": "C3lXxoQPqoA",
       "title": "Rakata",
@@ -6382,31 +6306,107 @@
       "bpm": 96,
       "vibe": "Clímax & Perreo",
       "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792814891656_3kew3",
+      "videoId": "wVRur2mMl_8",
+      "title": "Canela - Cesar Mora (Letra en la descripción)",
+      "artist": "zopa y seko",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/wVRur2mMl_8/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814891656,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792815144477_dcg2m",
+      "videoId": "JPYtPUfV9BU",
+      "title": "Ella Y Yo (Feat. Don Omar)",
+      "artist": "Aventura",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/JPYtPUfV9BU/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Aventura y Romeo Santos Mejores canciones.)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792815144477,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792815237353_7juu1",
+      "videoId": "DYTPMW1dc3k",
+      "title": "Por Amar A Ciegas",
+      "artist": "Arcangel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/DYTPMW1dc3k/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792815237353,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792815504073_g8ydq",
+      "videoId": "tDkDiN8x3Us",
+      "title": "Amigo",
+      "artist": "RKM & KEN-Y",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/tDkDiN8x3Us/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792815504073,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     }
   ],
   "currentlyPlaying": {
-    "id": "base_1792814531721_d9chl",
-    "videoId": "KmCWt4MBuJQ",
-    "title": "Aunque Te Fuiste",
-    "artist": "Don Omar",
+    "id": "base_1792814531734_tl548",
+    "videoId": "eQcZc_pOuSw",
+    "title": "la razon de mi vida - victor manuelle",
+    "artist": "Cesar Usco Navarro \"ycomolohace\"",
     "genre": "Reggaetón",
     "duration": "3:30",
-    "thumbnail": "https://i.ytimg.com/vi/KmCWt4MBuJQ/hqdefault.jpg",
+    "thumbnail": "https://i.ytimg.com/vi/eQcZc_pOuSw/hqdefault.jpg",
     "requestedBy": {
       "table": null,
-      "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
     },
     "isBaseTrack": true,
-    "addedAt": 1792814531721,
+    "addedAt": 1792814531734,
     "energy": 4,
     "bpm": 96,
     "vibe": "Clímax & Perreo",
     "djBadge": "Clímax & Perreo (96 BPM)",
-    "startedAt": 1792814539036,
+    "startedAt": 1792815504043,
     "transition": {
-      "transitionType": "riser_drop",
-      "fx": "riser_drop",
-      "label": "Puente Urbano Riser"
+      "transitionType": "crossfade",
+      "fx": "filter_sweep",
+      "label": "Fundido Rítmico"
     }
   },
   "history": [
@@ -9228,6 +9228,110 @@
         "label": "Puente Urbano Riser"
       },
       "playedAt": "2026-10-24T04:02:30.412Z"
+    },
+    {
+      "id": "base_1792814531721_d9chl",
+      "videoId": "KmCWt4MBuJQ",
+      "title": "Aunque Te Fuiste",
+      "artist": "Don Omar",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/KmCWt4MBuJQ/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531721,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792814539036,
+      "transition": {
+        "transitionType": "riser_drop",
+        "fx": "riser_drop",
+        "label": "Puente Urbano Riser"
+      },
+      "playedAt": "2026-10-24T04:08:11.563Z"
+    },
+    {
+      "id": "base_1792814531724_ob3ry",
+      "videoId": "a4xxzUEHKek",
+      "title": "Un Sueño",
+      "artist": "RKM & KEN-Y",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/a4xxzUEHKek/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531724,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792814891619,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T04:12:24.405Z"
+    },
+    {
+      "id": "base_1792814531729_awpyq",
+      "videoId": "LvJcDhDYiXM",
+      "title": "Víctor Manuelle - Tengo Ganas",
+      "artist": "Victor Manuelle",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/LvJcDhDYiXM/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531729,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792815144449,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T04:13:57.267Z"
+    },
+    {
+      "id": "base_1792814531731_hs6i1",
+      "videoId": "AjGVPuc0_jc",
+      "title": "Mi Amor es Pobre",
+      "artist": "Tony Dize",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/AjGVPuc0_jc/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531731,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792815237321,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T04:18:23.992Z"
     }
   ],
   "tableRequests": {

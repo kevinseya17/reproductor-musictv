@@ -507,4 +507,105 @@ select,
   transition: border-color 0.8s ease, box-shadow 0.8s ease;
 }
 
+/* ==========================================================
+   CONSOLA DJ PRO: WAVEFORM, VU METERS & PERFORMANCE PADS
+   ========================================================== */
+
+/* 1. Visualizador de Onda de Sonido DJ (Pioneer Soundwave Spectrum) */
+.dj-soundwave {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 26px;
+  width: 100%;
+}
+
+.dj-soundwave .sw-bar {
+  flex: 1;
+  background: linear-gradient(180deg, #facc15 0%, #f59e0b 60%, #ef4444 100%);
+  border-radius: 2px;
+  min-height: 4px;
+  height: 20%;
+  transition: height 0.15s ease;
+  opacity: 0.8;
+}
+
+.dj-soundwave.playing .sw-bar:nth-child(odd) {
+  animation: soundwaveBounce1 0.75s infinite ease-in-out alternate;
+}
+
+.dj-soundwave.playing .sw-bar:nth-child(even) {
+  animation: soundwaveBounce2 0.9s infinite ease-in-out alternate;
+}
+
+.dj-soundwave.playing .sw-bar:nth-child(3n) {
+  animation-duration: 0.65s;
+}
+
+.dj-soundwave.playing .sw-bar:nth-child(5n) {
+  animation-duration: 1.1s;
+}
+
+@keyframes soundwaveBounce1 {
+  0% { height: 15%; opacity: 0.45; }
+  50% { height: 85%; opacity: 1; }
+  100% { height: 35%; opacity: 0.65; }
+}
+
+@keyframes soundwaveBounce2 {
+  0% { height: 75%; opacity: 1; }
+  50% { height: 20%; opacity: 0.4; }
+  100% { height: 95%; opacity: 0.95; }
+}
+
+/* 2. Twin VU Meters (L / R) */
+.vu-meter-column {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2px;
+  height: 48px;
+  width: 7px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2px 1.5px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vu-led {
+  flex: 1;
+  width: 100%;
+  border-radius: 1px;
+  opacity: 0.2;
+  transition: opacity 0.1s ease, box-shadow 0.1s ease;
+}
+
+.vu-led.green { background: #22c55e; }
+.vu-led.yellow { background: #eab308; }
+.vu-led.red { background: #ef4444; }
+
+.vu-led.lit.green { opacity: 1; box-shadow: 0 0 5px #22c55e; }
+.vu-led.lit.yellow { opacity: 1; box-shadow: 0 0 6px #eab308; }
+.vu-led.lit.red { opacity: 1; box-shadow: 0 0 8px #ef4444; }
+
+/* 3. DJ Sampler Pad Button */
+.dj-pad-btn {
+  background: linear-gradient(180deg, #1e232f 0%, #11141c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.12s ease;
+  user-select: none;
+  cursor: pointer;
+}
+
+.dj-pad-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.55);
+}
+
+.dj-pad-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
 

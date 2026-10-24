@@ -96,6 +96,12 @@ function renderAdminState(data) {
     if (artistEl) artistEl.textContent = currentlyPlaying.artist;
     if (thumbEl) thumbEl.src = currentlyPlaying.thumbnail;
     
+    const vinylCenter = document.getElementById('adminVinylCenterArt');
+    if (vinylCenter) vinylCenter.src = currentlyPlaying.thumbnail;
+
+    const liveBpm = document.getElementById('adminLiveBpm');
+    if (liveBpm) liveBpm.textContent = currentlyPlaying.bpm || '96.0';
+    
     const miniThumb = document.getElementById('adminSidebarMiniThumb');
     const miniTitle = document.getElementById('adminSidebarMiniTitle');
     const miniArtist = document.getElementById('adminSidebarMiniArtist');
@@ -221,6 +227,44 @@ function updatePlayerTelemetry(data) {
     if (volDisplay) {
       volDisplay.textContent = `${Math.round(data.volume)}%`;
     }
+  }
+
+  // Sincronizar giro de vinilo, onda de sonido y VU meters
+  const vinylDisc = document.getElementById('adminVinylDisc');
+  const soundwave = document.getElementById('adminSoundwave');
+  if (vinylDisc) vinylDisc.classList.toggle('paused-vinyl', !playerTelemetry.isPlaying);
+  if (soundwave) soundwave.classList.toggle('playing', !!playerTelemetry.isPlaying);
+
+  updateVuMeters(!!playerTelemetry.isPlaying);
+}
+
+let vuInterval = null;
+function updateVuMeters(isPlaying) {
+  const ledsL = document.querySelectorAll('#vuMeterL .vu-led');
+  const ledsR = document.querySelectorAll('#vuMeterR .vu-led');
+
+  if (!isPlaying) {
+    ledsL.forEach(l => l.classList.remove('lit'));
+    ledsR.forEach(r => r.classList.remove('lit'));
+    if (vuInterval) {
+      clearInterval(vuInterval);
+      vuInterval = null;
+    }
+    return;
+  }
+
+  if (!vuInterval) {
+    vuInterval = setInterval(() => {
+      const levelL = Math.floor(Math.random() * 5) + 3;
+      const levelR = Math.floor(Math.random() * 5) + 3;
+
+      ledsL.forEach((led, idx) => {
+        led.classList.toggle('lit', idx < levelL);
+      });
+      ledsR.forEach((led, idx) => {
+        led.classList.toggle('lit', idx < levelR);
+      });
+    }, 120);
   }
 }
 

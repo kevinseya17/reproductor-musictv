@@ -132,8 +132,12 @@
           <!-- Header del Deck -->
           <div class="flex items-center justify-between border-b border-white/10 pb-2.5 sm:pb-3">
             <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_#facc15] animate-pulse"></span>
-              <span class="text-[10px] sm:text-xs font-black tracking-[0.2em] text-amber-400 uppercase">NOW PLAYING • CONSOLA DJ</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"></span>
+              <span class="text-[10px] sm:text-xs font-black tracking-[0.2em] text-amber-400 uppercase">DECK A • MASTER SYNC</span>
+              <span id="adminTvSyncBadge" class="text-[9px] bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>SYNC TV</span>
+              </span>
             </div>
             <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap justify-end">
               <span id="adminNowEnergy" class="hidden bg-purple-900/40 text-purple-300 border border-purple-500/40 px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold items-center gap-1">
@@ -144,33 +148,93 @@
             </div>
           </div>
 
-          <!-- Info Principal del Tema (Carátula grande con bisel dorado + Título impactante) -->
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-6">
-            <div class="flex items-center gap-3 sm:gap-6 min-w-0 flex-1 w-full sm:w-auto">
-              <div class="relative shrink-0 group">
-                <div class="absolute -inset-1 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 opacity-40 blur-sm group-hover:opacity-75 transition"></div>
-                <img id="adminNowThumb" src="" class="relative w-16 h-16 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-amber-400 shadow-2xl">
+          <!-- Info Principal del Tema (Tornamesa de Vinilo Giratorio + Info + Espectro Waveform + VU Meters) -->
+          <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 sm:gap-6">
+            
+            <!-- Tornamesa de Vinilo Giratoria + Info -->
+            <div class="flex items-center gap-3 sm:gap-5 min-w-0 flex-1 w-full lg:w-auto">
+              <!-- Plato de Vinilo Pro -->
+              <div class="vinyl-wrapper shrink-0">
+                <img id="adminNowThumb" src="" alt="Album Art" class="vinyl-album-cover">
+                <div id="adminVinylDisc" class="vinyl-record spinning-vinyl">
+                  <img id="adminVinylCenterArt" src="" class="vinyl-center-art">
+                  <div class="vinyl-center-hole"></div>
+                </div>
               </div>
-              <div class="min-w-0 flex-1">
-                <h2 id="adminNowTitle" class="text-base sm:text-2xl lg:text-3xl font-black text-white tracking-wide truncate leading-tight">
-                  Cargando...
-                </h2>
-                <p id="adminNowArtist" class="text-xs sm:text-base text-amber-400 font-bold truncate mt-0.5">
+
+              <!-- Textos de la pista + Visualizador de Onda DJ -->
+              <div class="min-w-0 flex-1 space-y-1.5">
+                <div class="flex items-center gap-2">
+                  <h2 id="adminNowTitle" class="text-base sm:text-2xl font-black text-white tracking-wide truncate leading-tight">
+                    Cargando...
+                  </h2>
+                  <span id="adminKeyBadge" class="text-[9px] font-mono font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 px-1.5 py-0.5 rounded shrink-0 hidden sm:inline">8A</span>
+                </div>
+                <p id="adminNowArtist" class="text-xs sm:text-base text-amber-400 font-bold truncate">
                   Artista
                 </p>
-                <p class="text-[11px] sm:text-xs text-gray-400 mt-1 flex items-center gap-1.5">
+                <p class="text-[11px] text-gray-400 flex items-center gap-1.5">
                   <span>🎵</span> <span id="adminNowOriginText">Lista Base</span>
                 </p>
+
+                <!-- Visualizador de Onda de Sonido Reactiva (Pioneer Waveform) -->
+                <div class="pt-1 max-w-md">
+                  <div id="adminSoundwave" class="dj-soundwave playing">
+                    <div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div>
+                    <div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div>
+                    <div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div>
+                    <div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div>
+                    <div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div>
+                    <div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div><div class="sw-bar"></div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Tiempo Numérico Grande (Estilo Display Digital) -->
-            <div class="bg-black/60 border border-white/10 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-right shrink-0 w-full sm:w-auto flex sm:flex-col items-center sm:items-end justify-between sm:justify-center">
-              <div class="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-400 font-bold sm:mb-0.5">TIEMPO TRANSCURRIDO</div>
-              <div class="font-mono text-lg sm:text-2xl font-black tracking-wider text-amber-400">
-                <span id="adminCurrentTime">00:00</span> <span class="text-gray-500 text-sm sm:text-base">/</span> <span id="adminTotalDuration" class="text-gray-300">00:00</span>
+            <!-- Display Digital Grande + Twin VU Meters Stereo (L / R) -->
+            <div class="bg-black/70 border border-white/10 px-4 py-3 rounded-2xl shrink-0 w-full lg:w-auto flex items-center justify-between lg:justify-end gap-4">
+              <!-- VU Meter L -->
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[8px] font-mono text-gray-500 font-black">L</span>
+                <div id="vuMeterL" class="vu-meter-column">
+                  <div class="vu-led red"></div>
+                  <div class="vu-led red"></div>
+                  <div class="vu-led yellow"></div>
+                  <div class="vu-led yellow"></div>
+                  <div class="vu-led green"></div>
+                  <div class="vu-led green"></div>
+                  <div class="vu-led green"></div>
+                  <div class="vu-led green"></div>
+                </div>
+              </div>
+
+              <!-- Display Digital Central -->
+              <div class="text-right">
+                <div class="text-[9px] uppercase tracking-widest text-gray-400 font-bold mb-0.5">TIEMPO TRANSCURRIDO</div>
+                <div class="font-mono text-xl sm:text-2xl font-black tracking-wider text-amber-400">
+                  <span id="adminCurrentTime">00:00</span> <span class="text-gray-500 text-sm">/</span> <span id="adminTotalDuration" class="text-gray-300">00:00</span>
+                </div>
+                <div class="text-[10px] font-mono text-gray-400 font-bold mt-0.5">
+                  TEMPO: <span id="adminLiveBpm" class="text-amber-400 font-black">96.0</span> BPM • <span class="text-emerald-400 font-black">±0.0%</span>
+                </div>
+              </div>
+
+              <!-- VU Meter R -->
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[8px] font-mono text-gray-500 font-black">R</span>
+                <div id="vuMeterR" class="vu-meter-column">
+                  <div class="vu-led red"></div>
+                  <div class="vu-led red"></div>
+                  <div class="vu-led yellow"></div>
+                  <div class="vu-led yellow"></div>
+                  <div class="vu-led green"></div>
+                  <div class="vu-led green"></div>
+                  <div class="vu-led green"></div>
+                  <div class="vu-led green"></div>
+                </div>
               </div>
             </div>
+
           </div>
 
           <!-- Barra de Progreso / Scrubber Interactivo -->
@@ -185,79 +249,111 @@
             </div>
           </div>
 
-          <!-- Botonera Táctil Neomórfica de Transporte (Estilo Hardware Físico) -->
+          <!-- Botonera Táctil Hi-Fi de Transporte & Sampler Pad de Efectos DJ -->
           <div class="pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
             
-            <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <!-- Transporte Principal (Flechas -30s, -10s, Play/Pause Dorado, +10s, +30s, Next, Mezcla) -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               
-              <!-- REWIND -->
+              <!-- REWIND 30s -->
               <div class="flex flex-col items-center gap-1">
-                <span class="text-[9px] font-black uppercase text-gray-400 tracking-wider">REWIND</span>
-                <button onclick="remoteSeek(-10)" class="tactile-btn-dark px-3.5 sm:px-4 py-2 text-xs sm:text-sm" title="Retroceder 10 segundos">
+                <span class="text-[8px] font-black uppercase text-gray-500 tracking-wider">-30s</span>
+                <button onclick="remoteSeek(-30)" class="tactile-btn-dark px-2.5 sm:px-3 py-2 text-xs" title="Retroceder 30 segundos">
+                  ⏪
+                </button>
+              </div>
+
+              <!-- REWIND 10s -->
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[8px] font-black uppercase text-gray-400 tracking-wider">-10s</span>
+                <button onclick="remoteSeek(-10)" class="tactile-btn-dark px-3 sm:px-3.5 py-2 text-xs sm:text-sm font-bold" title="Retroceder 10 segundos">
                   ⏪ -10s
                 </button>
               </div>
 
               <!-- PLAY / PAUSE (GRANDE Y DORADO AL CENTRO) -->
               <div class="flex flex-col items-center gap-1">
-                <span class="text-[9px] font-black uppercase text-amber-400 tracking-wider">PLAY / PAUSE</span>
-                <button id="btnPlayPause" onclick="togglePlayPauseRemote()" class="tactile-btn-gold px-7 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg flex items-center gap-2" title="Pausar o Reanudar">
+                <span class="text-[8px] font-black uppercase text-amber-400 tracking-wider">PLAY / PAUSE</span>
+                <button id="btnPlayPause" onclick="togglePlayPauseRemote()" class="tactile-btn-gold px-6 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg flex items-center gap-2" title="Pausar o Reanudar">
                   <span id="btnPlayPauseIcon">⏸️</span>
                   <span id="btnPlayPauseText" class="text-xs sm:text-sm uppercase tracking-wider font-black">PAUSAR</span>
                 </button>
               </div>
 
-              <!-- FAST FORWARD -->
+              <!-- FAST FORWARD 10s -->
               <div class="flex flex-col items-center gap-1">
-                <span class="text-[9px] font-black uppercase text-gray-400 tracking-wider">FAST FORWARD</span>
-                <button onclick="remoteSeek(10)" class="tactile-btn-dark px-3.5 sm:px-4 py-2 text-xs sm:text-sm" title="Adelantar 10 segundos">
+                <span class="text-[8px] font-black uppercase text-gray-400 tracking-wider">+10s</span>
+                <button onclick="remoteSeek(10)" class="tactile-btn-dark px-3 sm:px-3.5 py-2 text-xs sm:text-sm font-bold" title="Adelantar 10 segundos">
                   +10s ⏩
+                </button>
+              </div>
+
+              <!-- FAST FORWARD 30s -->
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[8px] font-black uppercase text-gray-500 tracking-wider">+30s</span>
+                <button onclick="remoteSeek(30)" class="tactile-btn-dark px-2.5 sm:px-3 py-2 text-xs" title="Adelantar 30 segundos">
+                  ⏩
                 </button>
               </div>
 
               <!-- NEXT / SALTAR -->
               <div class="flex flex-col items-center gap-1">
-                <span class="text-[9px] font-black uppercase text-gray-400 tracking-wider">NEXT</span>
-                <button onclick="skipCurrentSong()" class="tactile-btn-dark px-4 sm:px-5 py-2 text-xs sm:text-sm hover:border-amber-400/60" title="Saltar a la siguiente canción">
+                <span class="text-[8px] font-black uppercase text-gray-400 tracking-wider">NEXT</span>
+                <button onclick="skipCurrentSong()" class="tactile-btn-dark px-3.5 sm:px-4 py-2 text-xs sm:text-sm hover:border-amber-400/60 font-bold" title="Saltar a la siguiente canción">
                   ⏭️ Saltar
                 </button>
               </div>
 
               <!-- MEZCLA DJ FX -->
               <div class="flex flex-col items-center gap-1">
-                <span class="text-[9px] font-black uppercase text-amber-400 tracking-wider">MEZCLA DJ</span>
-                <button onclick="triggerDjTransition()" class="tactile-btn-dark px-3.5 sm:px-4 py-2 text-xs sm:text-sm hover:border-amber-400 text-amber-300 flex items-center gap-1.5" title="Transición con filtro sweep y pase inteligente a la siguiente canción">
+                <span class="text-[8px] font-black uppercase text-amber-400 tracking-wider">TRANSICIÓN</span>
+                <button onclick="triggerDjTransition()" class="tactile-btn-dark px-3 sm:px-3.5 py-2 text-xs sm:text-sm hover:border-amber-400 text-amber-300 flex items-center gap-1 font-bold" title="Transición con filtro sweep y pase suave">
                   🎛️ Mezclar
-                </button>
-              </div>
-
-              <!-- AIRHORN / HYPE -->
-              <div class="flex flex-col items-center gap-1">
-                <span class="text-[9px] font-black uppercase text-pink-400 tracking-wider">HYPE DROP</span>
-                <button onclick="triggerDjFx('airhorn')" class="tactile-btn-dark px-3 sm:px-3.5 py-2 text-xs sm:text-sm hover:border-pink-400 text-pink-300 flex items-center gap-1" title="Lanzar efecto Airhorn al televisor">
-                  🎺 Airhorn
                 </button>
               </div>
 
             </div>
 
+            <!-- DJ Sampler Performance Pads (Drops & Efectos en Vivo) -->
+            <div class="flex items-center gap-1.5 sm:gap-2 bg-black/40 px-3 py-2 rounded-2xl border border-white/10">
+              <span class="text-[9px] font-black uppercase text-amber-400 tracking-widest mr-1 hidden sm:inline">DJ PADS:</span>
+              
+              <!-- PAD 1: AIRHORN -->
+              <button onclick="triggerDjFx('airhorn')" class="dj-pad-btn px-2.5 sm:px-3 py-1.5 text-xs text-pink-300 hover:border-pink-400 hover:text-pink-200 flex items-center gap-1" title="Lanzar Airhorn drop a la TV">
+                <span>🎺</span> <span class="text-[10px] font-bold">Airhorn</span>
+              </button>
+
+              <!-- PAD 2: VINYL BRAKE -->
+              <button onclick="triggerDjFx('vinyl_brake')" class="dj-pad-btn px-2.5 sm:px-3 py-1.5 text-xs text-amber-300 hover:border-amber-400 hover:text-amber-200 flex items-center gap-1" title="Lanzar Freno de Vinilo">
+                <span>💿</span> <span class="text-[10px] font-bold">Brake</span>
+              </button>
+
+              <!-- PAD 3: FILTER SWEEP -->
+              <button onclick="triggerDjFx('sweep')" class="dj-pad-btn px-2.5 sm:px-3 py-1.5 text-xs text-purple-300 hover:border-purple-400 hover:text-purple-200 flex items-center gap-1" title="Lanzar Barrido de Filtro Club">
+                <span>🎛️</span> <span class="text-[10px] font-bold">Sweep</span>
+              </button>
+            </div>
+
             <!-- Controles Secundarios: Micrófono y Volumen TV -->
             <div class="flex items-center gap-3 sm:gap-4 ml-auto">
               <div class="flex flex-col items-center gap-1">
-                <span class="text-[9px] font-black uppercase text-gray-400 tracking-wider">VOZ / MIC</span>
-                <button onclick="toggleMicMode()" id="btnDeckMic" class="tactile-btn-dark px-3.5 py-2 text-xs flex items-center gap-1.5" title="Atenuar música para hablar">
+                <span class="text-[8px] font-black uppercase text-gray-400 tracking-wider">VOZ / MIC</span>
+                <button onclick="toggleMicMode()" id="btnDeckMic" class="tactile-btn-dark px-3 py-2 text-xs flex items-center gap-1.5" title="Atenuar música para hablar">
                   🎙️ <span id="deckMicLabel">Mic</span>
                 </button>
               </div>
 
-              <div class="flex flex-col items-start gap-1 bg-black/40 px-3.5 py-1.5 rounded-xl border border-white/10">
-                <span class="text-[9px] font-black uppercase text-gray-400 tracking-wider">VOLUMEN TV</span>
+              <div class="flex flex-col items-start gap-1 bg-black/40 px-3 sm:px-3.5 py-1.5 rounded-xl border border-white/10">
+                <span class="text-[8px] font-black uppercase text-gray-400 tracking-wider">VOLUMEN TV</span>
                 <div class="flex items-center gap-2">
                   <span class="text-xs text-gray-400">🔊</span>
-                  <input type="range" id="adminVolumeSlider" min="0" max="100" value="100" oninput="onVolumeChange(this.value)" class="w-20 sm:w-28 accent-amber-500 cursor-pointer h-1.5 bg-white/20 rounded-lg">
-                  <span id="adminVolumeDisplay" class="text-[10px] font-mono text-amber-400 font-bold w-7">100%</span>
+                  <input type="range" id="adminVolumeSlider" min="0" max="100" value="100" oninput="onVolumeChange(this.value)" class="w-16 sm:w-24 accent-amber-500 cursor-pointer h-1.5 bg-white/20 rounded-lg">
+                  <span id="adminVolumeDisplay" class="text-[10px] font-mono text-amber-400 font-bold w-7 text-right">100%</span>
                 </div>
               </div>
+            </div>
+
+          </div>
             </div>
 
           </div>
