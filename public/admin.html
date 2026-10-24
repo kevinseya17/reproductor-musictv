@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/css/style.css">
   <script src="/socket.io/socket.io.js"></script>
 </head>
-<body class="bg-[#0c0e12] text-gray-100 min-h-screen flex flex-col font-sans">
+<body class="bg-[#0c0e12] text-gray-100 min-h-screen flex flex-col font-sans" id="adminBody">
 
   <!-- Topbar Minimalista -->
   <header class="glass-header px-4 lg:px-6 py-2.5 flex items-center justify-between border-b border-white/10 z-30 shrink-0">
@@ -17,16 +17,27 @@
       <button onclick="toggleSidebarMobile()" class="lg:hidden text-gray-300 hover:text-white p-1.5 rounded-xl bg-white/5 border border-white/10" aria-label="Abrir Menú">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
+      <!-- Botón colapsar sidebar en desktop -->
+      <button onclick="toggleSidebarCollapse()" class="hidden lg:flex items-center justify-center text-gray-400 hover:text-white p-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition" title="Colapsar/Expandir menú lateral" aria-label="Colapsar Sidebar">
+        <svg id="sidebarCollapseIcon" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+      </button>
+      <!-- Botón colapsar sidebar en desktop -->
+      <button onclick="toggleSidebarCollapse()" class="hidden lg:flex text-gray-400 hover:text-white p-1.5 rounded-xl bg-white/5 border border-white/10 transition" title="Colapsar menú lateral" aria-label="Colapsar Sidebar">
+        <svg id="sidebarCollapseIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+      </button>
 
       <div class="flex items-center gap-2.5">
         <div class="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-extrabold text-sm shadow-[0_0_12px_rgba(245,158,11,0.3)]">
           ⚡
         </div>
         <div>
-          <h1 class="text-sm sm:text-base font-extrabold text-white tracking-wider flex items-center gap-2">
+          <h1 class="text-sm sm:text-base font-extrabold text-white tracking-wider flex items-center gap-2 flex-wrap">
             <span id="adminBarName">Reproductor MusicTV</span>
-            <span class="text-[9px] uppercase tracking-widest font-black px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 animate-pulse">
-              EN VIVO
+            <span class="text-[9px] uppercase tracking-widest font-black px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 animate-pulse">EN VIVO</span>
+            <!-- Indicador de TV dinámico -->
+            <span id="headerTvBadge" class="text-[9px] font-black px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-400 border border-rose-500/30 flex items-center gap-1 transition-all duration-500">
+              <span id="headerTvDot" class="w-1.5 h-1.5 rounded-full bg-rose-400 inline-block"></span>
+              <span id="headerTvText">TV offline</span>
             </span>
           </h1>
         </div>
@@ -52,59 +63,59 @@
   <div class="flex-1 flex overflow-hidden relative">
     
     <!-- Sidebar de Navegación Estilo Pro -->
-    <aside id="adminSidebar" class="w-64 bg-[#11141b] border-r border-white/10 flex flex-col justify-between shrink-0 transition-transform duration-300 -translate-x-full lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-40 lg:z-auto pt-14 lg:pt-0">
+    <aside id="adminSidebar" class="admin-sidebar-expanded bg-[#11141b] border-r border-white/10 flex flex-col justify-between shrink-0 transition-all duration-300 -translate-x-full lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-40 lg:z-auto pt-14 lg:pt-0 overflow-hidden">
       
       <!-- Menú Vertical -->
       <div class="p-3.5 space-y-1.5 overflow-y-auto">
         <div class="px-3 py-2 text-[10px] font-black uppercase tracking-widest text-gray-500 flex items-center justify-between">
-          <span>CONSOLA DEL BAR</span>
+          <span class="sidebar-label">CONSOLA DEL BAR</span>
           <button onclick="toggleSidebarMobile()" class="lg:hidden text-gray-400 hover:text-white p-1">✕</button>
         </div>
 
         <button onclick="switchTab('queue')" id="tabBtnQueue" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.15)]">
           <div class="flex items-center gap-2.5">
             <span class="text-base">📻</span>
-            <span>En Vivo & Consola</span>
+            <span class="sidebar-label">En Vivo &amp; Consola</span>
           </div>
-          <span id="queueCounterBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500 text-black font-extrabold">0</span>
+          <span id="queueCounterBadge" class="sidebar-badge text-[10px] px-2 py-0.5 rounded-full bg-amber-500 text-black font-extrabold shrink-0">0</span>
         </button>
 
         <button onclick="switchTab('playlists')" id="tabBtnPlaylists" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/5 border border-transparent transition">
           <span class="text-base">📂</span>
-          <span>Listas Maestras</span>
+          <span class="sidebar-label">Listas Maestras</span>
         </button>
 
         <button onclick="switchTab('control')" id="tabBtnControl" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/5 border border-transparent transition">
           <span class="text-base">🎛️</span>
-          <span>Mesas, Horarios & TV</span>
+          <span class="sidebar-label">Mesas, Horarios &amp; TV</span>
         </button>
 
         <button onclick="switchTab('ai')" id="tabBtnAI" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/5 border border-transparent transition">
           <span class="text-base">🤖</span>
-          <span>DJ Inteligente IA</span>
+          <span class="sidebar-label">DJ Inteligente IA</span>
         </button>
 
         <button onclick="switchTab('stats')" id="tabBtnStats" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/5 border border-transparent transition">
           <span class="text-base">📈</span>
-          <span>Tendencias & Historial</span>
+          <span class="sidebar-label">Tendencias &amp; Historial</span>
         </button>
 
         <button onclick="switchTab('settings')" id="tabBtnSettings" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/5 border border-transparent transition">
           <span class="text-base">⚙️</span>
-          <span>Ajustes del Bar</span>
+          <span class="sidebar-label">Ajustes del Bar</span>
         </button>
       </div>
 
       <!-- Mini Tarjeta Persistente al Fondo del Sidebar -->
-      <div class="p-3 border-t border-white/10 bg-black/40 m-3 rounded-2xl border border-white/5">
+      <div class="sidebar-mini-card p-3 border-t border-white/10 bg-black/40 m-3 rounded-2xl border border-white/5">
         <div class="flex items-center gap-2.5 mb-2">
           <img id="adminSidebarMiniThumb" src="" class="w-10 h-10 rounded-xl object-cover border border-amber-500/40 shrink-0">
-          <div class="min-w-0 flex-1">
+          <div class="min-w-0 flex-1 sidebar-label">
             <p id="adminSidebarMiniTitle" class="text-xs font-bold text-white truncate">Cargando...</p>
             <p id="adminSidebarMiniArtist" class="text-[10px] text-amber-400 truncate font-semibold">Artista</p>
           </div>
         </div>
-        <div class="flex items-center justify-between text-[10px] text-gray-400 font-mono">
+        <div class="flex items-center justify-between text-[10px] text-gray-400 font-mono sidebar-label">
           <span id="adminSidebarMiniTime">00:00</span>
           <span class="text-emerald-400 font-bold tracking-wider text-[9px] flex items-center gap-1">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> AL AIRE
@@ -122,7 +133,10 @@
       <!-- ============================================== -->
       <!-- PESTAÑA 1: COLA EN VIVO & CONSOLA DJ -->
       <!-- ============================================== -->
-      <div id="tabContentQueue" class="space-y-6">
+      <div id="tabContentQueue" class="">
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-5">
+        <!-- Columna Izquierda: Deck + Buscador + Cola (col-span-2) -->
+        <div class="xl:col-span-2 space-y-5">
 
         <!-- ============================================================ -->
         <!-- REPRODUCTOR PRO HARDWARE DECK (ESTILO DARK GOLD TRAKTOR/DJ) -->
@@ -168,7 +182,7 @@
                   <h2 id="adminNowTitle" class="text-base sm:text-2xl font-black text-white tracking-wide truncate leading-tight">
                     Cargando...
                   </h2>
-                  <span id="adminKeyBadge" class="text-[9px] font-mono font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 px-1.5 py-0.5 rounded shrink-0 hidden sm:inline">8A</span>
+                  
                 </div>
                 <p id="adminNowArtist" class="text-xs sm:text-base text-amber-400 font-bold truncate">
                   Artista
@@ -215,7 +229,7 @@
                   <span id="adminCurrentTime">00:00</span> <span class="text-gray-500 text-sm">/</span> <span id="adminTotalDuration" class="text-gray-300">00:00</span>
                 </div>
                 <div class="text-[10px] font-mono text-gray-400 font-bold mt-0.5">
-                  TEMPO: <span id="adminLiveBpm" class="text-amber-400 font-black">96.0</span> BPM • <span class="text-emerald-400 font-black">±0.0%</span>
+                  TEMPO: <span id="adminLiveBpm" class="text-amber-400 font-black">96.0</span> BPM
                 </div>
               </div>
 
@@ -354,9 +368,6 @@
             </div>
 
           </div>
-            </div>
-
-          </div>
 
         </div>
 
@@ -416,7 +427,47 @@
           </div>
         </div>
 
-      </div>
+        </div><!-- /col-left -->
+
+        <!-- Columna Derecha: A Continuación (sticky panel) -->
+        <div class="xl:col-span-1">
+          <div class="sticky top-0 space-y-3">
+            <!-- Panel A Continuación -->
+            <div class="bg-gradient-to-b from-[#181b24] to-[#12141c] rounded-2xl border border-white/10 p-4 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xs font-black uppercase tracking-widest text-amber-400 flex items-center gap-2">
+                  <span>⏭️</span> A Continuación
+                </h3>
+                <span id="upNextCount" class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-gray-300 font-bold">0</span>
+              </div>
+              <div id="upNextList" class="space-y-1.5 max-h-[calc(100vh-220px)] overflow-y-auto pr-0.5">
+                <p class="text-[11px] text-gray-500 text-center py-6">Cola vacía</p>
+              </div>
+            </div>
+
+            <!-- Panel Estado Rápido del Bar -->
+            <div class="bg-[#11141b] rounded-2xl border border-white/10 p-3.5 space-y-2.5">
+              <h3 class="text-[10px] font-black uppercase tracking-widest text-gray-400">Estado del Bar</h3>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="bg-black/40 rounded-xl p-2.5 text-center">
+                  <div id="statMesasConectadas" class="text-xl font-black text-amber-400">0</div>
+                  <div class="text-[9px] text-gray-500 uppercase tracking-wide mt-0.5">Mesas activas</div>
+                </div>
+                <div class="bg-black/40 rounded-xl p-2.5 text-center">
+                  <div id="statPedidosHoy" class="text-xl font-black text-emerald-400">0</div>
+                  <div class="text-[9px] text-gray-500 uppercase tracking-wide mt-0.5">Pedidos hoy</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between text-[10px] bg-black/40 rounded-xl px-3 py-2">
+                <span class="text-gray-400 font-semibold">Modo activo:</span>
+                <span id="statModoBadge" class="text-amber-300 font-black">Lista Base</span>
+              </div>
+            </div>
+          </div>
+        </div><!-- /col-right -->
+
+      </div><!-- /grid -->
+      </div><!-- /tabContentQueue -->
 
     <!-- ============================================== -->
     <!-- PESTAÑA 2: LISTAS MAESTRAS (EL NORTE) -->
@@ -947,6 +998,31 @@
     </main>
   </div>
 
+  <!-- Status Bar Footer -->
+  <footer class="shrink-0 bg-[#0d0f15]/90 backdrop-blur-sm border-t border-white/10 px-5 py-2 flex items-center justify-between flex-wrap gap-3 z-20">
+    <div class="flex items-center gap-4 text-[10px] text-gray-400 font-mono">
+      <span class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
+        <span>Mesas activas: <strong id="footerMesas" class="text-white">0</strong></span>
+      </span>
+      <span class="hidden sm:flex items-center gap-1.5">
+        <span>🎵</span>
+        <span>Pedidos hoy: <strong id="footerPedidos" class="text-amber-400">0</strong></span>
+      </span>
+      <span class="hidden md:flex items-center gap-1.5">
+        <span>📻</span>
+        <span>Modo: <strong id="footerModo" class="text-sky-400">Lista Base</strong></span>
+      </span>
+    </div>
+    <div class="flex items-center gap-3 text-[10px]">
+      <span id="footerTvStatus" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 font-bold transition-all duration-500">
+        <span id="footerTvDot" class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+        <span id="footerTvText">TV offline</span>
+      </span>
+      <span class="text-gray-500 hidden md:inline" id="footerClock"></span>
+    </div>
+  </footer>
+
   <!-- Modal Nueva Lista Base -->
   <div id="newPlaylistModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
     <div class="bg-[#161b26] border border-white/15 rounded-2xl sm:rounded-3xl w-full max-w-lg p-4 sm:p-6 space-y-4 animate-in fade-in duration-200 max-h-[92vh] overflow-y-auto">
@@ -1102,3 +1178,10 @@
   <script src="/js/admin.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+

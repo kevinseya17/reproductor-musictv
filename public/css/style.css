@@ -587,6 +587,152 @@ select,
 .vu-led.lit.yellow { opacity: 1; box-shadow: 0 0 6px #eab308; }
 .vu-led.lit.red { opacity: 1; box-shadow: 0 0 8px #ef4444; }
 
+/* ====================================================
+   ADMIN PANEL — SIDEBAR COLAPSABLE & LAYOUT MEJORAS
+   ==================================================== */
+
+/* Sidebar expandido (default) */
+.admin-sidebar-expanded {
+  width: 256px; /* w-64 */
+}
+
+/* Sidebar colapsado — solo íconos */
+.admin-sidebar-collapsed {
+  width: 64px; /* w-16 */
+}
+
+/* En sidebar colapsado, ocultar etiquetas de texto */
+.admin-sidebar-collapsed .sidebar-label {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+  display: none;
+}
+
+/* Ocultar badge de conteo cuando está colapsado */
+.admin-sidebar-collapsed .sidebar-badge {
+  display: none;
+}
+
+/* Ocultar la mini tarjeta de ahora sonando cuando colapsado */
+.admin-sidebar-collapsed .sidebar-mini-card {
+  display: none;
+}
+
+/* Centrar los botones de sidebar cuando está colapsado */
+.admin-sidebar-collapsed button,
+.admin-sidebar-collapsed a {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Rotar ícono de colapsar */
+.sidebar-collapse-rotated {
+  transform: rotate(180deg);
+}
+
+/* ====================================================
+   "A CONTINUACIÓN" — PANEL UP NEXT (SIDEBAR DERECHA)
+   ==================================================== */
+#upNextList::-webkit-scrollbar { width: 3px; }
+#upNextList::-webkit-scrollbar-track { background: transparent; }
+#upNextList::-webkit-scrollbar-thumb { background: rgba(245,158,11,0.3); border-radius: 3px; }
+
+.up-next-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.15s ease;
+  cursor: default;
+}
+.up-next-item:hover {
+  background: rgba(245,158,11,0.08);
+  border-color: rgba(245,158,11,0.2);
+}
+.up-next-position {
+  font-size: 10px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.2);
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+  font-family: monospace;
+}
+.up-next-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.05);
+}
+.up-next-info {
+  min-width: 0;
+  flex: 1;
+}
+.up-next-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #f3f4f6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.up-next-artist {
+  font-size: 9.5px;
+  color: #9ca3af;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+.up-next-customer-badge {
+  font-size: 8px;
+  font-weight: 900;
+  padding: 1px 5px;
+  border-radius: 20px;
+  background: rgba(245,158,11,0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245,158,11,0.3);
+  flex-shrink: 0;
+}
+
+/* ====================================================
+   FOOTER STATUS BAR
+   ==================================================== */
+footer#adminStatusBar,
+footer.admin-status-bar {
+  min-height: 36px;
+}
+
+/* ====================================================
+   HEADER TV BADGE — ONLINE/OFFLINE TRANSITION
+   ==================================================== */
+#headerTvBadge.tv-online {
+  background: rgba(16,185,129,0.15);
+  border-color: rgba(16,185,129,0.3);
+  color: #34d399;
+}
+#headerTvBadge.tv-online #headerTvDot {
+  background: #34d399;
+}
+#footerTvStatus.tv-online {
+  background: rgba(16,185,129,0.1);
+  border-color: rgba(16,185,129,0.2);
+  color: #34d399;
+}
+#footerTvStatus.tv-online #footerTvDot {
+  background: #34d399;
+}
+
 /* 3. DJ Sampler Pad Button */
 .dj-pad-btn {
   background: linear-gradient(180deg, #1e232f 0%, #11141c 100%);

@@ -161,6 +161,8 @@ function renderAdminState(data) {
   }
 
   renderQueueList(currentQueueState);
+  renderUpNextPanel(currentQueueState);
+  updateStatusBar(currentQueueState, settings);
 }
 
 // Formateador de segundos a mm:ss
@@ -351,6 +353,162 @@ function toggleSidebarMobile() {
 }
 
 // ============================================================
+// SIDEBAR COLAPSABLE (DESKTOP) — Solo íconos
+// ============================================================
+let sidebarCollapsed = false;
+function toggleSidebarCollapse() {
+  sidebarCollapsed = !sidebarCollapsed;
+  const sidebar = document.getElementById('adminSidebar');
+  const icon = document.getElementById('sidebarCollapseIcon');
+  if (!sidebar) return;
+  if (sidebarCollapsed) {
+    sidebar.classList.remove('admin-sidebar-expanded');
+    sidebar.classList.add('admin-sidebar-collapsed');
+    if (icon) icon.style.transform = 'rotate(180deg)';
+  } else {
+    sidebar.classList.remove('admin-sidebar-collapsed');
+    sidebar.classList.add('admin-sidebar-expanded');
+    if (icon) icon.style.transform = 'rotate(0deg)';
+  }
+}
+
+// ============================================================
+// INDICADOR TV EN TOPBAR Y FOOTER
+// ============================================================
+let tvConnected = false;
+function setTvConnectionStatus(connected) {
+  if (tvConnected === connected) return; // sin cambio
+  tvConnected = connected;
+
+  // Badge en header
+  const badge = document.getElementById('headerTvBadge');
+  const dot = document.getElementById('headerTvDot');
+  const text = document.getElementById('headerTvText');
+  if (badge && dot && text) {
+    if (connected) {
+      badge.classList.add('tv-online');
+      dot.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-ping';
+      text.textContent = '📺 TV conectada';
+    } else {
+      badge.classList.remove('tv-online');
+      dot.className = 'w-1.5 h-1.5 rounded-full bg-rose-400 inline-block';
+      text.textContent = '📺 TV offline';
+    }
+  }
+
+  // Badge en footer
+  const fStatus = document.getElementById('footerTvStatus');
+  const fDot = document.getElementById('footerTvDot');
+  const fText = document.getElementById('footerTvText');
+  if (fStatus && fDot && fText) {
+    if (connected) {
+      fStatus.classList.add('tv-online');
+      fDot.style.background = '#34d399';
+      fText.textContent = 'TV conectada';
+    } else {
+      fStatus.classList.remove('tv-online');
+      fDot.style.background = '#f87171';
+      fText.textContent = 'TV offline';
+    }
+  }
+}
+
+// ============================================================
+// RELOJ Y STATUS BAR
+// ============================================================
+function startStatusBar() {
+  function updateClock() {
+    const el = document.getElementById('footerClock');
+    if (el) {
+      const now = new Date();
+      el.textContent = now.toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' });
+    }
+  }
+  updateClock();
+  setInterval(updateClock, 30000);
+}
+
+function updateStatusBar(queue, settings) {
+  // Contador de pedidos de mesas en cola
+  const customerRequests = (queue || []).filter(s => s.isBaseTrack !== true).length;
+  const el1 = document.getElementById('footerPedidos');
+  const el2 = document.getElementById('statPedidosHoy');
+  if (el1) el1.textContent = customerRequests;
+  if (el2) el2.textContent = customerRequests;
+
+  // Mesas (usamos totalTables como referencia visible)
+  const totalTables = settings?.totalTables || 0;
+  const el5 = document.getElementById('footerMesas');
+  const el6 = document.getElementById('statMesasConectadas');
+  if (el5) el5.textContent = totalTables;
+  if (el6) el6.textContent = totalTables;
+
+  // Modo activo
+  const mode = settings?.basePlaybackMode || 'single';
+  const modeMap = { single: 'Lista Única', crossover: 'Crossover', sequential: 'Consecutivo', genre_focus: 'Género Focus' };
+  const modeLabel = modeMap[mode] || 'Lista Base';
+  const el3 = document.getElementById('footerModo');
+  const el4 = document.getElementById('statModoBadge');
+  if (el3) el3.textContent = modeLabel;
+  if (el4) el4.textContent = modeLabel;
+}
+
+// ============================================================
+// PANEL "A CONTINUACIÓN" (UP NEXT — COLUMNA DERECHA)
+// ============================================================
+function renderUpNextPanel(queue) {
+  const list = document.getElementById('upNextList');
+  const count = document.getElementById('upNextCount');
+  if (!list) return;
+
+  const items = (queue || []).slice(0, 12);
+  if (count) count.textContent = items.length;
+
+  if (items.length === 0) {
+    list.innerHTML = '<p class="text-[11px] text-gray-500 text-center py-6">Cola vacía</p>';
+    return;
+  }
+
+  list.innerHTML = items.map((song, idx) => {
+    const isCustomer = song.isBaseTrack === false;
+    const thumb = song.thumbnail || '';
+    const title = escapeHtml(song.title || 'Sin título');
+    const artist = escapeHtml(song.artist || '');
+    const badge = isCustomer
+      ? `<span class="up-next-customer-badge">Mesa ${escapeHtml(song.requestedBy?.table || '?')}</span>`
+      : '';
+    return `
+      <div class="up-next-item">
+        <span class="up-next-position">${idx + 1}</span>
+        ${thumb ? `<img src="${thumb}" class="up-next-thumb" alt="">` : '<div class="up-next-thumb bg-white/5 rounded-md flex items-center justify-center text-[10px]">🎵</div>'}
+        <div class="up-next-info">
+          <div class="up-next-title">${title}</div>
+          ${artist ? `<div class="up-next-artist">${artist}</div>` : ''}
+        </div>
+        ${badge}
+      </div>`;
+  }).join('');
+}
+
+// Inicializar status bar al cargar
+document.addEventListener('DOMContentLoaded', () => {
+  startStatusBar();
+  // Detectar si la TV está conectada: escuchar telemetría (si llega = TV activa)
+});
+
+// Hook: cuando llega telemetría del player, marcar TV como conectada
+const _origSetupSocket = setupSocket;
+// Extender setupSocket para detectar TV
+(function patchSocketForTv() {
+  socket.on('player-telemetry', () => {
+    setTvConnectionStatus(true);
+    // Si no llega más en 12 segundos, marcar offline
+    clearTimeout(window._tvOfflineTimer);
+    window._tvOfflineTimer = setTimeout(() => setTvConnectionStatus(false), 12000);
+  });
+})();
+
+// ============================================================
 // DRAG & DROP REORDENAMIENTO DE COLA EN VIVO
 // ============================================================
 let draggedQueueIndex = null;
@@ -409,6 +567,8 @@ function handleQueueDrop(e, targetIndex) {
   newQueue.splice(targetIndex, 0, movedSong);
   currentQueueState = newQueue;
   renderQueueList(currentQueueState);
+  renderUpNextPanel(currentQueueState);
+  updateStatusBar(currentQueueState, settings);
 
   // Persistir en el servidor
   fetch('/api/admin/reorder', {
@@ -446,12 +606,16 @@ function renderQueueList(queue) {
     return;
   }
 
-  container.innerHTML = queue.map((song, i) => {
-    const isFirst = i === 0;
-    const isLast = i === queue.length - 1;
-    const isClientReq = song.isBaseTrack !== true;
+  // Separar pedidos de mesas (arriba) y lista base (abajo)
+  const customerSongs = queue.map((s, i) => ({ ...s, _origIdx: i })).filter(s => s.isBaseTrack !== true);
+  const baseSongs = queue.map((s, i) => ({ ...s, _origIdx: i })).filter(s => s.isBaseTrack === true);
 
-    // Distinción clara: Pedido de Mesa (dorado/destacado) vs Canción Base (sobria con nombre de lista)
+  function buildRow(song, i, total) {
+    const isFirst = i === 0;
+    const isLast = i === total - 1;
+    const isClientReq = song.isBaseTrack !== true;
+    const origIdx = song._origIdx;
+
     let badgeHtml = '';
     let rowBorderClass = 'border-white/5 hover:border-amber-500/40 bg-[#141720]';
     let vipButtonHtml = '';
@@ -460,40 +624,40 @@ function renderQueueList(queue) {
       const tableNum = song.requestedBy?.table || '?';
       badgeHtml = `<span class="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-black tracking-wide">👑 MESA ${escapeHtml(tableNum)}</span>`;
       rowBorderClass = 'border-amber-500/40 bg-amber-500/[0.05] hover:border-amber-400/80 shadow-[0_0_15px_rgba(245,158,11,0.06)]';
-      if (!isFirst) {
+      if (origIdx > 0) {
         vipButtonHtml = `
-          <button onclick="setSongPriority('${song.id}')" class="btn-secondary text-[11px] sm:text-xs py-1 px-1.5 sm:px-2.5 text-amber-300 font-bold border-amber-500/40 hover:bg-amber-500/20 whitespace-nowrap" title="Dar Prioridad VIP para que suene a continuación">
-            <span class="sm:hidden">⭐ VIP</span><span class="hidden sm:inline">⭐ Prioridad VIP</span>
+          <button onclick="setSongPriority('${song.id}')" class="btn-secondary text-[11px] sm:text-xs py-1 px-1.5 sm:px-2.5 text-amber-300 font-bold border-amber-500/40 hover:bg-amber-500/20 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity" title="Dar Prioridad VIP para que suene a continuación">
+            <span class="sm:hidden">⭐</span><span class="hidden sm:inline">⭐ Prioridad VIP</span>
           </button>
         `;
       }
     } else {
       const plName = song.playlistName || song.genre || 'Crossover';
-      badgeHtml = `<span class="px-2 py-0.5 rounded-md bg-white/10 text-gray-300 text-[10px] font-medium">🎵 Base: ${escapeHtml(plName)}</span>`;
+      badgeHtml = `<span class="px-2 py-0.5 rounded-md bg-white/10 text-gray-300 text-[10px] font-medium">🎵 ${escapeHtml(plName)}</span>`;
     }
 
     return `
-      <div id="queue-row-${i}"
+      <div id="queue-row-${origIdx}"
            draggable="true"
-           ondragstart="handleQueueDragStart(event, ${i})"
-           ondragover="handleQueueDragOver(event, ${i})"
-           ondragenter="handleQueueDragEnter(event, ${i})"
-           ondragleave="handleQueueDragLeave(event, ${i})"
-           ondrop="handleQueueDrop(event, ${i})"
+           ondragstart="handleQueueDragStart(event, ${origIdx})"
+           ondragover="handleQueueDragOver(event, ${origIdx})"
+           ondragenter="handleQueueDragEnter(event, ${origIdx})"
+           ondragleave="handleQueueDragLeave(event, ${origIdx})"
+           ondrop="handleQueueDrop(event, ${origIdx})"
            ondragend="handleQueueDragEnd(event)"
            class="queue-row flex items-center justify-between p-2 sm:p-3 rounded-2xl ${rowBorderClass} gap-1.5 sm:gap-3 group select-none cursor-grab active:cursor-grabbing transition-all">
         
-        <!-- Izquierda: Agarre (Grip Handle), Botones de Reordenar ▲ ▼ y Número 1., 2., 3. -->
+        <!-- Izquierda: Grip + Reordenar + Número -->
         <div class="flex items-center gap-1 sm:gap-2 shrink-0">
           <span class="text-gray-500 group-hover:text-amber-400 text-xs px-1 cursor-grab" title="Arrastra para cambiar de posición">⋮⋮</span>
           <div class="flex flex-col items-center">
-            <button onclick="reorderQueueItem(${i}, 'up')" class="text-[11px] px-1 text-gray-400 hover:text-amber-400 hover:bg-white/10 rounded transition ${isFirst ? 'opacity-20 cursor-not-allowed' : ''}" title="Subir turno" ${isFirst ? 'disabled' : ''}>▲</button>
-            <button onclick="reorderQueueItem(${i}, 'down')" class="text-[11px] px-1 text-gray-400 hover:text-amber-400 hover:bg-white/10 rounded transition ${isLast ? 'opacity-20 cursor-not-allowed' : ''}" title="Bajar turno" ${isLast ? 'disabled' : ''}>▼</button>
+            <button onclick="reorderQueueItem(${origIdx}, 'up')" class="text-[11px] px-1 text-gray-400 hover:text-amber-400 hover:bg-white/10 rounded transition ${i === 0 ? 'opacity-20 cursor-not-allowed' : ''}" title="Subir turno" ${i === 0 ? 'disabled' : ''}>▲</button>
+            <button onclick="reorderQueueItem(${origIdx}, 'down')" class="text-[11px] px-1 text-gray-400 hover:text-amber-400 hover:bg-white/10 rounded transition ${i === total - 1 ? 'opacity-20 cursor-not-allowed' : ''}" title="Bajar turno" ${i === total - 1 ? 'disabled' : ''}>▼</button>
           </div>
-          <span class="font-mono font-black text-amber-400 text-xs sm:text-sm w-5 text-center">${i + 1}.</span>
+          <span class="font-mono font-black text-amber-400 text-xs sm:text-sm w-5 text-center">${origIdx + 1}.</span>
         </div>
 
-        <!-- Carátula + Info de la canción -->
+        <!-- Carátula + Info -->
         <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 pointer-events-none">
           <img src="${song.thumbnail || 'https://i.ytimg.com/vi/' + song.videoId + '/hqdefault.jpg'}" class="w-10 h-8 sm:w-12 sm:h-9 rounded-xl object-cover border border-white/10 shrink-0 shadow-md">
           <div class="min-w-0 flex-1">
@@ -517,7 +681,7 @@ function renderQueueList(queue) {
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <span class="font-mono text-xs text-gray-300 font-bold hidden sm:inline">${song.duration || '3:30'}</span>
           ${vipButtonHtml}
-          <button onclick="playNowDirect('${song.videoId}', '${escapeHtml(song.title)}', '${escapeHtml(song.artist)}', '${song.genre}')" class="tactile-btn-gold text-[11px] sm:text-xs py-1 sm:py-1.5 px-2 sm:px-3 font-bold whitespace-nowrap" title="Reproducir ahora mismo">
+          <button onclick="playNowDirect('${song.videoId}', '${escapeHtml(song.title)}', '${escapeHtml(song.artist)}', '${song.genre}')" class="tactile-btn-gold text-[11px] sm:text-xs py-1 sm:py-1.5 px-2 sm:px-3 font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity" title="Reproducir ahora mismo">
             Sonar Ya
           </button>
           <button onclick="removeQueueItem('${song.id}')" class="text-gray-400 hover:text-red-400 p-1 sm:p-1.5 rounded-lg hover:bg-white/10 transition" title="Eliminar de la cola">
@@ -526,7 +690,42 @@ function renderQueueList(queue) {
         </div>
       </div>
     `;
-  }).join('');
+  }
+
+  let html = '';
+
+  // 1) Sección Pedidos de Mesas (si hay)
+  if (customerSongs.length > 0) {
+    html += `
+      <div class="mb-2">
+        <div class="flex items-center gap-2 px-1 py-1.5 mb-2">
+          <span class="text-[10px] font-black uppercase tracking-widest text-amber-400">👑 Pedidos de Mesas</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">${customerSongs.length}</span>
+        </div>
+        <div class="space-y-1.5">
+          ${customerSongs.map((song, i) => buildRow(song, i, customerSongs.length)).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // 2) Sección Lista Base
+  if (baseSongs.length > 0) {
+    const headerClass = customerSongs.length > 0 ? 'border-t border-white/5 pt-3 mt-1' : '';
+    html += `
+      <div class="${headerClass}">
+        <div class="flex items-center gap-2 px-1 py-1.5 mb-2">
+          <span class="text-[10px] font-black uppercase tracking-widest text-gray-400">🎵 Lista Base</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-gray-400 border border-white/10 font-bold">${baseSongs.length}</span>
+        </div>
+        <div class="space-y-1.5">
+          ${baseSongs.map((song, i) => buildRow(song, i, baseSongs.length)).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
 }
 
 // Asignar Prioridad VIP a un pedido para que suene a continuación
