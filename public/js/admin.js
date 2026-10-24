@@ -151,6 +151,8 @@ function renderAdminState(data) {
   const customerCount = currentQueueState.filter(s => s.isBaseTrack !== true).length;
   
   if (counterEl) counterEl.textContent = currentQueueState.length;
+  const mobileQEl = document.getElementById('mobileQueueCounter');
+  if (mobileQEl) mobileQEl.textContent = currentQueueState.length;
   if (oldBadgeEl) oldBadgeEl.textContent = currentQueueState.length;
   if (badgeEl) {
     if (customerCount > 0) {
@@ -464,6 +466,8 @@ function renderUpNextPanel(queue) {
 
   const items = (queue || []).slice(0, 12);
   if (count) count.textContent = items.length;
+  const mobileUEl = document.getElementById('mobileUpNextCounter');
+  if (mobileUEl) mobileUEl.textContent = items.length;
 
   if (items.length === 0) {
     list.innerHTML = '<p class="text-[11px] text-gray-500 text-center py-6">Cola vacía</p>';
@@ -2514,3 +2518,42 @@ function escapeHtml(text) {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
+
+
+// ============================================================
+// SUB-VISTAS MÓVILES (COLA / A CONTINUACIÓN / ESTADO)
+// ============================================================
+let currentMobileSubView = 'queue';
+function switchMobileSubView(view) {
+  currentMobileSubView = view;
+  const qSec = document.getElementById('mobileSectionQueue');
+  const uSec = document.getElementById('mobileSectionUpNext');
+  const sSec = document.getElementById('mobileSectionStatus');
+  const qBtn = document.getElementById('mobileTabBtnQueue');
+  const uBtn = document.getElementById('mobileTabBtnUpNext');
+  const sBtn = document.getElementById('mobileTabBtnStatus');
+
+  if (!qSec || !uSec || !sSec) return;
+
+  const activeClasses = 'flex-1 py-2 px-2 rounded-xl transition text-center bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold';
+  const inactiveClasses = 'flex-1 py-2 px-2 rounded-xl transition text-center text-gray-400 hover:text-white border border-transparent';
+
+  if (qBtn) qBtn.className = inactiveClasses;
+  if (uBtn) uBtn.className = inactiveClasses;
+  if (sBtn) sBtn.className = inactiveClasses;
+
+  qSec.classList.add('hidden');
+  uSec.classList.add('hidden');
+  sSec.classList.add('hidden');
+
+  if (view === 'queue') {
+    qSec.classList.remove('hidden');
+    if (qBtn) qBtn.className = activeClasses;
+  } else if (view === 'upnext') {
+    uSec.classList.remove('hidden');
+    if (uBtn) uBtn.className = activeClasses;
+  } else if (view === 'status') {
+    sSec.classList.remove('hidden');
+    if (sBtn) sBtn.className = activeClasses;
+  }
+}

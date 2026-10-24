@@ -776,3 +776,62 @@ footer.admin-status-bar {
 }
 
 
+
+
+/* ====================================================
+   RESPONSIVE PRO DJ CONSOLE SUITE
+   ==================================================== */
+
+/* Touch screens & mobile devices: always reveal action buttons */
+@media (hover: none), (max-width: 1023px) {
+  .queue-row .opacity-0 {
+    opacity: 1 !important;
+  }
+}
+
+/* Vinyl Platter Scalability */
+@media (max-width: 639px) {
+  .vinyl-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+  .vinyl-record {
+    left: 14px;
+  }
+  .dj-soundwave {
+    height: 18px;
+    gap: 1.5px;
+  }
+  .dj-soundwave .sw-bar {
+    min-height: 3px;
+  }
+  .vu-meter-column {
+    height: 36px;
+    width: 6px;
+  }
+}
+
+/* Smooth Scrolling & Safe Area insets */
+body {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+footer {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+}
+
+/* Scrubber touch target expansion on mobile */
+@media (max-width: 768px) {
+  .scrubber-slider {
+    height: 8px;
+  }
+  .scrubber-slider::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Queue List Container responsive height */
+#adminQueueList {
+  scrollbar-width: thin;
+}
