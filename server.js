@@ -102,6 +102,19 @@ function getPlaylistByPercentage(eligiblePlaylists, percentages) {
 }
 
 /**
+ * Enriquece cualquier pista con atributos armónicos y de energía de DJ (BPM, energía 1-5, vibe y badge)
+ */
+function enrichSongWithDjEnergy(song) {
+  if (!song) return song;
+  const analysis = aiDj.analyzeTrackEnergy(song.title, song.artist, song.genre);
+  song.energy = analysis.energy;
+  song.bpm = analysis.bpm;
+  song.vibe = analysis.vibe;
+  song.djBadge = analysis.badge;
+  return song;
+}
+
+/**
  * Obtiene la siguiente canción de la lista base (El Norte)
  * Soporta 3 modos:
  * 1. 'single': Una sola lista base activa.
@@ -209,7 +222,7 @@ function getNextBaseSong() {
         ? selectedTrack.genre
         : aiDj.classifyGenreFast(selectedTrack.title, selectedTrack.artist, activeList.name);
 
-      return {
+      return enrichSongWithDjEnergy({
         id: `base_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
         videoId: selectedTrack.videoId,
         title: selectedTrack.title,
@@ -222,7 +235,7 @@ function getNextBaseSong() {
         requestedBy: { table: null, name: activeList ? activeList.name : 'Lista Base' },
         isBaseTrack: true,
         addedAt: Date.now()
-      };
+      });
     }
   }
 
@@ -267,7 +280,7 @@ function getNextBaseSong() {
         ? track.genre
         : aiDj.classifyGenreFast(track.title, track.artist, currentList.name);
 
-      return {
+      return enrichSongWithDjEnergy({
         id: `base_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
         videoId: track.videoId,
         title: track.title,
@@ -278,7 +291,7 @@ function getNextBaseSong() {
         requestedBy: { table: null, name: `Cadena DJ (${currentList.name})` },
         isBaseTrack: true,
         addedAt: Date.now()
-      };
+      });
     }
   }
 
@@ -335,7 +348,7 @@ function getNextBaseSong() {
       }
 
       if (chosenItem) {
-        return {
+        return enrichSongWithDjEnergy({
           id: `base_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
           videoId: chosenItem.track.videoId,
           title: chosenItem.track.title,
@@ -346,7 +359,7 @@ function getNextBaseSong() {
           requestedBy: { table: null, name: `DJ 100% ${focusGenre} (${chosenItem.playlistName})` },
           isBaseTrack: true,
           addedAt: Date.now()
-        };
+        });
       }
     }
   }
@@ -362,7 +375,7 @@ function getNextBaseSong() {
   const track = playlist.tracks[currentPlaylistIndex % playlist.tracks.length];
   currentPlaylistIndex++;
 
-  return {
+  return enrichSongWithDjEnergy({
     id: `base_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
     videoId: track.videoId,
     title: track.title,
@@ -375,7 +388,7 @@ function getNextBaseSong() {
     requestedBy: { table: null, name: playlist.name || 'Lista Base' },
     isBaseTrack: true,
     addedAt: Date.now()
-  };
+  });
 }
 
 /**
@@ -439,14 +452,29 @@ function advanceToNextSong() {
 
   if (queue.length > 0) {
     const nextSong = queue.shift();
+    if (!nextSong.energy) {
+      enrichSongWithDjEnergy(nextSong);
+    }
+    const transition = currentlyPlaying
+      ? aiDj.getTransitionBridge(currentlyPlaying.genre, nextSong.genre)
+      : null;
+
     db.setQueue(queue);
     currentlyPlaying = {
       ...nextSong,
-      startedAt: Date.now()
+      startedAt: Date.now(),
+      transition
     };
     db.setCurrentlyPlaying(currentlyPlaying);
     // Mantener siempre 50 temas en la cola visible de fondo
     replenishPlaybackQueue(50);
+
+    // Notificar transición armónica de DJ
+    io.emit('dj-transition', {
+      fromSong: db.getHistory().slice(-1)[0] || null,
+      toSong: currentlyPlaying,
+      transition
+    });
   } else {
     currentlyPlaying = null;
     db.setCurrentlyPlaying(null);
@@ -541,8 +569,9 @@ app.post('/api/request', async (req, res) => {
       }
     }
 
-    // 4. Clasificar género con el DJ Inteligente
+    // 4. Clasificar género y energía con el DJ Inteligente
     const genre = await aiDj.classifyGenre(title, artist);
+    const analysis = aiDj.analyzeTrackEnergy(title, artist, genre);
 
     const song = {
       id: `${isDJOrAdmin ? 'admin' : 'req'}_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
@@ -550,6 +579,10 @@ app.post('/api/request', async (req, res) => {
       title,
       artist: artist || 'Artista',
       genre,
+      energy: analysis.energy,
+      bpm: analysis.bpm,
+      vibe: analysis.vibe,
+      djBadge: analysis.badge,
       duration: duration || '3:30',
       thumbnail: thumbnail || `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
       requestedBy: {
@@ -598,7 +631,7 @@ app.post('/api/request', async (req, res) => {
     }
 
     if (currentSettings.autoDJEnabled && existingClientRequests.length > 1) {
-      slotIndex = aiDj.calculateSmartSlot(currentQueue.slice(0, Math.min(10, currentQueue.length)), genre, currentlyPlaying);
+      slotIndex = aiDj.calculateSmartSlot(currentQueue.slice(0, Math.min(10, currentQueue.length)), genre, currentlyPlaying, song.energy);
     }
 
     db.insertInQueueAt(slotIndex, song);
@@ -983,6 +1016,24 @@ app.post('/api/admin/skip', (req, res) => {
   res.json({ success: true, currentlyPlaying: next });
 });
 
+// Mezcla / Transición armónica de DJ con efectos Web Audio sincronizados
+app.post('/api/admin/dj-transition', (req, res) => {
+  const { fxType } = req.body || {};
+  const queue = db.getQueue();
+  const nextSong = queue && queue.length > 0 ? queue[0] : null;
+  const bridge = currentlyPlaying && nextSong
+    ? aiDj.getTransitionBridge(currentlyPlaying.genre, nextSong.genre)
+    : { transitionType: 'filter_sweep', fx: 'sweep', label: 'Fundido Rítmico' };
+
+  const chosenFx = fxType || bridge.fx || 'sweep';
+  io.emit('dj-fx-play', { type: chosenFx, bridge });
+
+  setTimeout(() => {
+    const next = advanceToNextSong();
+    res.json({ success: true, currentlyPlaying: next, bridge, fx: chosenFx });
+  }, 500);
+});
+
 app.post('/api/admin/remove-queued', (req, res) => {
   const { songId } = req.body;
   db.removeFromQueue(songId);
@@ -1304,6 +1355,11 @@ io.on('connection', (socket) => {
   // Progreso en tiempo real desde el reproductor TV hacia la consola DJ
   socket.on('player-progress', (data) => {
     io.emit('player-telemetry', data);
+  });
+
+  // Comandos de efectos DJ en vivo hacia la pantalla TV (airhorn, sweep, brake)
+  socket.on('dj-trigger-fx', (data) => {
+    io.emit('dj-fx-play', data);
   });
 });
 

@@ -146,6 +146,12 @@
       <span>🎙️ MODO MICRÓFONO ACTIVO (Música atenuada)</span>
     </div>
 
+    <!-- Indicador de Efecto / Transición DJ en Vivo -->
+    <div id="djFxNotice" class="self-center hidden bg-gradient-to-r from-purple-600 to-amber-500 text-white font-black px-6 py-2.5 rounded-full text-xs shadow-[0_0_30px_rgba(168,85,247,0.7)] flex items-center gap-2 transition-all duration-300 transform scale-95 opacity-0 z-20">
+      <span id="djFxNoticeIcon" class="text-base animate-spin">🎛️</span>
+      <span id="djFxNoticeText">MEZCLA ARMÓNICA DJ</span>
+    </div>
+
     <!-- Footer Inferior: Información del tema sonando (Auto-ocultable a los 15s para dejar video limpio) -->
     <footer class="space-y-3">
       <div id="songInfoFooter" class="transition-all duration-700 ease-in-out transform translate-y-0 opacity-100">
@@ -155,10 +161,14 @@
           <div class="bg-black/80 backdrop-blur-xl p-3 sm:p-5 rounded-2xl sm:rounded-3xl border border-white/15 max-w-2xl flex items-center gap-3 sm:gap-5 shadow-2xl interactive">
             <img id="currentThumb" src="" class="w-14 h-14 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl object-cover shadow-md border border-white/10 flex-shrink-0">
             <div class="space-y-0.5 sm:space-y-1 min-w-0 flex-1">
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2 flex-wrap">
                 <span id="currentGenre" class="genre-badge genre-Salsa text-[10px] sm:text-xs">Salsa</span>
                 <span id="requestedByBadge" class="bg-amber-500/20 text-amber-300 text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
                   ✨ Lista Base
+                </span>
+                <span id="currentVibeBadge" class="hidden bg-purple-500/20 text-purple-300 text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full border border-purple-500/30 items-center gap-1.5 shadow">
+                  <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+                  <span id="currentVibeText">Clímax & Perreo (96 BPM)</span>
                 </span>
               </div>
               <h2 id="currentTitle" class="text-sm sm:text-2xl font-bold tracking-tight text-white leading-tight truncate">Cargando música...</h2>

@@ -109,6 +109,21 @@ function renderAdminState(data) {
       genreEl.className = `genre-badge genre-${currentlyPlaying.genre || 'Crossover'}`;
     }
 
+    const energyEl = document.getElementById('adminNowEnergy');
+    const energyTextEl = document.getElementById('adminNowEnergyText');
+    if (energyEl && energyTextEl) {
+      if (currentlyPlaying.vibe || currentlyPlaying.bpm || currentlyPlaying.energy) {
+        const energyStars = currentlyPlaying.energy ? '⚡'.repeat(currentlyPlaying.energy) : '⚡⚡⚡';
+        const bpmStr = currentlyPlaying.bpm ? ` • ${currentlyPlaying.bpm} BPM` : '';
+        energyTextEl.textContent = `${energyStars} ${currentlyPlaying.vibe || 'DJ Mix'}${bpmStr}`;
+        energyEl.classList.remove('hidden');
+        energyEl.classList.add('inline-flex');
+      } else {
+        energyEl.classList.add('hidden');
+        energyEl.classList.remove('inline-flex');
+      }
+    }
+
     const reqEl = document.getElementById('adminNowRequested');
     if (reqEl) {
       if (currentlyPlaying.requestedBy && currentlyPlaying.requestedBy.table) {
@@ -443,6 +458,7 @@ function renderQueueList(queue) {
                 ${escapeHtml(song.title)}
               </p>
               <span class="genre-badge genre-${song.genre || 'Crossover'} text-[9px] py-0.2 px-2 hidden sm:inline-flex">${escapeHtml(song.genre || 'Crossover')}</span>
+              ${song.bpm ? `<span class="px-1.5 py-0.2 rounded bg-purple-900/40 text-purple-300 text-[9px] font-mono border border-purple-500/30 hidden md:inline-flex">⚡ ${song.bpm} BPM</span>` : ''}
             </div>
             <div class="flex items-center gap-2 text-[11px] text-gray-400 truncate mt-0.5">
               <span class="truncate font-semibold text-gray-300">${escapeHtml(song.artist)}</span>
@@ -2197,6 +2213,35 @@ async function handleBackupFileSelected(event) {
 function closeViewPlaylistModal() {
   document.getElementById('viewPlaylistModal').classList.add('hidden');
   currentViewingPlaylistId = null;
+}
+
+// Disparar mezcla armónica de DJ hacia la pantalla TV
+async function triggerDjTransition() {
+  try {
+    showAdminToast('🎛️ Mezclando con filtro DJ...', 'info');
+    const res = await fetch('/api/admin/dj-transition', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fxType: 'sweep' })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showAdminToast(`✨ Transición: ${data.bridge?.label || 'Fundido Rítmico'}`, 'success');
+    }
+  } catch (err) {
+    console.error('Error al mezclar:', err);
+  }
+}
+
+// Disparar efecto sonoro DJ en vivo a la pantalla (airhorn, vinyl_brake, sweep)
+function triggerDjFx(fxType) {
+  try {
+    socket.emit('dj-trigger-fx', { type: fxType });
+    const label = fxType === 'airhorn' ? '🎺 Airhorn lanzado a la TV' : '💿 Freno Vinilo lanzado';
+    showAdminToast(label, 'success');
+  } catch (err) {
+    console.error('Error enviando FX:', err);
+  }
 }
 
 function escapeHtml(text) {

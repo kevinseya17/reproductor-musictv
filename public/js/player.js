@@ -21,6 +21,158 @@ let hasReportedSongEnded = false;
 let isFadingInNewSong = false;
 let savedVolumeBeforeMic = 100;
 
+// ==========================================
+// SINTETIZADOR DE EFECTOS DJ (WEB AUDIO API)
+// Sin dependencias de archivos externos, latencia cero
+// ==========================================
+let djAudioCtx = null;
+function getDjAudioContext() {
+  if (!djAudioCtx) {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtx) {
+      djAudioCtx = new AudioCtx();
+    }
+  }
+  if (djAudioCtx && djAudioCtx.state === 'suspended') {
+    djAudioCtx.resume();
+  }
+  return djAudioCtx;
+}
+
+// 1. Efecto Vinilo Freno (Vinyl Brake / Scratch Stop)
+function playDjVinylBrake() {
+  const ctx = getDjAudioContext();
+  if (!ctx) return;
+  const now = ctx.currentTime;
+  
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(320, now);
+  osc.frequency.exponentialRampToValueAtTime(30, now + 0.65);
+  
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.setValueAtTime(1200, now);
+  filter.frequency.exponentialRampToValueAtTime(150, now + 0.65);
+
+  gain.gain.setValueAtTime(0.25, now);
+  gain.gain.linearRampToValueAtTime(0.3, now + 0.1);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+
+  osc.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start(now);
+  osc.stop(now + 0.7);
+}
+
+// 2. Efecto Sweep / Riser Club de DJ
+function playDjClubSweep() {
+  const ctx = getDjAudioContext();
+  if (!ctx) return;
+  const now = ctx.currentTime;
+  const dur = 1.1;
+
+  const bufferSize = Math.floor(ctx.sampleRate * dur);
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++) {
+    data[i] = Math.random() * 2 - 1;
+  }
+  const noise = ctx.createBufferSource();
+  noise.buffer = buffer;
+
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.Q.value = 4.0;
+  filter.frequency.setValueAtTime(260, now);
+  filter.frequency.exponentialRampToValueAtTime(4800, now + dur * 0.75);
+  filter.frequency.exponentialRampToValueAtTime(700, now + dur);
+
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(0.01, now);
+  gain.gain.exponentialRampToValueAtTime(0.35, now + dur * 0.7);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+
+  const sub = ctx.createOscillator();
+  const subGain = ctx.createGain();
+  sub.type = 'sine';
+  sub.frequency.setValueAtTime(85, now + dur * 0.7);
+  sub.frequency.exponentialRampToValueAtTime(32, now + dur);
+  subGain.gain.setValueAtTime(0.35, now + dur * 0.7);
+  subGain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+
+  noise.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+
+  sub.connect(subGain);
+  subGain.connect(ctx.destination);
+
+  noise.start(now);
+  noise.stop(now + dur);
+  sub.start(now + dur * 0.7);
+  sub.stop(now + dur);
+}
+
+// 3. Efecto Airhorn Clásico de DJ (Hype Drop)
+function playDjAirhorn() {
+  const ctx = getDjAudioContext();
+  if (!ctx) return;
+  const bursts = [
+    { start: 0.0, dur: 0.14 },
+    { start: 0.18, dur: 0.14 },
+    { start: 0.36, dur: 0.42 }
+  ];
+  const freqs = [466.16, 622.25, 932.33];
+
+  bursts.forEach(burst => {
+    const startTime = ctx.currentTime + burst.start;
+    freqs.forEach(freq => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(freq, startTime);
+      osc.frequency.linearRampToValueAtTime(freq * 1.02, startTime + burst.dur * 0.5);
+      osc.frequency.exponentialRampToValueAtTime(freq * 0.95, startTime + burst.dur);
+
+      gain.gain.setValueAtTime(0.12, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + burst.dur);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(startTime);
+      osc.stop(startTime + burst.dur);
+    });
+  });
+}
+
+function showDjFxFlash(text, icon = '🎛️') {
+  const notice = document.getElementById('djFxNotice');
+  const noticeText = document.getElementById('djFxNoticeText');
+  const noticeIcon = document.getElementById('djFxNoticeIcon');
+  if (!notice) return;
+
+  if (noticeText) noticeText.textContent = text;
+  if (noticeIcon) noticeIcon.textContent = icon;
+
+  notice.classList.remove('hidden');
+  setTimeout(() => {
+    notice.classList.remove('opacity-0', 'scale-95');
+    notice.classList.add('opacity-100', 'scale-100');
+  }, 30);
+
+  clearTimeout(window._djNoticeTimer);
+  window._djNoticeTimer = setTimeout(() => {
+    notice.classList.remove('opacity-100', 'scale-100');
+    notice.classList.add('opacity-0', 'scale-95');
+    setTimeout(() => notice.classList.add('hidden'), 350);
+  }, 2500);
+}
+
 // 1. YouTube IFrame API Callback global
 window.onYouTubeIframeAPIReady = function() {
   ytPlayer = new YT.Player('ytPlayer', {
@@ -135,6 +287,7 @@ function togglePlayPause() {
 
 async function skipSong() {
   try {
+    playDjVinylBrake();
     // Si la transición suave está activa, desvanecer rápido y saltar
     if (currentSettings.fadeTransitionEnabled !== false && ytPlayer && isPlayerReady) {
       fadeVolume(ytPlayer.getVolume(), 0, 700, async () => {
@@ -146,6 +299,10 @@ async function skipSong() {
   } catch (err) {
     console.error('Error saltando canción:', err);
   }
+}
+
+function skipCurrentSong() {
+  return skipSong();
 }
 
 function setVolume(val) {
@@ -272,6 +429,23 @@ socket.on('player-control', (data) => {
   }
 });
 
+// 5. Escuchar disparos de efectos de DJ desde la consola o transiciones automáticas
+socket.on('dj-fx-play', (data) => {
+  const type = data?.type || 'sweep';
+  const label = data?.bridge?.label || (type === 'airhorn' ? 'Hype Airhorn' : (type === 'vinyl_brake' ? 'Vinyl Brake' : 'Transición DJ'));
+  const icon = type === 'airhorn' ? '🎺' : (type === 'vinyl_brake' || type === 'brake' ? '💿' : '🎛️');
+
+  if (type === 'airhorn') {
+    playDjAirhorn();
+  } else if (type === 'vinyl_brake' || type === 'brake') {
+    playDjVinylBrake();
+  } else {
+    playDjClubSweep();
+  }
+
+  showDjFxFlash(label.toUpperCase(), icon);
+});
+
 // 4. Fundido de Volumen (Fade Suave)
 function fadeVolume(fromVol, targetVol, durationMs = 1500, onComplete = null) {
   if (!ytPlayer || !isPlayerReady) {
@@ -347,6 +521,21 @@ socket.on('state-changed', (data) => {
     } else {
       reqBadge.textContent = `✨ Lista Base del Bar`;
       reqBadge.className = 'bg-white/10 text-gray-300 font-medium text-xs px-3 py-1 rounded-full';
+    }
+
+    // Indicador DJ de Vibra & BPM
+    const vibeBadge = document.getElementById('currentVibeBadge');
+    const vibeText = document.getElementById('currentVibeText');
+    if (vibeBadge && vibeText) {
+      if (currentlyPlaying.vibe || currentlyPlaying.bpm) {
+        const bpmText = currentlyPlaying.bpm ? ` (${currentlyPlaying.bpm} BPM)` : '';
+        vibeText.textContent = `${currentlyPlaying.vibe || 'Modo Fiesta'}${bpmText}`;
+        vibeBadge.classList.remove('hidden');
+        vibeBadge.classList.add('inline-flex');
+      } else {
+        vibeBadge.classList.add('hidden');
+        vibeBadge.classList.remove('inline-flex');
+      }
     }
 
     // Dedicatoria especial en TV (Visible 15 segundos con fade suave)

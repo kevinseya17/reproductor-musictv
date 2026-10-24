@@ -135,7 +135,10 @@
               <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_#facc15] animate-pulse"></span>
               <span class="text-[10px] sm:text-xs font-black tracking-[0.2em] text-amber-400 uppercase">NOW PLAYING • CONSOLA DJ</span>
             </div>
-            <div class="flex items-center gap-1.5 sm:gap-2">
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap justify-end">
+              <span id="adminNowEnergy" class="hidden bg-purple-900/40 text-purple-300 border border-purple-500/40 px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold items-center gap-1">
+                ⚡ <span id="adminNowEnergyText">Energía 4 • 96 BPM</span>
+              </span>
               <span id="adminNowGenre" class="genre-badge genre-Salsa text-[9px] sm:text-[10px]">Salsa</span>
               <span id="adminNowRequested" class="text-[10px] sm:text-[11px] text-gray-400"></span>
             </div>
@@ -217,6 +220,22 @@
                 <span class="text-[9px] font-black uppercase text-gray-400 tracking-wider">NEXT</span>
                 <button onclick="skipCurrentSong()" class="tactile-btn-dark px-4 sm:px-5 py-2 text-xs sm:text-sm hover:border-amber-400/60" title="Saltar a la siguiente canción">
                   ⏭️ Saltar
+                </button>
+              </div>
+
+              <!-- MEZCLA DJ FX -->
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[9px] font-black uppercase text-amber-400 tracking-wider">MEZCLA DJ</span>
+                <button onclick="triggerDjTransition()" class="tactile-btn-dark px-3.5 sm:px-4 py-2 text-xs sm:text-sm hover:border-amber-400 text-amber-300 flex items-center gap-1.5" title="Transición con filtro sweep y pase inteligente a la siguiente canción">
+                  🎛️ Mezclar
+                </button>
+              </div>
+
+              <!-- AIRHORN / HYPE -->
+              <div class="flex flex-col items-center gap-1">
+                <span class="text-[9px] font-black uppercase text-pink-400 tracking-wider">HYPE DROP</span>
+                <button onclick="triggerDjFx('airhorn')" class="tactile-btn-dark px-3 sm:px-3.5 py-2 text-xs sm:text-sm hover:border-pink-400 text-pink-300 flex items-center gap-1" title="Lanzar efecto Airhorn al televisor">
+                  🎺 Airhorn
                 </button>
               </div>
 
