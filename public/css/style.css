@@ -744,6 +744,9 @@ footer.admin-status-bar {
   user-select: none;
   cursor: pointer;
   overflow: hidden;
+  flex-shrink: 0;
+  white-space: nowrap;
+  min-width: 78px;
 }
 
 .dj-pad-btn::before {

@@ -187,7 +187,7 @@
         <!-- ============================================================ -->
         <!-- REPRODUCTOR PRO HARDWARE DECK (ESTILO DARK GOLD TRAKTOR/DJ) -->
         <!-- ============================================================ -->
-        <div class="relative bg-gradient-to-b from-[#151822] via-[#10121a] to-[#0c0e14] rounded-3xl p-4 sm:p-6 border border-amber-500/25 shadow-[0_12px_40px_rgba(0,0,0,0.7),0_0_20px_rgba(245,158,11,0.06)] space-y-4">
+        <div class="relative bg-gradient-to-b from-[#151822] via-[#10121a] to-[#0c0e14] rounded-3xl p-4 sm:p-6 border border-amber-500/25 shadow-[0_12px_40px_rgba(0,0,0,0.7),0_0_20px_rgba(245,158,11,0.06)] space-y-4 overflow-hidden">
           
           <!-- Header del Deck: Sincronización y Badges -->
           <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
@@ -312,83 +312,88 @@
             </div>
           </div>
 
-          <!-- Botonera Táctil Hi-Fi de Transporte & Sampler Pad de Efectos DJ (Full Responsive) -->
-          <div class="pt-2.5 border-t border-white/10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+          <!-- Botonera Táctil Hi-Fi de Transporte & Sampler Pad de Efectos DJ (Dual-Strip Pro Hardware) -->
+          <div class="pt-3 border-t border-white/10 space-y-2.5">
             
-            <!-- Fila 1 en móvil / Bloque Izquierdo en Desktop: Seek y Play Master -->
-            <div class="flex items-center justify-between sm:justify-start gap-1 sm:gap-2 w-full md:w-auto">
-              <!-- REWIND 30s -->
-              <button onclick="remoteSeek(-30)" class="tactile-btn-dark px-2 sm:px-3 py-2 text-xs flex items-center justify-center gap-1 font-mono flex-1 sm:flex-initial" title="Retroceder 30 segundos">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                  <path d="M3 3v5h5"/>
-                </svg>
-                <span class="text-[10px] font-black hidden xs:inline">-30s</span>
-              </button>
-
-              <!-- REWIND 10s -->
-              <button onclick="remoteSeek(-10)" class="tactile-btn-dark px-2.5 sm:px-3.5 py-2 text-xs sm:text-sm font-bold flex items-center justify-center gap-1 font-mono flex-1 sm:flex-initial" title="Retroceder 10 segundos">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                  <path d="M3 3v5h5"/>
-                </svg>
-                <span class="text-[10px] sm:text-[11px] font-black">-10s</span>
-              </button>
-
-              <!-- PLAY / PAUSE (GRANDE Y DORADO AL CENTRO) -->
-              <button id="btnPlayPause" onclick="togglePlayPauseRemote()" class="tactile-btn-gold px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-base flex items-center justify-center gap-2 flex-[2] sm:flex-initial" title="Pausar o Reanudar">
-                <span id="btnPlayPauseIcon" class="w-4 h-4 flex items-center justify-center shrink-0">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
-                </span>
-                <span id="btnPlayPauseText" class="text-[11px] sm:text-xs uppercase tracking-wider font-black whitespace-nowrap">PAUSAR</span>
-              </button>
-
-              <!-- FAST FORWARD 10s -->
-              <button onclick="remoteSeek(10)" class="tactile-btn-dark px-2.5 sm:px-3.5 py-2 text-xs sm:text-sm font-bold flex items-center justify-center gap-1 font-mono flex-1 sm:flex-initial" title="Adelantar 10 segundos">
-                <span class="text-[10px] sm:text-[11px] font-black">+10s</span>
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.99 6.74 2.74L21 8"/>
-                  <path d="M21 3v5h-5"/>
-                </svg>
-              </button>
-
-              <!-- FAST FORWARD 30s -->
-              <button onclick="remoteSeek(30)" class="tactile-btn-dark px-2 sm:px-3 py-2 text-xs flex items-center justify-center gap-1 font-mono flex-1 sm:flex-initial" title="Adelantar 30 segundos">
-                <span class="text-[10px] font-black hidden xs:inline">+30s</span>
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.99 6.74 2.74L21 8"/>
-                  <path d="M21 3v5h-5"/>
-                </svg>
-              </button>
-            </div>
-
-            <!-- Fila 2 en móvil / Centro en Desktop: Saltar + Mezclar + DJ Pads -->
-            <div class="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full md:w-auto">
-              <!-- NEXT / SALTAR -->
-              <button onclick="skipCurrentSong()" class="tactile-btn-dark px-3 sm:px-3.5 py-2 text-xs hover:border-amber-400/60 font-bold flex items-center justify-center gap-1.5 flex-1" title="Saltar a la siguiente canción">
-                <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <polygon points="5 4 15 12 5 20 5 4"/>
-                  <rect x="18" y="4" width="2.5" height="16" rx="1"/>
-                </svg>
-                <span>Saltar</span>
-              </button>
-
-              <!-- MEZCLA DJ FX -->
-              <button onclick="triggerDjTransition()" class="tactile-btn-dark px-3 sm:px-3.5 py-2 text-xs hover:border-amber-400 text-amber-300 flex items-center justify-center gap-1.5 font-bold flex-1" title="Transición con filtro sweep y pase suave">
-                <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2 12h20M17 5l5 7-5 7M7 19l-5-7 5-7"/>
-                </svg>
-                <span>Mezclar</span>
-              </button>
-            </div>
-
-            <!-- Fila 3 en móvil / Bloque Derecho en Desktop: DJ Pads, Mic & Volumen -->
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full md:w-auto md:ml-auto">
+            <!-- FILA 1: TRANSPORTE PRINCIPAL (Playback Engine) -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
               
-              <!-- DJ Sampler Performance Pads -->
-              <div class="grid grid-cols-3 gap-1.5 bg-black/50 p-1.5 rounded-2xl border border-white/10 w-full sm:w-auto">
+              <!-- Seek y Master Play/Pause -->
+              <div class="flex items-center justify-between sm:justify-start gap-1 sm:gap-2 flex-1">
+                <!-- REWIND 30s -->
+                <button onclick="remoteSeek(-30)" class="tactile-btn-dark px-2.5 sm:px-3 py-2 text-xs flex items-center justify-center gap-1 font-mono flex-1 sm:flex-initial shrink-0" title="Retroceder 30 segundos">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                  </svg>
+                  <span class="text-[10px] font-black hidden xs:inline">-30s</span>
+                </button>
+
+                <!-- REWIND 10s -->
+                <button onclick="remoteSeek(-10)" class="tactile-btn-dark px-2.5 sm:px-3.5 py-2 text-xs sm:text-sm font-bold flex items-center justify-center gap-1 font-mono flex-1 sm:flex-initial shrink-0" title="Retroceder 10 segundos">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                  </svg>
+                  <span class="text-[10px] sm:text-[11px] font-black">-10s</span>
+                </button>
+
+                <!-- PLAY / PAUSE (GRANDE Y DORADO AL CENTRO) -->
+                <button id="btnPlayPause" onclick="togglePlayPauseRemote()" class="tactile-btn-gold px-5 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-base flex items-center justify-center gap-2 flex-[2] sm:flex-initial shrink-0" title="Pausar o Reanudar">
+                  <span id="btnPlayPauseIcon" class="w-4 h-4 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+                  </span>
+                  <span id="btnPlayPauseText" class="text-[11px] sm:text-xs uppercase tracking-wider font-black whitespace-nowrap">PAUSAR</span>
+                </button>
+
+                <!-- FAST FORWARD 10s -->
+                <button onclick="remoteSeek(10)" class="tactile-btn-dark px-2.5 sm:px-3.5 py-2 text-xs sm:text-sm font-bold flex items-center justify-center gap-1 font-mono flex-1 sm:flex-initial shrink-0" title="Adelantar 10 segundos">
+                  <span class="text-[10px] sm:text-[11px] font-black">+10s</span>
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.99 6.74 2.74L21 8"/>
+                    <path d="M21 3v5h-5"/>
+                  </svg>
+                </button>
+
+                <!-- FAST FORWARD 30s -->
+                <button onclick="remoteSeek(30)" class="tactile-btn-dark px-2 sm:px-3 py-2 text-xs flex items-center justify-center gap-1 font-mono flex-1 sm:flex-initial shrink-0" title="Adelantar 30 segundos">
+                  <span class="text-[10px] font-black hidden xs:inline">+30s</span>
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.99 6.74 2.74L21 8"/>
+                    <path d="M21 3v5h-5"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Saltar y Mezclar -->
+              <div class="grid grid-cols-2 sm:flex sm:items-center gap-1.5 sm:gap-2 shrink-0">
+                <button onclick="skipCurrentSong()" class="tactile-btn-dark px-3 sm:px-4 py-2 text-xs hover:border-amber-400/60 font-bold flex items-center justify-center gap-1.5 shrink-0" title="Saltar a la siguiente canción">
+                  <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 4 15 12 5 20 5 4"/>
+                    <rect x="18" y="4" width="2.5" height="16" rx="1"/>
+                  </svg>
+                  <span>Saltar</span>
+                </button>
+
+                <button onclick="triggerDjTransition()" class="tactile-btn-dark px-3 sm:px-4 py-2 text-xs hover:border-amber-400 text-amber-300 flex items-center justify-center gap-1.5 font-bold shrink-0" title="Transición con filtro sweep y pase suave">
+                  <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 12h20M17 5l5 7-5 7M7 19l-5-7 5-7"/>
+                  </svg>
+                  <span>Mezclar</span>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- FILA 2: PADS DE RENDIMIENTO & MASTER OUTPUT -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-2 border-t border-white/5">
+              
+              <!-- DJ Performance Pads (Izquierda) -->
+              <div class="grid grid-cols-3 sm:flex sm:items-center gap-1.5 sm:gap-2 bg-black/40 p-1 rounded-2xl border border-white/10 shrink-0">
+                <span class="text-[9px] font-mono font-black uppercase text-gray-500 tracking-wider px-2 hidden sm:inline">PADS</span>
+                
                 <!-- PAD 1: AIRHORN -->
-                <button onclick="triggerDjFx('airhorn')" class="dj-pad-btn px-2 sm:px-3 py-1.5 text-xs text-pink-300 hover:text-pink-200 flex items-center justify-center gap-1.5" title="Lanzar Airhorn drop a la TV">
+                <button onclick="triggerDjFx('airhorn')" class="dj-pad-btn px-2.5 sm:px-3 py-1.5 text-xs text-pink-300 hover:text-pink-200 flex items-center justify-center gap-1.5 shrink-0" title="Lanzar Airhorn drop a la TV">
                   <svg class="w-3 h-3 text-pink-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/>
                     <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
@@ -397,7 +402,7 @@
                 </button>
 
                 <!-- PAD 2: VINYL BRAKE -->
-                <button onclick="triggerDjFx('vinyl_brake')" class="dj-pad-btn px-2 sm:px-3 py-1.5 text-xs text-amber-300 hover:text-amber-200 flex items-center justify-center gap-1.5" title="Lanzar Freno de Vinilo">
+                <button onclick="triggerDjFx('vinyl_brake')" class="dj-pad-btn px-2.5 sm:px-3 py-1.5 text-xs text-amber-300 hover:text-amber-200 flex items-center justify-center gap-1.5 shrink-0" title="Lanzar Freno de Vinilo">
                   <svg class="w-3 h-3 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
                   </svg>
@@ -405,7 +410,7 @@
                 </button>
 
                 <!-- PAD 3: FILTER SWEEP -->
-                <button onclick="triggerDjFx('sweep')" class="dj-pad-btn px-2 sm:px-3 py-1.5 text-xs text-purple-300 hover:text-purple-200 flex items-center justify-center gap-1.5" title="Lanzar Barrido de Filtro Club">
+                <button onclick="triggerDjFx('sweep')" class="dj-pad-btn px-2.5 sm:px-3 py-1.5 text-xs text-purple-300 hover:text-purple-200 flex items-center justify-center gap-1.5 shrink-0" title="Lanzar Barrido de Filtro Club">
                   <svg class="w-3 h-3 text-purple-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M2 12c3-8 9-8 12 0s9 8 12 0"/>
                   </svg>
@@ -413,9 +418,9 @@
                 </button>
               </div>
 
-              <!-- Mic y Volumen TV -->
-              <div class="flex items-center justify-between sm:justify-start gap-2 w-full sm:w-auto">
-                <button onclick="toggleMicMode()" id="btnDeckMic" class="tactile-btn-dark px-3 py-2 text-xs flex items-center justify-center gap-1.5 flex-1 sm:flex-initial" title="Atenuar música para hablar">
+              <!-- Master Controls: Mic & TV Volume (Derecha) -->
+              <div class="flex items-center justify-between sm:justify-end gap-2.5 shrink-0">
+                <button onclick="toggleMicMode()" id="btnDeckMic" class="tactile-btn-dark px-3 py-1.5 text-xs flex items-center justify-center gap-1.5 shrink-0" title="Atenuar música para hablar">
                   <svg class="w-3.5 h-3.5 text-red-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
                     <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
@@ -424,11 +429,11 @@
                   <span id="deckMicLabel" class="font-bold">Mic</span>
                 </button>
 
-                <div class="flex items-center gap-2 bg-black/50 px-3 py-1.5 rounded-xl border border-white/10 flex-1 sm:flex-initial">
+                <div class="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-xl border border-white/10 shrink-0">
                   <svg class="w-3.5 h-3.5 text-gray-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/>
                   </svg>
-                  <input type="range" id="adminVolumeSlider" min="0" max="100" value="100" oninput="onVolumeChange(this.value)" class="w-full sm:w-20 accent-amber-500 cursor-pointer h-1.5 bg-white/20 rounded-lg">
+                  <input type="range" id="adminVolumeSlider" min="0" max="100" value="100" oninput="onVolumeChange(this.value)" class="w-16 sm:w-20 accent-amber-500 cursor-pointer h-1.5 bg-white/20 rounded-lg">
                   <span id="adminVolumeDisplay" class="text-[10px] font-mono text-amber-400 font-bold w-7 text-right">100%</span>
                 </div>
               </div>
