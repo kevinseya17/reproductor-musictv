@@ -733,20 +733,41 @@ footer.admin-status-bar {
   background: #34d399;
 }
 
-/* 3. DJ Sampler Pad Button */
+/* 3. DJ Sampler Pad Button (Estilo Hardware Silicone Backlit Pad) */
 .dj-pad-btn {
-  background: linear-gradient(180deg, #1e232f 0%, #11141c 100%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  position: relative;
+  background: linear-gradient(180deg, #1d212d 0%, #10121a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
   transition: all 0.12s ease;
   user-select: none;
   cursor: pointer;
+  overflow: hidden;
+}
+
+.dj-pad-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.6;
+  border-radius: 2px;
+  box-shadow: 0 0 6px currentColor;
 }
 
 .dj-pad-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.55);
+  border-color: currentColor;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(255, 255, 255, 0.1);
+}
+
+.dj-pad-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7), inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .dj-pad-btn:active {

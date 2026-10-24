@@ -119,9 +119,10 @@ function renderAdminState(data) {
     const energyTextEl = document.getElementById('adminNowEnergyText');
     if (energyEl && energyTextEl) {
       if (currentlyPlaying.vibe || currentlyPlaying.bpm || currentlyPlaying.energy) {
-        const energyStars = currentlyPlaying.energy ? '⚡'.repeat(currentlyPlaying.energy) : '⚡⚡⚡';
+        const energyLvl = currentlyPlaying.energy ? `ENERGY ${currentlyPlaying.energy}/5` : 'ENERGY 4/5';
         const bpmStr = currentlyPlaying.bpm ? ` • ${currentlyPlaying.bpm} BPM` : '';
-        energyTextEl.textContent = `${energyStars} ${currentlyPlaying.vibe || 'DJ Mix'}${bpmStr}`;
+        const vibeStr = currentlyPlaying.vibe ? ` • ${currentlyPlaying.vibe.toUpperCase()}` : '';
+        energyTextEl.textContent = `${energyLvl}${vibeStr}${bpmStr}`;
         energyEl.classList.remove('hidden');
         energyEl.classList.add('inline-flex');
       } else {
@@ -137,8 +138,8 @@ function renderAdminState(data) {
         reqEl.innerHTML = `• Pedida por: Mesa ${escapeHtml(currentlyPlaying.requestedBy.table)}${ded}`;
         if (originTextEl) originTextEl.textContent = `Pedido Mesa ${currentlyPlaying.requestedBy.table}`;
       } else {
-        reqEl.textContent = `• Lista Base`;
-        if (originTextEl) originTextEl.textContent = `Lista Base del Bar`;
+        reqEl.textContent = `• Repertorio Base`;
+        if (originTextEl) originTextEl.textContent = `Repertorio Base`;
       }
     }
   }
@@ -388,11 +389,11 @@ function setTvConnectionStatus(connected) {
     if (connected) {
       badge.classList.add('tv-online');
       dot.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-ping';
-      text.textContent = '📺 TV conectada';
+      text.textContent = 'TV CONECTADA';
     } else {
       badge.classList.remove('tv-online');
       dot.className = 'w-1.5 h-1.5 rounded-full bg-rose-400 inline-block';
-      text.textContent = '📺 TV offline';
+      text.textContent = 'TV STANDBY';
     }
   }
 
@@ -404,11 +405,11 @@ function setTvConnectionStatus(connected) {
     if (connected) {
       fStatus.classList.add('tv-online');
       fDot.style.background = '#34d399';
-      fText.textContent = 'TV conectada';
+      fText.textContent = 'TV ONLINE';
     } else {
       fStatus.classList.remove('tv-online');
       fDot.style.background = '#f87171';
-      fText.textContent = 'TV offline';
+      fText.textContent = 'TV STANDBY';
     }
   }
 }
@@ -475,12 +476,17 @@ function renderUpNextPanel(queue) {
     const title = escapeHtml(song.title || 'Sin título');
     const artist = escapeHtml(song.artist || '');
     const badge = isCustomer
-      ? `<span class="up-next-customer-badge">Mesa ${escapeHtml(song.requestedBy?.table || '?')}</span>`
+      ? `<span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-black bg-amber-500/20 text-amber-300 border border-amber-500/30">MESA ${escapeHtml(song.requestedBy?.table || '?')}</span>`
       : '';
+    const thumbHtml = thumb 
+      ? `<img src="${thumb}" class="up-next-thumb" alt="">`
+      : `<div class="up-next-thumb bg-white/5 rounded-md flex items-center justify-center text-gray-500">
+           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+         </div>`;
     return `
       <div class="up-next-item">
-        <span class="up-next-position">${idx + 1}</span>
-        ${thumb ? `<img src="${thumb}" class="up-next-thumb" alt="">` : '<div class="up-next-thumb bg-white/5 rounded-md flex items-center justify-center text-[10px]">🎵</div>'}
+        <span class="up-next-position font-mono font-bold text-gray-400">${String(idx + 1).padStart(2, '0')}</span>
+        ${thumbHtml}
         <div class="up-next-info">
           <div class="up-next-title">${title}</div>
           ${artist ? `<div class="up-next-artist">${artist}</div>` : ''}
@@ -589,17 +595,20 @@ function handleQueueDragEnd(e) {
 }
 
 // Renderizado de Lista UP NEXT / QUEUE (Estilo Referencia Pro con Arrastre y Cola Unificada 50+)
+// Renderizado de Lista UP NEXT / QUEUE (Estilo Hardware Pro - Cero Emojis)
 function renderQueueList(queue) {
   const container = document.getElementById('adminQueueList');
   if (!container) return;
 
   if (!queue || queue.length === 0) {
     container.innerHTML = `
-      <div class="p-8 rounded-2xl bg-black/20 border border-white/5 text-center space-y-2">
-        <div class="text-2xl text-amber-400">✨</div>
-        <p class="text-xs sm:text-sm font-bold text-white">No hay canciones en la cola</p>
+      <div class="p-8 rounded-2xl bg-black/30 border border-white/5 text-center space-y-2">
+        <div class="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 mx-auto flex items-center justify-center text-gray-400">
+          <svg class="w-5 h-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+        </div>
+        <p class="text-xs sm:text-sm font-bold text-white font-mono uppercase tracking-wider">No hay canciones en la cola</p>
         <p class="text-[11px] text-gray-400 max-w-sm mx-auto">
-          Las canciones de la lista base o pedidos de las mesas aparecerán aquí. Puedes arrastrarlas o usar las flechas ▲ ▼ para cambiar su orden de reproducción.
+          Las pistas de la lista base o pedidos de las mesas aparecerán aquí. Arrastra los elementos para reorganizar el orden de reproducción.
         </p>
       </div>
     `;
@@ -617,23 +626,24 @@ function renderQueueList(queue) {
     const origIdx = song._origIdx;
 
     let badgeHtml = '';
-    let rowBorderClass = 'border-white/5 hover:border-amber-500/40 bg-[#141720]';
+    let rowBorderClass = 'border-white/5 hover:border-amber-500/40 bg-[#12151e]';
     let vipButtonHtml = '';
 
     if (isClientReq) {
       const tableNum = song.requestedBy?.table || '?';
-      badgeHtml = `<span class="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-black tracking-wide">👑 MESA ${escapeHtml(tableNum)}</span>`;
-      rowBorderClass = 'border-amber-500/40 bg-amber-500/[0.05] hover:border-amber-400/80 shadow-[0_0_15px_rgba(245,158,11,0.06)]';
+      badgeHtml = `<span class="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9.5px] font-mono font-black tracking-wide">MESA ${escapeHtml(tableNum)}</span>`;
+      rowBorderClass = 'border-amber-500/40 bg-amber-500/[0.04] hover:border-amber-400/80 shadow-[0_0_15px_rgba(245,158,11,0.06)]';
       if (origIdx > 0) {
         vipButtonHtml = `
-          <button onclick="setSongPriority('${song.id}')" class="btn-secondary text-[11px] sm:text-xs py-1 px-1.5 sm:px-2.5 text-amber-300 font-bold border-amber-500/40 hover:bg-amber-500/20 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity" title="Dar Prioridad VIP para que suene a continuación">
-            <span class="sm:hidden">⭐</span><span class="hidden sm:inline">⭐ Prioridad VIP</span>
+          <button onclick="setSongPriority('${song.id}')" class="tactile-btn-dark text-[10px] font-mono py-1 px-2.5 text-amber-300 border-amber-500/40 hover:border-amber-400 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1" title="Prioridad VIP para que suene a continuación">
+            <svg class="w-3 h-3 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>VIP</span>
           </button>
         `;
       }
     } else {
       const plName = song.playlistName || song.genre || 'Crossover';
-      badgeHtml = `<span class="px-2 py-0.5 rounded-md bg-white/10 text-gray-300 text-[10px] font-medium">🎵 ${escapeHtml(plName)}</span>`;
+      badgeHtml = `<span class="px-2 py-0.5 rounded-md bg-white/5 text-gray-400 border border-white/10 text-[9.5px] font-mono font-medium truncate max-w-[140px]">BASE • ${escapeHtml(plName)}</span>`;
     }
 
     return `
@@ -645,31 +655,37 @@ function renderQueueList(queue) {
            ondragleave="handleQueueDragLeave(event, ${origIdx})"
            ondrop="handleQueueDrop(event, ${origIdx})"
            ondragend="handleQueueDragEnd(event)"
-           class="queue-row flex items-center justify-between p-2 sm:p-3 rounded-2xl ${rowBorderClass} gap-1.5 sm:gap-3 group select-none cursor-grab active:cursor-grabbing transition-all">
+           class="queue-row flex items-center justify-between p-2 sm:p-2.5 rounded-xl ${rowBorderClass} gap-1.5 sm:gap-3 group select-none cursor-grab active:cursor-grabbing transition-all">
         
         <!-- Izquierda: Grip + Reordenar + Número -->
-        <div class="flex items-center gap-1 sm:gap-2 shrink-0">
-          <span class="text-gray-500 group-hover:text-amber-400 text-xs px-1 cursor-grab" title="Arrastra para cambiar de posición">⋮⋮</span>
-          <div class="flex flex-col items-center">
-            <button onclick="reorderQueueItem(${origIdx}, 'up')" class="text-[11px] px-1 text-gray-400 hover:text-amber-400 hover:bg-white/10 rounded transition ${i === 0 ? 'opacity-20 cursor-not-allowed' : ''}" title="Subir turno" ${i === 0 ? 'disabled' : ''}>▲</button>
-            <button onclick="reorderQueueItem(${origIdx}, 'down')" class="text-[11px] px-1 text-gray-400 hover:text-amber-400 hover:bg-white/10 rounded transition ${i === total - 1 ? 'opacity-20 cursor-not-allowed' : ''}" title="Bajar turno" ${i === total - 1 ? 'disabled' : ''}>▼</button>
+        <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
+          <div class="text-gray-600 group-hover:text-amber-400 px-1 cursor-grab" title="Arrastra para cambiar orden">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="9" cy="5" r="1.5"/><circle cx="15" cy="5" r="1.5"/>
+              <circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/>
+              <circle cx="9" cy="19" r="1.5"/><circle cx="15" cy="19" r="1.5"/>
+            </svg>
           </div>
-          <span class="font-mono font-black text-amber-400 text-xs sm:text-sm w-5 text-center">${origIdx + 1}.</span>
+          <div class="flex flex-col items-center">
+            <button onclick="reorderQueueItem(${origIdx}, 'up')" class="text-[10px] p-0.5 text-gray-500 hover:text-amber-400 hover:bg-white/10 rounded transition ${i === 0 ? 'opacity-20 cursor-not-allowed' : ''}" title="Subir turno" ${i === 0 ? 'disabled' : ''}>▲</button>
+            <button onclick="reorderQueueItem(${origIdx}, 'down')" class="text-[10px] p-0.5 text-gray-500 hover:text-amber-400 hover:bg-white/10 rounded transition ${i === total - 1 ? 'opacity-20 cursor-not-allowed' : ''}" title="Bajar turno" ${i === total - 1 ? 'disabled' : ''}>▼</button>
+          </div>
+          <span class="font-mono font-bold text-gray-400 text-xs w-6 text-center">${String(origIdx + 1).padStart(2, '0')}</span>
         </div>
 
         <!-- Carátula + Info -->
         <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 pointer-events-none">
-          <img src="${song.thumbnail || 'https://i.ytimg.com/vi/' + song.videoId + '/hqdefault.jpg'}" class="w-10 h-8 sm:w-12 sm:h-9 rounded-xl object-cover border border-white/10 shrink-0 shadow-md">
+          <img src="${song.thumbnail || 'https://i.ytimg.com/vi/' + song.videoId + '/hqdefault.jpg'}" class="w-10 h-8 sm:w-11 sm:h-8 rounded-lg object-cover border border-white/10 shrink-0 shadow-sm">
           <div class="min-w-0 flex-1">
             <div class="flex items-center gap-2">
               <p class="text-xs sm:text-sm font-bold text-white truncate group-hover:text-amber-300 transition" title="${escapeHtml(song.title)}">
                 ${escapeHtml(song.title)}
               </p>
-              <span class="genre-badge genre-${song.genre || 'Crossover'} text-[9px] py-0.2 px-2 hidden sm:inline-flex">${escapeHtml(song.genre || 'Crossover')}</span>
-              ${song.bpm ? `<span class="px-1.5 py-0.2 rounded bg-purple-900/40 text-purple-300 text-[9px] font-mono border border-purple-500/30 hidden md:inline-flex">⚡ ${song.bpm} BPM</span>` : ''}
+              <span class="genre-badge genre-${song.genre || 'Crossover'} text-[8.5px] py-0 px-2 font-mono hidden sm:inline-flex">${escapeHtml(song.genre || 'Crossover')}</span>
+              ${song.bpm ? `<span class="px-1.5 py-0.2 rounded bg-purple-950/60 text-purple-300 text-[8.5px] font-mono border border-purple-500/30 hidden md:inline-flex">${song.bpm} BPM</span>` : ''}
             </div>
-            <div class="flex items-center gap-2 text-[11px] text-gray-400 truncate mt-0.5">
-              <span class="truncate font-semibold text-gray-300">${escapeHtml(song.artist)}</span>
+            <div class="flex items-center gap-2 text-[10.5px] text-gray-400 truncate mt-0.5">
+              <span class="truncate font-medium text-gray-300">${escapeHtml(song.artist)}</span>
               <span>•</span>
               ${badgeHtml}
               ${song.requestedBy?.dedication ? `<span class="text-pink-400 italic truncate hidden md:inline">"${escapeHtml(song.requestedBy.dedication)}"</span>` : ''}
@@ -679,12 +695,13 @@ function renderQueueList(queue) {
 
         <!-- Duración + Acciones -->
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <span class="font-mono text-xs text-gray-300 font-bold hidden sm:inline">${song.duration || '3:30'}</span>
+          <span class="font-mono text-xs text-gray-400 hidden sm:inline">${song.duration || '3:30'}</span>
           ${vipButtonHtml}
-          <button onclick="playNowDirect('${song.videoId}', '${escapeHtml(song.title)}', '${escapeHtml(song.artist)}', '${song.genre}')" class="tactile-btn-gold text-[11px] sm:text-xs py-1 sm:py-1.5 px-2 sm:px-3 font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity" title="Reproducir ahora mismo">
-            Sonar Ya
+          <button onclick="playNowDirect('${song.videoId}', '${escapeHtml(song.title)}', '${escapeHtml(song.artist)}', '${song.genre}')" class="tactile-btn-gold text-[10px] font-mono font-black py-1 px-2.5 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1" title="Reproducir ahora mismo">
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>SONAR YA</span>
           </button>
-          <button onclick="removeQueueItem('${song.id}')" class="text-gray-400 hover:text-red-400 p-1 sm:p-1.5 rounded-lg hover:bg-white/10 transition" title="Eliminar de la cola">
+          <button onclick="removeQueueItem('${song.id}')" class="text-gray-500 hover:text-red-400 p-1.5 rounded-lg hover:bg-white/10 transition" title="Eliminar de la cola">
             ✕
           </button>
         </div>
@@ -697,10 +714,13 @@ function renderQueueList(queue) {
   // 1) Sección Pedidos de Mesas (si hay)
   if (customerSongs.length > 0) {
     html += `
-      <div class="mb-2">
-        <div class="flex items-center gap-2 px-1 py-1.5 mb-2">
-          <span class="text-[10px] font-black uppercase tracking-widest text-amber-400">👑 Pedidos de Mesas</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">${customerSongs.length}</span>
+      <div class="mb-3">
+        <div class="flex items-center justify-between px-1.5 py-1 mb-2 border-b border-amber-500/20 pb-1.5">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_#f59e0b] animate-pulse"></span>
+            <span class="text-[10px] font-mono font-black uppercase tracking-widest text-amber-400">PEDIDOS DE MESAS (PRIORIDAD)</span>
+          </div>
+          <span class="text-[10px] font-mono font-black px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">${customerSongs.length}</span>
         </div>
         <div class="space-y-1.5">
           ${customerSongs.map((song, i) => buildRow(song, i, customerSongs.length)).join('')}
@@ -711,12 +731,15 @@ function renderQueueList(queue) {
 
   // 2) Sección Lista Base
   if (baseSongs.length > 0) {
-    const headerClass = customerSongs.length > 0 ? 'border-t border-white/5 pt-3 mt-1' : '';
+    const headerBorder = customerSongs.length > 0 ? 'border-t border-white/10 pt-3 mt-2' : '';
     html += `
-      <div class="${headerClass}">
-        <div class="flex items-center gap-2 px-1 py-1.5 mb-2">
-          <span class="text-[10px] font-black uppercase tracking-widest text-gray-400">🎵 Lista Base</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-gray-400 border border-white/10 font-bold">${baseSongs.length}</span>
+      <div class="${headerBorder}">
+        <div class="flex items-center justify-between px-1.5 py-1 mb-2 border-b border-white/10 pb-1.5">
+          <div class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-gray-500"></span>
+            <span class="text-[10px] font-mono font-black uppercase tracking-widest text-gray-400">REPERTORIO BASE EN ROTACIÓN</span>
+          </div>
+          <span class="text-[10px] font-mono font-black px-2 py-0.5 rounded-full bg-white/10 text-gray-400 border border-white/10">${baseSongs.length}</span>
         </div>
         <div class="space-y-1.5">
           ${baseSongs.map((song, i) => buildRow(song, i, baseSongs.length)).join('')}
@@ -728,7 +751,6 @@ function renderQueueList(queue) {
   container.innerHTML = html;
 }
 
-// Asignar Prioridad VIP a un pedido para que suene a continuación
 async function setSongPriority(songId) {
   try {
     const res = await fetch('/api/admin/queue/priority', {
@@ -737,7 +759,7 @@ async function setSongPriority(songId) {
       body: JSON.stringify({ songId })
     });
     if (res.ok) {
-      showAdminToast('⭐ Prioridad VIP: Canción movida al turno #1', '👑');
+      showAdminToast('Prioridad VIP: Canción movida al turno #1', 'VIP');
     }
   } catch (err) {
     console.error('Error asignando prioridad VIP:', err);
@@ -749,7 +771,7 @@ async function refreshPlaybackQueue() {
   try {
     const res = await fetch('/api/admin/queue/refresh', { method: 'POST' });
     if (res.ok) {
-      showAdminToast('🔄 Mezcla base regenerada (50 temas)', '🔄');
+      showAdminToast('Mezcla base regenerada con éxito (50 temas)', 'SYNC');
     }
   } catch (err) {
     console.error('Error regenerando mezcla de cola:', err);
@@ -970,20 +992,20 @@ async function adminAddSongToQueue(videoId, title, artist, duration, thumbnail) 
   }
 }
 
-function showAdminToast(msg, icon = '🎵') {
+function showAdminToast(msg, tag = 'SYSTEM') {
   let toast = document.getElementById('adminDynamicToast');
   if (!toast) {
     toast = document.createElement('div');
     toast.id = 'adminDynamicToast';
-    toast.className = 'fixed bottom-5 right-5 z-50 flex items-center gap-2.5 px-4 py-3 bg-amber-400 text-black font-bold text-xs rounded-xl shadow-2xl backdrop-blur-md transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none';
+    toast.className = 'fixed bottom-5 right-5 z-50 flex items-center gap-2.5 px-4 py-2.5 bg-[#12151f] border border-amber-500/40 text-gray-100 text-xs font-mono rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] backdrop-blur-md transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none';
     document.body.appendChild(toast);
   }
-  toast.innerHTML = `<span class="text-base">${icon}</span> <span class="truncate max-w-[280px]">${escapeHtml(msg)}</span>`;
+  toast.innerHTML = `<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[9px] font-black uppercase">${tag}</span> <span class="truncate max-w-[280px] font-medium text-white">${escapeHtml(msg)}</span>`;
   toast.classList.remove('translate-y-10', 'opacity-0');
   clearTimeout(toast._timeout);
   toast._timeout = setTimeout(() => {
     toast.classList.add('translate-y-10', 'opacity-0');
-  }, 3500);
+  }, 3200);
 }
 
 // 4. Pestaña de Listas Maestras
@@ -2461,7 +2483,7 @@ function closeViewPlaylistModal() {
 // Disparar mezcla armónica de DJ hacia la pantalla TV
 async function triggerDjTransition() {
   try {
-    showAdminToast('🎛️ Mezclando con filtro DJ...', 'info');
+    showAdminToast('Mezclando con filtro DJ...', 'FX');
     const res = await fetch('/api/admin/dj-transition', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -2469,7 +2491,7 @@ async function triggerDjTransition() {
     });
     const data = await res.json();
     if (data.success) {
-      showAdminToast(`✨ Transición: ${data.bridge?.label || 'Fundido Rítmico'}`, 'success');
+      showAdminToast(`Transición: ${data.bridge?.label || 'Fundido Rítmico'}`, 'FX');
     }
   } catch (err) {
     console.error('Error al mezclar:', err);
@@ -2480,7 +2502,7 @@ async function triggerDjTransition() {
 function triggerDjFx(fxType) {
   try {
     socket.emit('dj-trigger-fx', { type: fxType });
-    const label = fxType === 'airhorn' ? '🎺 Airhorn lanzado a la TV' : '💿 Freno Vinilo lanzado';
+    const label = fxType === 'airhorn' ? 'Airhorn FX enviado a la TV' : 'Freno de vinilo FX enviado a la TV';
     showAdminToast(label, 'success');
   } catch (err) {
     console.error('Error enviando FX:', err);
