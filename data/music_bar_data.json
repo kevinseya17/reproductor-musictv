@@ -5434,443 +5434,6 @@
   ],
   "queue": [
     {
-      "id": "base_1792814531737_ytg7e",
-      "videoId": "C3lXxoQPqoA",
-      "title": "Rakata",
-      "artist": "Wisin & Yandel",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/C3lXxoQPqoA/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531737,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531740_7s92z",
-      "videoId": "8OalWvMJlkc",
-      "title": "Junto al Amanecer",
-      "artist": "J Alvarez",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/8OalWvMJlkc/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531740,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531744_1mfqo",
-      "videoId": "7KkNxxlN3Nk",
-      "title": "Doncella (Remix) (Remix Mix)",
-      "artist": "Zion & Lennox",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/7KkNxxlN3Nk/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531744,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531747_6eo3b",
-      "videoId": "TD-_GdjgwKo",
-      "title": "Sensacion Del Bloque",
-      "artist": "De La Ghetto",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/TD-_GdjgwKo/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531747,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531751_o94eo",
-      "videoId": "caS88zPqCCc",
-      "title": "Abusadora",
-      "artist": "Wisin & Yandel",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/caS88zPqCCc/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531751,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531755_170k7",
-      "videoId": "a4xxzUEHKek",
-      "title": "Un Sueño",
-      "artist": "RKM & KEN-Y",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/a4xxzUEHKek/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531755,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531758_eutbj",
-      "videoId": "VnYDuazkyZc",
-      "title": "Pegao",
-      "artist": "Wisin & Yandel",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/VnYDuazkyZc/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531758,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531764_3ic50",
-      "videoId": "hLos-LP0w9M",
-      "title": "tito nieves - de mi enamorate",
-      "artist": "O. Mauricio Marin V.",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/hLos-LP0w9M/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531764,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531768_cuzi9",
-      "videoId": "2Vk2U9DqApo",
-      "title": "Fashion Girl",
-      "artist": "Jadiel",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/2Vk2U9DqApo/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531768,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531771_9f50r",
-      "videoId": "_Zila5rLu74",
-      "title": "Don Omar - Pobre Diabla (Original Version)",
-      "artist": "Sandrewification",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/_Zila5rLu74/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531771,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531774_oez8x",
-      "videoId": "mPOKvZ7yJac",
-      "title": "Baila Morena (with Luny Tunes, Noriega)",
-      "artist": "Luny Tunes",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/mPOKvZ7yJac/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531774,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531779_lyvz3",
-      "videoId": "yDlQwGN4ku8",
-      "title": "Pa' Que La Pases Bien",
-      "artist": "Arcangel",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/yDlQwGN4ku8/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531779,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531782_q6ynp",
-      "videoId": "57NUUEu1518",
-      "title": "Dejale Caer To' El Peso",
-      "artist": "YomoMusicOfficial",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/57NUUEu1518/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531782,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531786_pyonx",
-      "videoId": "AjGVPuc0_jc",
-      "title": "Mi Amor es Pobre",
-      "artist": "Tony Dize",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/AjGVPuc0_jc/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531786,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531789_g8eai",
-      "videoId": "oD5f55ohsc4",
-      "title": "Feid - Normal",
-      "artist": "Feid",
-      "genre": "Reggaetón",
-      "duration": "2:51",
-      "thumbnail": "https://i.ytimg.com/vi/oD5f55ohsc4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDz37cCvj_rwg6A4TTJimbhywtdrA",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (pruebas)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531789,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531792_vk7xn",
-      "videoId": "aKho-toCrDo",
-      "title": "Tu Príncipe",
-      "artist": "Daddy Yankee",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/aKho-toCrDo/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531792,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531797_ku8rn",
-      "videoId": "jR_j-LPLBvU",
-      "title": "Yo Voy (feat. Daddy Yankee)",
-      "artist": "Zion & Lennox",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/jR_j-LPLBvU/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531797,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531800_42869",
-      "videoId": "0lCEsGtlBdI",
-      "title": "Quizas",
-      "artist": "Tony Dize",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/0lCEsGtlBdI/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531800,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531804_dmwxc",
-      "videoId": "E02NBXm9r9k",
-      "title": "Esta Noche de Travesuras (feat. Héctor \"El Father\")",
-      "artist": "DJ Nelson",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/E02NBXm9r9k/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531804,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531807_m1s7n",
-      "videoId": "R0d56K_xOLM",
-      "title": "Hola Beba",
-      "artist": "Farruko",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/R0d56K_xOLM/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531807,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531811_2wmg2",
-      "videoId": "C8t8Uo2fYTI",
-      "title": "Down (Remix)",
-      "artist": "RKM & KEN-Y",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/C8t8Uo2fYTI/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531811,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531813_98mds",
-      "videoId": "_Zila5rLu74",
-      "title": "Don Omar - Pobre Diabla (Original Version)",
-      "artist": "Sandrewification",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/_Zila5rLu74/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531813,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
-      "id": "base_1792814531816_ucixc",
-      "videoId": "R0fpd4BOaTk",
-      "title": "House of Pleasure",
-      "artist": "Plan B",
-      "genre": "Reggaetón",
-      "duration": "3:30",
-      "thumbnail": "https://i.ytimg.com/vi/R0fpd4BOaTk/hqdefault.jpg",
-      "requestedBy": {
-        "table": null,
-        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
-      },
-      "isBaseTrack": true,
-      "addedAt": 1792814531816,
-      "energy": 4,
-      "bpm": 96,
-      "vibe": "Clímax & Perreo",
-      "djBadge": "Clímax & Perreo (96 BPM)"
-    },
-    {
       "id": "base_1792814531818_xh4gk",
       "videoId": "hLos-LP0w9M",
       "title": "tito nieves - de mi enamorate",
@@ -6382,27 +5945,464 @@
       "bpm": 96,
       "vibe": "Clímax & Perreo",
       "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792817482509_cl2ps",
+      "videoId": "jR_j-LPLBvU",
+      "title": "Yo Voy (feat. Daddy Yankee)",
+      "artist": "Zion & Lennox",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/jR_j-LPLBvU/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792817482509,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792817482638_gsc74",
+      "videoId": "PfeY71rsaMg",
+      "title": "Salió El Sol",
+      "artist": "Don Omar",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/PfeY71rsaMg/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792817482638,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792817545764_juwc1",
+      "videoId": "xplqHK8YVak",
+      "title": "Me Estas Tentando",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/xplqHK8YVak/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792817545764,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792817562897_e7b63",
+      "videoId": "p_-eHLhdF_0",
+      "title": "Felina",
+      "artist": "Hector & Tito - Topic",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/p_-eHLhdF_0/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792817562897,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792817796931_ql7an",
+      "videoId": "fRIhCiUVaKs",
+      "title": "KAROL G, Judeline, rusowsky - BbY WOW (Visualizer)",
+      "artist": "KAROL G",
+      "genre": "Reggaetón",
+      "duration": "3:46",
+      "thumbnail": "https://i.ytimg.com/vi/fRIhCiUVaKs/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCkRiFGxkneYkgSUTpj5LRazeIV2Q",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (pruebas)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792817796931,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792817799090_gk9mm",
+      "videoId": "cT6B3EL15JA",
+      "title": "Wisin & Yandel - Besos Mojados (Visualizer)",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "4:25",
+      "thumbnail": "https://i.ytimg.com/vi/cT6B3EL15JA/hq720.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (Regaetoon)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792817799090,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792817799241_0ka6r",
+      "videoId": "Sy3f35o_TlQ",
+      "title": "KAROL G ft. Marco Antonio Solis - Coleccionando Heridas (Music Video) Dany Deglein, dennis fernando",
+      "artist": "UNIONN LATINA",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/Sy3f35o_TlQ/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 musica variada canciones para escuchar de todo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792817799241,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792818032499_jviy2",
+      "videoId": "stHC5wqqA28",
+      "title": "Amor De Pobre",
+      "artist": "Zion",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/stHC5wqqA28/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792818032499,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792818034669_qbkmj",
+      "videoId": "mPOKvZ7yJac",
+      "title": "Baila Morena (with Luny Tunes, Noriega)",
+      "artist": "Luny Tunes",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/mPOKvZ7yJac/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792818034669,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792818034782_3brwo",
+      "videoId": "Ofcvfr-okzY",
+      "title": "Plaka Plaka",
+      "artist": "Cosculluela El Principe",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/Ofcvfr-okzY/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792818034782,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792818369320_4lm24",
+      "videoId": "MUqtcxE78GA",
+      "title": "Down",
+      "artist": "RKM & KEN-Y",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/MUqtcxE78GA/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792818369320,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792818556903_qi3fo",
+      "videoId": "q3e0ijvUS90",
+      "title": "Fantasma",
+      "artist": "Zion",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/q3e0ijvUS90/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792818556903,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792818771306_b87j9",
+      "videoId": "Sy3f35o_TlQ",
+      "title": "KAROL G ft. Marco Antonio Solis - Coleccionando Heridas (Music Video) Dany Deglein, dennis fernando",
+      "artist": "UNIONN LATINA",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/Sy3f35o_TlQ/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 musica variada canciones para escuchar de todo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792818771306,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792819022199_09jsx",
+      "videoId": "yNjpYHl4i-M",
+      "title": "Alocate",
+      "artist": "Zion",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/yNjpYHl4i-M/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792819022199,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792819289309_qtwv2",
+      "videoId": "UMVIvGZrv9k",
+      "title": "Aventura",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/UMVIvGZrv9k/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792819289309,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792819460168_35z99",
+      "videoId": "fHwbnAeJ6EA",
+      "title": "Lo Que Pasó, Pasó",
+      "artist": "Daddy Yankee",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/fHwbnAeJ6EA/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792819460168,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792819666106_o2onr",
+      "videoId": "dh5OMOTvDsI",
+      "title": "Pam Pam",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/dh5OMOTvDsI/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792819666106,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792819898555_e25lm",
+      "videoId": "QOMdVW5k-NE",
+      "title": "Shorty",
+      "artist": "Casa De Leones - Topic",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/QOMdVW5k-NE/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792819898555,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792820086125_66beg",
+      "videoId": "DYTPMW1dc3k",
+      "title": "Por Amar A Ciegas",
+      "artist": "Arcangel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/DYTPMW1dc3k/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792820086125,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792820299296_ahhzm",
+      "videoId": "G_pAZUffY9c",
+      "title": "Besos Mojados",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/G_pAZUffY9c/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792820299296,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792820516531_9fmy6",
+      "videoId": "AHp1XS0CVOs",
+      "title": "Pierdo La Cabeza",
+      "artist": "ZION",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/AHp1XS0CVOs/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792820516532,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792820666284_471qf",
+      "videoId": "UMVIvGZrv9k",
+      "title": "Aventura",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/UMVIvGZrv9k/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792820666284,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
+    },
+    {
+      "id": "base_1792820851300_9ctcp",
+      "videoId": "_28ERuPOaXg",
+      "title": "Solos",
+      "artist": "Tony Dize",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/_28ERuPOaXg/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792820851300,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)"
     }
   ],
   "currentlyPlaying": {
-    "id": "base_1792814531734_tl548",
-    "videoId": "eQcZc_pOuSw",
-    "title": "la razon de mi vida - victor manuelle",
-    "artist": "Cesar Usco Navarro \"ycomolohace\"",
+    "id": "base_1792814531813_98mds",
+    "videoId": "_Zila5rLu74",
+    "title": "Don Omar - Pobre Diabla (Original Version)",
+    "artist": "Sandrewification",
     "genre": "Reggaetón",
     "duration": "3:30",
-    "thumbnail": "https://i.ytimg.com/vi/eQcZc_pOuSw/hqdefault.jpg",
+    "thumbnail": "https://i.ytimg.com/vi/_Zila5rLu74/hqdefault.jpg",
     "requestedBy": {
       "table": null,
-      "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
+      "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
     },
     "isBaseTrack": true,
-    "addedAt": 1792814531734,
+    "addedAt": 1792814531813,
     "energy": 4,
     "bpm": 96,
     "vibe": "Clímax & Perreo",
     "djBadge": "Clímax & Perreo (96 BPM)",
-    "startedAt": 1792815504043,
+    "startedAt": 1792820851273,
     "transition": {
       "transitionType": "crossfade",
       "fx": "filter_sweep",
@@ -9332,6 +9332,636 @@
         "label": "Fundido Rítmico"
       },
       "playedAt": "2026-10-24T04:18:23.992Z"
+    },
+    {
+      "id": "base_1792814531734_tl548",
+      "videoId": "eQcZc_pOuSw",
+      "title": "la razon de mi vida - victor manuelle",
+      "artist": "Cesar Usco Navarro \"ycomolohace\"",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/eQcZc_pOuSw/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531734,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792815504043,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T04:51:22.404Z"
+    },
+    {
+      "id": "base_1792814531737_ytg7e",
+      "videoId": "C3lXxoQPqoA",
+      "title": "Rakata",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/C3lXxoQPqoA/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531737,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792817482463,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T04:51:22.547Z"
+    },
+    {
+      "id": "base_1792814531740_7s92z",
+      "videoId": "8OalWvMJlkc",
+      "title": "Junto al Amanecer",
+      "artist": "J Alvarez",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/8OalWvMJlkc/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531740,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792817482605,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T04:52:25.669Z"
+    },
+    {
+      "id": "base_1792814531744_1mfqo",
+      "videoId": "7KkNxxlN3Nk",
+      "title": "Doncella (Remix) (Remix Mix)",
+      "artist": "Zion & Lennox",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/7KkNxxlN3Nk/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531744,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792817545725,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T04:52:42.811Z"
+    },
+    {
+      "id": "base_1792814531747_6eo3b",
+      "videoId": "TD-_GdjgwKo",
+      "title": "Sensacion Del Bloque",
+      "artist": "De La Ghetto",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/TD-_GdjgwKo/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531747,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792817562864,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T04:56:36.855Z"
+    },
+    {
+      "id": "base_1792814531751_o94eo",
+      "videoId": "caS88zPqCCc",
+      "title": "Abusadora",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/caS88zPqCCc/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531751,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792817796902,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T04:56:39.006Z"
+    },
+    {
+      "id": "base_1792814531755_170k7",
+      "videoId": "a4xxzUEHKek",
+      "title": "Un Sueño",
+      "artist": "RKM & KEN-Y",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/a4xxzUEHKek/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531755,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792817799056,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T04:56:39.122Z"
+    },
+    {
+      "id": "base_1792814531758_eutbj",
+      "videoId": "VnYDuazkyZc",
+      "title": "Pegao",
+      "artist": "Wisin & Yandel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/VnYDuazkyZc/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531758,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792817799181,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:00:32.420Z"
+    },
+    {
+      "id": "base_1792814531764_3ic50",
+      "videoId": "hLos-LP0w9M",
+      "title": "tito nieves - de mi enamorate",
+      "artist": "O. Mauricio Marin V.",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/hLos-LP0w9M/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Lo Mejor de la Salsa)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531764,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792818032470,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:00:34.582Z"
+    },
+    {
+      "id": "base_1792814531768_cuzi9",
+      "videoId": "2Vk2U9DqApo",
+      "title": "Fashion Girl",
+      "artist": "Jadiel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/2Vk2U9DqApo/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531768,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792818034636,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:00:34.698Z"
+    },
+    {
+      "id": "base_1792814531771_9f50r",
+      "videoId": "_Zila5rLu74",
+      "title": "Don Omar - Pobre Diabla (Original Version)",
+      "artist": "Sandrewification",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/_Zila5rLu74/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531771,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792818034749,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:02:29.411Z"
+    },
+    {
+      "id": "forced_1792818149438",
+      "videoId": "E02NBXm9r9k",
+      "title": "Esta Noche de Travesuras (feat. Héctor \"El Father\")",
+      "artist": "DJ Nelson",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/E02NBXm9r9k/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ / Bar"
+      },
+      "isBaseTrack": false,
+      "startedAt": 1792818149438,
+      "playedAt": "2026-10-24T05:02:32.445Z"
+    },
+    {
+      "id": "forced_1792818152471",
+      "videoId": "R0d56K_xOLM",
+      "title": "Hola Beba",
+      "artist": "Farruko",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/R0d56K_xOLM/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ / Bar"
+      },
+      "isBaseTrack": false,
+      "startedAt": 1792818152471,
+      "playedAt": "2026-10-24T05:06:09.239Z"
+    },
+    {
+      "id": "base_1792814531774_oez8x",
+      "videoId": "mPOKvZ7yJac",
+      "title": "Baila Morena (with Luny Tunes, Noriega)",
+      "artist": "Luny Tunes",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/mPOKvZ7yJac/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531774,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792818369289,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:09:16.821Z"
+    },
+    {
+      "id": "base_1792814531779_lyvz3",
+      "videoId": "yDlQwGN4ku8",
+      "title": "Pa' Que La Pases Bien",
+      "artist": "Arcangel",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/yDlQwGN4ku8/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531779,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792818556872,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:12:51.215Z"
+    },
+    {
+      "id": "base_1792814531782_q6ynp",
+      "videoId": "57NUUEu1518",
+      "title": "Dejale Caer To' El Peso",
+      "artist": "YomoMusicOfficial",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/57NUUEu1518/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531782,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792818771271,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:17:02.117Z"
+    },
+    {
+      "id": "base_1792814531786_pyonx",
+      "videoId": "AjGVPuc0_jc",
+      "title": "Mi Amor es Pobre",
+      "artist": "Tony Dize",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/AjGVPuc0_jc/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531786,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792819022170,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:21:29.221Z"
+    },
+    {
+      "id": "base_1792814531789_g8eai",
+      "videoId": "oD5f55ohsc4",
+      "title": "Feid - Normal",
+      "artist": "Feid",
+      "genre": "Reggaetón",
+      "duration": "2:51",
+      "thumbnail": "https://i.ytimg.com/vi/oD5f55ohsc4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDz37cCvj_rwg6A4TTJimbhywtdrA",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (pruebas)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531789,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792819289274,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:24:20.082Z"
+    },
+    {
+      "id": "base_1792814531792_vk7xn",
+      "videoId": "aKho-toCrDo",
+      "title": "Tu Príncipe",
+      "artist": "Daddy Yankee",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/aKho-toCrDo/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531792,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792819460141,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:27:46.024Z"
+    },
+    {
+      "id": "base_1792814531797_ku8rn",
+      "videoId": "jR_j-LPLBvU",
+      "title": "Yo Voy (feat. Daddy Yankee)",
+      "artist": "Zion & Lennox",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/jR_j-LPLBvU/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531797,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792819666074,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:31:38.462Z"
+    },
+    {
+      "id": "base_1792814531800_42869",
+      "videoId": "0lCEsGtlBdI",
+      "title": "Quizas",
+      "artist": "Tony Dize",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/0lCEsGtlBdI/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531800,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792819898525,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:34:46.030Z"
+    },
+    {
+      "id": "base_1792814531804_dmwxc",
+      "videoId": "E02NBXm9r9k",
+      "title": "Esta Noche de Travesuras (feat. Héctor \"El Father\")",
+      "artist": "DJ Nelson",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/E02NBXm9r9k/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531804,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792820086089,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:38:19.218Z"
+    },
+    {
+      "id": "base_1792814531807_m1s7n",
+      "videoId": "R0d56K_xOLM",
+      "title": "Hola Beba",
+      "artist": "Farruko",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/R0d56K_xOLM/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531807,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792820299269,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:41:56.452Z"
+    },
+    {
+      "id": "base_1792814531811_2wmg2",
+      "videoId": "C8t8Uo2fYTI",
+      "title": "Down (Remix)",
+      "artist": "RKM & KEN-Y",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/C8t8Uo2fYTI/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531811,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792820516501,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:44:26.192Z"
+    },
+    {
+      "id": "base_1792814531816_ucixc",
+      "videoId": "R0fpd4BOaTk",
+      "title": "House of Pleasure",
+      "artist": "Plan B",
+      "genre": "Reggaetón",
+      "duration": "3:30",
+      "thumbnail": "https://i.ytimg.com/vi/R0fpd4BOaTk/hqdefault.jpg",
+      "requestedBy": {
+        "table": null,
+        "name": "DJ 100% Reggaetón (📥 Reggaeton Viejo)"
+      },
+      "isBaseTrack": true,
+      "addedAt": 1792814531816,
+      "energy": 4,
+      "bpm": 96,
+      "vibe": "Clímax & Perreo",
+      "djBadge": "Clímax & Perreo (96 BPM)",
+      "startedAt": 1792820666254,
+      "transition": {
+        "transitionType": "crossfade",
+        "fx": "filter_sweep",
+        "label": "Fundido Rítmico"
+      },
+      "playedAt": "2026-10-24T05:47:31.220Z"
     }
   ],
   "tableRequests": {
