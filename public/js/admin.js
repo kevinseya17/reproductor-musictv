@@ -699,7 +699,10 @@ function renderQueueList(queue) {
            ondragleave="handleQueueDragLeave(event, ${origIdx})"
            ondrop="handleQueueDrop(event, ${origIdx})"
            ondragend="handleQueueDragEnd(event)"
-           class="queue-row flex items-center justify-between p-2 sm:p-2.5 rounded-xl ${rowBorderClass} gap-1.5 sm:gap-3 group select-none cursor-grab active:cursor-grabbing transition-all">
+           ontouchstart="initCardTouchCast(event, ${origIdx})"
+           ontouchmove="handleCardTouchMove(event, ${origIdx})"
+           ontouchend="endCardTouchCast(event, ${origIdx})"
+           class="queue-row flex items-center justify-between p-2 sm:p-2.5 rounded-xl ${rowBorderClass} gap-1.5 sm:gap-3 group select-none cursor-grab active:cursor-grabbing transition-all relative overflow-hidden">
         
         <!-- Izquierda: Grip + Reordenar + Número -->
         <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
@@ -741,9 +744,8 @@ function renderQueueList(queue) {
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <span class="font-mono text-xs text-gray-400 hidden sm:inline">${song.duration || '3:30'}</span>
           ${vipButtonHtml}
-          <button onclick="playNowDirect('${song.videoId}', '${escapeHtml(song.title)}', '${escapeHtml(song.artist)}', '${song.genre}')" class="tactile-btn-gold text-[10px] font-mono font-black py-1 px-2.5 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1" title="Reproducir ahora mismo">
-            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            <span>SONAR YA</span>
+          <button onclick="castSongDirect(${origIdx})" class="tactile-btn-gold text-[10px] font-mono font-black py-1 px-2.5 whitespace-nowrap flex items-center gap-1 shadow-[0_0_15px_rgba(245,158,11,0.35)] hover:scale-105 active:scale-95 transition" title="Lanzar esta canción hacia el televisor con animación">
+            <span>🚀</span> <span>LANZAR</span>
           </button>
           <button onclick="removeQueueItem('${song.id}')" class="text-gray-500 hover:text-red-400 p-1.5 rounded-lg hover:bg-white/10 transition" title="Eliminar de la cola">
             ✕
@@ -869,6 +871,193 @@ async function playNowDirect(videoId, title, artist, genre) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ videoId, title, artist, genre })
   });
+}
+
+// ==========================================
+// DRAG-TO-CAST: LANZAR CANCIONES AL TELEVISOR
+// ==========================================
+let mobileAudioCtx = null;
+function getMobileAudioContext() {
+  if (!mobileAudioCtx) {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtx) mobileAudioCtx = new AudioCtx();
+  }
+  if (mobileAudioCtx && mobileAudioCtx.state === 'suspended') {
+    mobileAudioCtx.resume();
+  }
+  return mobileAudioCtx;
+}
+
+function playMobileWhooshSound() {
+  try {
+    const ctx = getMobileAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    osc.type = 'sawtooth';
+    filter.type = 'lowpass';
+
+    osc.frequency.setValueAtTime(150, now);
+    osc.frequency.exponentialRampToValueAtTime(800, now + 0.2);
+    osc.frequency.exponentialRampToValueAtTime(100, now + 0.4);
+
+    filter.frequency.setValueAtTime(300, now);
+    filter.frequency.exponentialRampToValueAtTime(4000, now + 0.2);
+    filter.frequency.exponentialRampToValueAtTime(200, now + 0.4);
+
+    gain.gain.setValueAtTime(0.01, now);
+    gain.gain.linearRampToValueAtTime(0.25, now + 0.1);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.4);
+  } catch (err) {}
+}
+
+let touchCastState = {
+  active: false,
+  card: null,
+  index: -1,
+  startY: 0,
+  startX: 0,
+  deltaY: 0,
+  isDraggingUp: false
+};
+
+function initCardTouchCast(e, index) {
+  if (e.target.closest('button, input, select, a')) return;
+  const touch = e.touches[0];
+  const card = document.getElementById(`queue-row-${index}`);
+  if (!card) return;
+
+  touchCastState = {
+    active: true,
+    card,
+    index,
+    startY: touch.clientY,
+    startX: touch.clientX,
+    deltaY: 0,
+    isDraggingUp: false
+  };
+}
+
+function handleCardTouchMove(e, index) {
+  if (!touchCastState.active || touchCastState.index !== index) return;
+  const touch = e.touches[0];
+  const deltaY = touch.clientY - touchCastState.startY;
+  const deltaX = touch.clientX - touchCastState.startX;
+  touchCastState.deltaY = deltaY;
+
+  // Si se mueve hacia arriba más de 12px y el movimiento vertical supera el horizontal
+  if (deltaY < -12 && Math.abs(deltaY) > Math.abs(deltaX)) {
+    touchCastState.isDraggingUp = true;
+    e.preventDefault(); // Prevenir scroll nativo
+
+    // Mostrar portal en el tope de la pantalla
+    const portal = document.getElementById('castDropPortal');
+    if (portal) portal.classList.remove('-translate-y-full');
+
+    const card = touchCastState.card;
+    const progress = Math.min(1, Math.abs(deltaY) / 180);
+    const scale = 1 - (progress * 0.12);
+    const tilt = (deltaX * 0.05);
+
+    card.style.transition = 'none';
+    card.style.transform = `translate(${deltaX * 0.25}px, ${deltaY}px) scale(${scale}) rotate(${tilt}deg)`;
+    card.style.boxShadow = `0 0 ${20 + progress * 35}px rgba(245, 158, 11, ${0.4 + progress * 0.5})`;
+    card.style.zIndex = '100';
+    card.style.borderColor = 'rgba(245, 158, 11, 0.9)';
+  }
+}
+
+function endCardTouchCast(e, index) {
+  if (!touchCastState.active || touchCastState.index !== index) return;
+  const portal = document.getElementById('castDropPortal');
+  if (portal) portal.classList.add('-translate-y-full');
+
+  const card = touchCastState.card;
+  const deltaY = touchCastState.deltaY;
+  const wasDraggingUp = touchCastState.isDraggingUp;
+  touchCastState.active = false;
+
+  // Umbral de lanzamiento: si arrastró hacia arriba más de 75px
+  if (wasDraggingUp && deltaY < -75) {
+    castSongDirect(index);
+  } else if (card) {
+    // Devolver suavemente a su lugar
+    card.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+    card.style.transform = '';
+    card.style.boxShadow = '';
+    card.style.zIndex = '';
+    card.style.borderColor = '';
+  }
+}
+
+function castSongDirect(index) {
+  const song = currentQueueState[index];
+  if (!song) return;
+
+  const card = document.getElementById(`queue-row-${index}`);
+  if (card) {
+    // Animación de salida supersónica hacia arriba fuera de la pantalla
+    card.style.transition = 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+    card.style.transform = 'translateY(-180%) scale(0.5) rotate(-5deg)';
+    card.style.opacity = '0';
+    card.style.boxShadow = '0 0 60px rgba(245, 158, 11, 1)';
+  }
+
+  // Vibración háptica en celular
+  if (navigator.vibrate) {
+    try { navigator.vibrate([40, 60, 100]); } catch(e){}
+  }
+
+  // Sonido de despegue
+  playMobileWhooshSound();
+
+  // Enviar orden de lanzamiento por socket
+  socket.emit('cast-song-to-tv', {
+    videoId: song.videoId,
+    title: song.title,
+    artist: song.artist,
+    genre: song.genre || 'Crossover',
+    duration: song.duration,
+    thumbnail: song.thumbnail,
+    requestedBy: song.requestedBy || { name: 'DJ / Celular' },
+    queueIndex: index
+  });
+
+  showAdminToast(`🚀 ¡"${song.title}" lanzada al televisor!`, '✨');
+}
+
+function adminCastSongFromSearch(idx) {
+  const v = lastAdminSearchVideos[idx];
+  if (!v) return;
+
+  if (navigator.vibrate) {
+    try { navigator.vibrate([40, 60, 100]); } catch(e){}
+  }
+  playMobileWhooshSound();
+
+  socket.emit('cast-song-to-tv', {
+    videoId: v.videoId,
+    title: v.title,
+    artist: v.artist,
+    genre: 'Crossover',
+    duration: v.duration,
+    thumbnail: v.thumbnail,
+    requestedBy: { name: 'DJ / Buscador' }
+  });
+
+  showAdminToast(`🚀 ¡"${v.title}" lanzada al televisor!`, '✨');
+  clearAdminSearch();
 }
 
 // 3. Búsqueda rápida de DJ con soporte para Enter, Debounce y caché

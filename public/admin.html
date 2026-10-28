@@ -10,6 +10,21 @@
 </head>
 <body class="bg-[#090b10] text-gray-100 min-h-screen flex flex-col font-sans select-none antialiased" id="adminBody">
 
+  <!-- Portal visual de lanzamiento hacia el TV (Aparece al arrastrar canciones hacia arriba) -->
+  <div id="castDropPortal" class="fixed top-0 left-0 right-0 z-50 pointer-events-none transform -translate-y-full transition-transform duration-300 ease-out flex flex-col items-center justify-center py-5 px-4 bg-gradient-to-b from-amber-500/40 via-amber-600/25 to-transparent border-b-2 border-amber-400 backdrop-blur-md shadow-[0_10px_50px_rgba(245,158,11,0.6)]">
+    <div class="flex items-center gap-3">
+      <span class="text-4xl animate-bounce">🚀</span>
+      <div class="text-center sm:text-left">
+        <p class="text-sm sm:text-base font-black text-amber-300 uppercase tracking-widest drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+          ¡SUELTA AQUÍ PARA LANZAR AL TELEVISOR!
+        </p>
+        <p class="text-[10px] sm:text-xs text-white font-bold">
+          La canción saldrá volando del celular directo a la pantalla del bar
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- Topbar Hardware Pro -->
   <header class="glass-header px-3 sm:px-4 lg:px-6 py-2 sm:py-2.5 flex items-center justify-between border-b border-white/10 z-30 shrink-0">
     <div class="flex items-center gap-2 sm:gap-3 min-w-0">
