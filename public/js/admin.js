@@ -690,10 +690,16 @@ function renderQueueList(queue) {
       badgeHtml = `<span class="px-2 py-0.5 rounded-md bg-white/5 text-gray-400 border border-white/10 text-[9.5px] font-mono font-medium truncate max-w-[140px]">BASE • ${escapeHtml(plName)}</span>`;
     }
 
-    const rowTouchAction = (typeof touchCastLockMode === 'undefined' || touchCastLockMode) ? 'none' : 'pan-y';
+    const isArmed = (typeof armedSongIndex !== 'undefined' && armedSongIndex === origIdx);
+    const hasAnyArmed = (typeof armedSongIndex !== 'undefined' && armedSongIndex !== -1);
+    const rowTouchAction = isArmed ? 'none' : 'pan-y';
+    const armedStyle = isArmed
+      ? 'transform: scale(1.025) translateY(-3px); box-shadow: 0 14px 34px rgba(245, 158, 11, 0.5), 0 0 20px rgba(245, 158, 11, 0.35); border-color: #fbbf24; border-width: 2px; background: linear-gradient(90deg, rgba(245,158,11,0.22), #181d2c, rgba(245,158,11,0.18)); z-index: 20;'
+      : (hasAnyArmed ? 'opacity: 0.5;' : '');
 
     return `
       <div id="queue-row-${origIdx}"
+           data-queue-index="${origIdx}"
            onmousedown="if(!('ontouchstart' in window)) this.draggable = true;"
            ondragstart="handleQueueDragStart(event, ${origIdx})"
            ondragover="handleQueueDragOver(event, ${origIdx})"
@@ -702,9 +708,13 @@ function renderQueueList(queue) {
            ondrop="handleQueueDrop(event, ${origIdx})"
            ondragend="handleQueueDragEnd(event)"
            ontouchstart="this.draggable = false; initCardTouchCast(event, ${origIdx})"
-           style="touch-action: ${rowTouchAction}; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;"
-           class="queue-row flex items-center justify-between p-2 sm:p-2.5 rounded-xl ${rowBorderClass} gap-1.5 sm:gap-2.5 group select-none cursor-grab active:cursor-grabbing transition-all relative overflow-hidden">
+           style="touch-action: ${rowTouchAction}; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; ${armedStyle}"
+           class="queue-row flex items-center justify-between p-2 sm:p-2.5 rounded-xl ${rowBorderClass} gap-1.5 sm:gap-2.5 group select-none cursor-pointer transition-all duration-200 relative ${isArmed ? 'overflow-visible' : 'overflow-hidden'}">
         
+        <div id="armed-badge-${origIdx}" class="${isArmed ? 'flex' : 'hidden'} absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-orange-500 text-black text-[9.5px] font-black px-3 py-0.5 rounded-full shadow-[0_0_18px_rgba(245,158,11,0.95)] whitespace-nowrap uppercase tracking-wider items-center gap-1 z-30 pointer-events-none animate-bounce">
+          <span>🚀</span> <span>¡Enganchada! Arrástrala hacia arriba ↑</span>
+        </div>
+
         <!-- Izquierda: Reordenar ▲ ▼ y Número -->
         <div class="no-cast-drag flex items-center gap-1 sm:gap-1.5 shrink-0" style="touch-action: pan-y;">
           <div class="text-gray-600 group-hover:text-amber-400 px-0.5 cursor-grab hidden md:inline-block" title="Arrastra para cambiar orden">
@@ -721,15 +731,15 @@ function renderQueueList(queue) {
           <span class="font-mono font-bold text-gray-400 text-xs w-5 sm:w-6 text-center">${String(origIdx + 1).padStart(2, '0')}</span>
         </div>
 
-        <!-- Carátula + Info de la canción con bloqueo nativo de scroll en iPhone -->
+        <!-- Carátula + Info de la canción -->
         <div class="cast-direct-zone flex items-center gap-2 sm:gap-3 min-w-0 flex-1" style="touch-action: ${rowTouchAction};">
-          <div class="cast-force-lock relative shrink-0" style="touch-action: none;">
-            <img src="${song.thumbnail || 'https://i.ytimg.com/vi/' + song.videoId + '/hqdefault.jpg'}" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-white/10 shrink-0 shadow-sm pointer-events-none">
-            <span class="md:hidden absolute -top-1 -right-1 text-[9px] bg-amber-500 text-black font-black rounded-full w-4 h-4 flex items-center justify-center shadow pointer-events-none">↑</span>
+          <div class="relative shrink-0">
+            <img src="${song.thumbnail || 'https://i.ytimg.com/vi/' + song.videoId + '/hqdefault.jpg'}" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border ${isArmed ? 'border-amber-400' : 'border-white/10'} shrink-0 shadow-sm pointer-events-none">
+            <span id="armed-icon-${origIdx}" class="md:hidden absolute -top-1 -right-1 text-[9px] ${isArmed ? 'bg-amber-400 scale-125' : 'bg-white/20 text-white'} text-black font-black rounded-full w-4 h-4 flex items-center justify-center shadow pointer-events-none transition-transform">${isArmed ? '🚀' : '👆'}</span>
           </div>
           <div class="min-w-0 flex-1 pointer-events-none">
             <div class="flex items-center gap-1.5">
-              <p class="text-xs sm:text-sm font-bold text-white truncate group-hover:text-amber-300 transition" title="${escapeHtml(song.title)}">
+              <p class="text-xs sm:text-sm font-bold ${isArmed ? 'text-amber-300' : 'text-white'} truncate group-hover:text-amber-300 transition" title="${escapeHtml(song.title)}">
                 ${escapeHtml(song.title)}
               </p>
               <span class="genre-badge genre-${song.genre || 'Crossover'} text-[8.5px] py-0 px-1.5 font-mono hidden lg:inline-flex">${escapeHtml(song.genre || 'Crossover')}</span>
@@ -748,7 +758,7 @@ function renderQueueList(queue) {
         <div class="flex items-center gap-1 sm:gap-2 shrink-0">
           <span class="font-mono text-xs text-gray-400 hidden lg:inline">${song.duration || '3:30'}</span>
           ${vipButtonHtml}
-          <button onclick="castSongDirect(${origIdx})" style="touch-action: none;" class="cast-force-lock tactile-btn-gold text-[10px] font-mono font-black py-1.5 px-2.5 sm:px-3 whitespace-nowrap flex items-center gap-1 shadow-[0_0_12px_rgba(245,158,11,0.25)] hover:scale-105 active:scale-95 transition rounded-xl" title="Toca o arrastra hacia arriba para sonar en la TV">
+          <button onclick="castSongDirect(${origIdx})" style="touch-action: manipulation;" class="no-cast-drag tactile-btn-gold text-[10px] font-mono font-black py-1.5 px-2.5 sm:px-3 whitespace-nowrap flex items-center gap-1 shadow-[0_0_12px_rgba(245,158,11,0.25)] hover:scale-105 active:scale-95 transition rounded-xl" title="Hacer sonar inmediatamente en la TV">
             <span class="text-xs">▶</span> <span>SONAR</span>
           </button>
           <button onclick="removeQueueItem('${song.id}')" style="touch-action: pan-y;" class="no-cast-drag text-gray-500 hover:text-red-400 p-1.5 rounded-lg hover:bg-white/10 transition shrink-0" title="Eliminar de la cola">
@@ -926,32 +936,116 @@ function playMobileWhooshSound() {
   } catch (err) {}
 }
 
-let touchCastLockMode = true;
+let armedSongIndex = -1;
 
-function toggleTouchCastLockMode() {
-  touchCastLockMode = !touchCastLockMode;
-  const btn = document.getElementById('btnToggleTouchCastMode');
-  const icon = document.getElementById('touchCastModeIcon');
-  const text = document.getElementById('touchCastModeText');
+// Sonido táctil tipo "Taptic Pop / MagSafe Lock" cuando presionas y enganchas una canción
+function playArmCardSound(isArming = true) {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const now = ctx.currentTime;
 
-  if (touchCastLockMode) {
-    if (icon) icon.textContent = '🚀';
-    if (text) text.textContent = 'Lanzar con Dedo (Cola Fija)';
-    if (btn) {
-      btn.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/30 to-orange-500/30 border border-amber-400 text-[10px] sm:text-xs font-black text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.3)] active:scale-95 transition';
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'sine';
+    if (isArming) {
+      osc.frequency.setValueAtTime(140, now);
+      osc.frequency.exponentialRampToValueAtTime(580, now + 0.065);
+      gain.gain.setValueAtTime(0.28, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.075);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.08);
+    } else {
+      osc.frequency.setValueAtTime(360, now);
+      osc.frequency.exponentialRampToValueAtTime(130, now + 0.05);
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.055);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.06);
     }
-    showAdminToast('🚀 Cola fija activada: Arrastra cualquier canción al TV sin que se mueva la lista', '🔒');
-  } else {
-    if (icon) icon.textContent = '↕️';
-    if (text) text.textContent = 'Modo Mover Lista (Toca para fijar)';
-    if (btn) {
-      btn.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/25 text-[10px] sm:text-xs font-bold text-gray-200 active:scale-95 transition';
+  } catch (err) {}
+}
+
+// Enganchar o desenganchar una canción en el DOM sin destruir el nodo activo bajo el dedo
+function setArmedSong(index) {
+  const prevArmed = armedSongIndex;
+  armedSongIndex = index;
+
+  if (index !== -1 && index !== prevArmed) {
+    if (navigator.vibrate) {
+      try { navigator.vibrate([25, 30, 15]); } catch (e) {}
     }
-    showAdminToast('↕️ Modo deslizar lista activado (aún puedes lanzar desde la carátula o botón Sonar)', '📜');
+    playArmCardSound(true);
+  } else if (index === -1 && prevArmed !== -1) {
+    playArmCardSound(false);
   }
 
-  renderQueueList(currentQueueState);
+  const rows = document.querySelectorAll('.queue-row');
+  rows.forEach((row) => {
+    const rowIdx = Number(row.getAttribute('data-queue-index'));
+    const badge = document.getElementById(`armed-badge-${rowIdx}`);
+    const icon = document.getElementById(`armed-icon-${rowIdx}`);
+    const zone = row.querySelector('.cast-direct-zone');
+
+    if (rowIdx === armedSongIndex) {
+      row.style.touchAction = 'none';
+      if (zone) zone.style.touchAction = 'none';
+      row.style.transition = 'transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, opacity 0.2s ease';
+      row.style.transform = 'scale(1.028) translateY(-4px)';
+      row.style.boxShadow = '0 14px 34px rgba(245, 158, 11, 0.55), 0 0 22px rgba(245, 158, 11, 0.4)';
+      row.style.borderColor = '#fbbf24';
+      row.style.borderWidth = '2px';
+      row.style.background = 'linear-gradient(90deg, rgba(245,158,11,0.24), #181d2c, rgba(245,158,11,0.18))';
+      row.style.opacity = '1';
+      row.style.zIndex = '25';
+      row.classList.remove('overflow-hidden');
+      row.classList.add('overflow-visible');
+
+      if (badge) {
+        badge.classList.remove('hidden');
+        badge.classList.add('flex');
+      }
+      if (icon) {
+        icon.textContent = '🚀';
+        icon.className = 'md:hidden absolute -top-1 -right-1 text-[9px] bg-amber-400 scale-125 text-black font-black rounded-full w-4 h-4 flex items-center justify-center shadow pointer-events-none transition-transform';
+      }
+    } else {
+      row.style.touchAction = 'pan-y';
+      if (zone) zone.style.touchAction = 'pan-y';
+      row.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease';
+      row.style.transform = '';
+      row.style.boxShadow = '';
+      row.style.borderColor = '';
+      row.style.borderWidth = '';
+      row.style.background = '';
+      row.style.zIndex = '';
+      row.style.opacity = (armedSongIndex !== -1) ? '0.48' : '1';
+      row.classList.remove('overflow-visible');
+      row.classList.add('overflow-hidden');
+
+      if (badge) {
+        badge.classList.add('hidden');
+        badge.classList.remove('flex');
+      }
+      if (icon) {
+        icon.textContent = '👆';
+        icon.className = 'md:hidden absolute -top-1 -right-1 text-[9px] bg-white/20 text-white font-black rounded-full w-4 h-4 flex items-center justify-center shadow pointer-events-none transition-transform';
+      }
+    }
+  });
 }
+
+document.addEventListener('touchstart', (e) => {
+  if (armedSongIndex !== -1 && !e.target.closest('.queue-row')) {
+    setArmedSong(-1);
+  }
+}, { passive: true });
 
 let touchCastState = {
   active: false,
@@ -964,7 +1058,9 @@ let touchCastState = {
   deltaY: 0,
   deltaX: 0,
   isDraggingUp: false,
-  lockScroll: true,
+  wasArmedOnStart: false,
+  isArmedNow: false,
+  holdTimer: null,
   rect: null
 };
 
@@ -973,101 +1069,103 @@ function onWindowTouchMove(e) {
   const touch = e.touches[0];
   const deltaY = touch.clientY - touchCastState.startY;
   const deltaX = touch.clientX - touchCastState.startX;
-  const stepY = touch.clientY - touchCastState.lastY;
   touchCastState.lastY = touch.clientY;
   touchCastState.deltaY = deltaY;
   touchCastState.deltaX = deltaX;
 
-  // CRÍTICO EN iPHONE (iOS Safari): Cancelar el evento en el Frame 1 ANTES de que WebKit inicie el scroll nativo
-  if (touchCastState.lockScroll || touchCastState.isDraggingUp || deltaY < 0) {
-    if (e.cancelable) e.preventDefault();
-  }
-
-  // Si aún no ha despegado hacia arriba y el usuario desliza hacia ABAJO (> 8px), permitir subir la página suavemente
-  if (!touchCastState.isDraggingUp && deltaY > 8 && Math.abs(deltaY) > Math.abs(deltaX)) {
-    window.scrollBy(0, -stepY);
+  if (!touchCastState.isArmedNow && (Math.abs(deltaY) > 6 || Math.abs(deltaX) > 6)) {
+    if (touchCastState.holdTimer) {
+      clearTimeout(touchCastState.holdTimer);
+      touchCastState.holdTimer = null;
+    }
+    if (armedSongIndex !== -1) {
+      setArmedSong(-1);
+    }
+    touchCastState.active = false;
+    window.removeEventListener('touchmove', onWindowTouchMove, { passive: false });
+    window.removeEventListener('touchend', onWindowTouchEnd, { passive: false });
+    window.removeEventListener('touchcancel', onWindowTouchEnd);
     return;
   }
 
-  // Despegue instantáneo a los -4px hacia arriba: la columna jamás se mueve
-  if (!touchCastState.isDraggingUp && deltaY < -4 && (touchCastState.lockScroll || Math.abs(deltaY) > Math.abs(deltaX))) {
-    touchCastState.isDraggingUp = true;
+  if (touchCastState.isArmedNow) {
+    if (e.cancelable) e.preventDefault();
 
-    // 1. Mostrar portal superior en el teléfono
-    const portal = document.getElementById('castDropPortal');
-    if (portal) portal.classList.remove('-translate-y-full');
+    if (!touchCastState.isDraggingUp && deltaY < -5) {
+      touchCastState.isDraggingUp = true;
 
-    // 2. Crear clon 3D flotante desacoplado de la lista con position: fixed
-    const card = touchCastState.card;
-    const rect = card.getBoundingClientRect();
-    touchCastState.rect = rect;
+      const portal = document.getElementById('castDropPortal');
+      if (portal) portal.classList.remove('-translate-y-full');
 
-    const clone = card.cloneNode(true);
-    clone.id = 'activeCastClone';
-    clone.style.position = 'fixed';
-    clone.style.left = `${rect.left}px`;
-    clone.style.top = `${rect.top}px`;
-    clone.style.width = `${rect.width}px`;
-    clone.style.height = `${rect.height}px`;
-    clone.style.margin = '0';
-    clone.style.zIndex = '9999';
-    clone.style.pointerEvents = 'none';
-    clone.style.overflow = 'visible';
-    clone.style.boxShadow = '0 0 50px rgba(245, 158, 11, 0.95), 0 18px 45px rgba(0,0,0,0.9)';
-    clone.style.border = '2px solid rgba(245, 158, 11, 1)';
-    clone.style.background = '#0e1118';
-    clone.style.borderRadius = '1rem';
-    clone.style.transition = 'none';
-    clone.style.willChange = 'transform';
+      const card = touchCastState.card;
+      const rect = card.getBoundingClientRect();
+      touchCastState.rect = rect;
 
-    // Etiqueta flotante neón sobre la tarjeta que llevas en el dedo
-    const floatingBadge = document.createElement('div');
-    floatingBadge.className = 'absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-orange-500 text-black text-[9.5px] font-black px-3 py-0.5 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.9)] whitespace-nowrap uppercase tracking-wider flex items-center gap-1';
-    floatingBadge.innerHTML = '<span>🚀</span> <span>¡Suelta para sonar en TV!</span>';
-    clone.appendChild(floatingBadge);
+      const clone = card.cloneNode(true);
+      clone.id = 'activeCastClone';
+      clone.style.position = 'fixed';
+      clone.style.left = `${rect.left}px`;
+      clone.style.top = `${rect.top}px`;
+      clone.style.width = `${rect.width}px`;
+      clone.style.height = `${rect.height}px`;
+      clone.style.margin = '0';
+      clone.style.zIndex = '9999';
+      clone.style.pointerEvents = 'none';
+      clone.style.overflow = 'visible';
+      clone.style.boxShadow = '0 0 50px rgba(245, 158, 11, 0.95), 0 18px 45px rgba(0,0,0,0.9)';
+      clone.style.border = '2px solid rgba(245, 158, 11, 1)';
+      clone.style.background = '#0e1118';
+      clone.style.borderRadius = '1rem';
+      clone.style.transition = 'none';
+      clone.style.willChange = 'transform';
 
-    document.body.appendChild(clone);
-    touchCastState.clone = clone;
+      const existingBadge = clone.querySelector('[id^="armed-badge-"]');
+      if (existingBadge) {
+        existingBadge.innerHTML = '<span>🚀</span> <span>¡Suelta para sonar en TV!</span>';
+      }
 
-    // 3. Dejar la ranura guía fija en la cola (la columna no se mueve ni 1px)
-    card.style.opacity = '0.18';
-    card.style.filter = 'grayscale(0.8)';
-    card.style.borderStyle = 'dashed';
-  }
+      document.body.appendChild(clone);
+      touchCastState.clone = clone;
 
-  // Mover el clon 3D con aceleración por hardware (60/120fps en iPhone)
-  if (touchCastState.isDraggingUp) {
-    const clone = touchCastState.clone;
-    if (clone) {
-      const progress = Math.min(1, Math.abs(deltaY) / 180);
-      const scale = 1.03 - (progress * 0.14);
-      const tilt = Math.max(-8, Math.min(8, deltaX * 0.05));
+      card.style.opacity = '0.18';
+      card.style.filter = 'grayscale(0.8)';
+      card.style.borderStyle = 'dashed';
+    }
 
-      clone.style.transform = `translate3d(${deltaX * 0.4}px, ${deltaY}px, 0) scale(${scale}) rotate(${tilt}deg)`;
-      clone.style.boxShadow = `0 0 ${35 + progress * 45}px rgba(245, 158, 11, ${0.7 + progress * 0.3}), 0 22px 50px rgba(0,0,0,0.95)`;
+    if (touchCastState.isDraggingUp) {
+      const clone = touchCastState.clone;
+      if (clone) {
+        const progress = Math.min(1, Math.abs(deltaY) / 180);
+        const scale = 1.04 - (progress * 0.14);
+        const tilt = Math.max(-8, Math.min(8, deltaX * 0.05));
+
+        clone.style.transform = `translate3d(${deltaX * 0.4}px, ${deltaY}px, 0) scale(${scale}) rotate(${tilt}deg)`;
+        clone.style.boxShadow = `0 0 ${35 + progress * 45}px rgba(245, 158, 11, ${0.7 + progress * 0.3}), 0 22px 50px rgba(0,0,0,0.95)`;
+      }
     }
   }
 }
 
 function onWindowTouchEnd(e) {
+  if (touchCastState.holdTimer) {
+    clearTimeout(touchCastState.holdTimer);
+    touchCastState.holdTimer = null;
+  }
   if (!touchCastState.active) return;
 
-  // Remover listeners de ventana
   window.removeEventListener('touchmove', onWindowTouchMove, { passive: false });
-  window.removeEventListener('touchend', onWindowTouchEnd);
+  window.removeEventListener('touchend', onWindowTouchEnd, { passive: false });
   window.removeEventListener('touchcancel', onWindowTouchEnd);
 
   const portal = document.getElementById('castDropPortal');
   if (portal) portal.classList.add('-translate-y-full');
 
-  const { card, clone, deltaY, deltaX, isDraggingUp, index } = touchCastState;
+  const { card, clone, deltaY, deltaX, isDraggingUp, wasArmedOnStart, isArmedNow, index } = touchCastState;
   touchCastState.active = false;
 
   if (isDraggingUp && clone) {
-    // Evitar que el click fantasma dispare botones debajo al soltar el arrastre
     if (e && e.cancelable) e.preventDefault();
 
-    // Umbral cómodo de -38px hacia arriba: disparo supersónico directo al TV
     if (deltaY < -38) {
       clone.style.transition = 'all 0.36s cubic-bezier(0.16, 1, 0.3, 1)';
       clone.style.transform = `translate3d(${deltaX * 0.35}px, -140vh, 0) scale(0.25) rotate(-10deg)`;
@@ -1075,44 +1173,42 @@ function onWindowTouchEnd(e) {
 
       setTimeout(() => {
         clone.remove();
-        if (card) {
-          card.style.opacity = '';
-          card.style.filter = '';
-          card.style.borderStyle = '';
-        }
       }, 360);
 
+      setArmedSong(-1);
       castSongDirect(index);
       return;
     }
 
-    // Si apenas la levantó (< 38px), regresa suavemente a su ranura fija
     clone.style.transition = 'all 0.22s cubic-bezier(0.16, 1, 0.3, 1)';
-    clone.style.transform = 'translate3d(0, 0, 0) scale(1) rotate(0deg)';
+    clone.style.transform = 'translate3d(0, 0, 0) scale(1.028) rotate(0deg)';
     setTimeout(() => {
       clone.remove();
-      if (card) {
-        card.style.opacity = '';
-        card.style.filter = '';
-        card.style.borderStyle = '';
-      }
+      setArmedSong(index);
     }, 220);
-  } else if (card) {
-    card.style.opacity = '';
-    card.style.filter = '';
-    card.style.borderStyle = '';
+    return;
+  }
+
+  if (Math.abs(deltaY) < 10 && Math.abs(deltaX) < 10) {
+    if (!wasArmedOnStart && !isArmedNow) {
+      setArmedSong(index);
+    } else if (wasArmedOnStart && !isDraggingUp) {
+      setArmedSong(-1);
+    }
   }
 }
 
 function initCardTouchCast(e, index) {
-  // Ignorar solo botones de reordenar (▲ ▼), VIP o eliminar (✕)
   if (e.target.closest('.no-cast-drag, input, select, a')) return;
   const touch = e.touches[0];
   const card = document.getElementById(`queue-row-${index}`);
   if (!card) return;
 
-  // Si toca la carátula o el botón Sonar, o si está activo el Modo Cola Fija, bloqueamos el scroll desde el Frame 0
-  const isForceZone = Boolean(e.target.closest('.cast-force-lock'));
+  if (touchCastState.holdTimer) {
+    clearTimeout(touchCastState.holdTimer);
+  }
+
+  const alreadyArmed = (armedSongIndex === index);
 
   touchCastState = {
     active: true,
@@ -1125,9 +1221,20 @@ function initCardTouchCast(e, index) {
     deltaY: 0,
     deltaX: 0,
     isDraggingUp: false,
-    lockScroll: touchCastLockMode || isForceZone,
+    wasArmedOnStart: alreadyArmed,
+    isArmedNow: alreadyArmed,
+    holdTimer: null,
     rect: null
   };
+
+  if (!alreadyArmed) {
+    touchCastState.holdTimer = setTimeout(() => {
+      if (touchCastState.active && !touchCastState.isDraggingUp) {
+        touchCastState.isArmedNow = true;
+        setArmedSong(index);
+      }
+    }, 250);
+  }
 
   window.addEventListener('touchmove', onWindowTouchMove, { passive: false });
   window.addEventListener('touchend', onWindowTouchEnd, { passive: false });
