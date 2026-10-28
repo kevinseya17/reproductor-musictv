@@ -700,11 +700,11 @@ function renderQueueList(queue) {
            ondrop="handleQueueDrop(event, ${origIdx})"
            ondragend="handleQueueDragEnd(event)"
            ontouchstart="initCardTouchCast(event, ${origIdx})"
-           class="queue-row flex items-center justify-between p-2 sm:p-2.5 rounded-xl ${rowBorderClass} gap-1.5 sm:gap-3 group select-none cursor-grab active:cursor-grabbing transition-all relative overflow-hidden">
+           class="queue-row flex items-center justify-between p-2 sm:p-2.5 rounded-xl ${rowBorderClass} gap-1.5 sm:gap-2.5 group select-none cursor-grab active:cursor-grabbing transition-all relative overflow-hidden">
         
-        <!-- Izquierda: Grip + Reordenar + Número -->
+        <!-- Izquierda: Reordenar ▲ ▼ y Número -->
         <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
-          <div class="text-gray-600 group-hover:text-amber-400 px-1 cursor-grab" title="Arrastra para cambiar orden">
+          <div class="text-gray-600 group-hover:text-amber-400 px-0.5 cursor-grab hidden md:inline-block" title="Arrastra para cambiar orden">
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
               <circle cx="9" cy="5" r="1.5"/><circle cx="15" cy="5" r="1.5"/>
               <circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/>
@@ -712,40 +712,40 @@ function renderQueueList(queue) {
             </svg>
           </div>
           <div class="flex flex-col items-center">
-            <button onclick="reorderQueueItem(${origIdx}, 'up')" class="text-[10px] p-0.5 text-gray-500 hover:text-amber-400 hover:bg-white/10 rounded transition ${i === 0 ? 'opacity-20 cursor-not-allowed' : ''}" title="Subir turno" ${i === 0 ? 'disabled' : ''}>▲</button>
-            <button onclick="reorderQueueItem(${origIdx}, 'down')" class="text-[10px] p-0.5 text-gray-500 hover:text-amber-400 hover:bg-white/10 rounded transition ${i === total - 1 ? 'opacity-20 cursor-not-allowed' : ''}" title="Bajar turno" ${i === total - 1 ? 'disabled' : ''}>▼</button>
+            <button onclick="reorderQueueItem(${origIdx}, 'up')" class="text-[9px] sm:text-[10px] leading-none py-0.5 px-0.5 text-gray-500 hover:text-amber-400 hover:bg-white/10 rounded transition ${i === 0 ? 'opacity-20 cursor-not-allowed' : ''}" title="Subir turno" ${i === 0 ? 'disabled' : ''}>▲</button>
+            <button onclick="reorderQueueItem(${origIdx}, 'down')" class="text-[9px] sm:text-[10px] leading-none py-0.5 px-0.5 text-gray-500 hover:text-amber-400 hover:bg-white/10 rounded transition ${i === total - 1 ? 'opacity-20 cursor-not-allowed' : ''}" title="Bajar turno" ${i === total - 1 ? 'disabled' : ''}>▼</button>
           </div>
-          <span class="font-mono font-bold text-gray-400 text-xs w-6 text-center">${String(origIdx + 1).padStart(2, '0')}</span>
+          <span class="font-mono font-bold text-gray-400 text-xs w-5 sm:w-6 text-center">${String(origIdx + 1).padStart(2, '0')}</span>
         </div>
 
-        <!-- Carátula + Info -->
+        <!-- Carátula + Info de la canción con espacio amplio -->
         <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 pointer-events-none">
-          <img src="${song.thumbnail || 'https://i.ytimg.com/vi/' + song.videoId + '/hqdefault.jpg'}" class="w-10 h-8 sm:w-11 sm:h-8 rounded-lg object-cover border border-white/10 shrink-0 shadow-sm">
+          <img src="${song.thumbnail || 'https://i.ytimg.com/vi/' + song.videoId + '/hqdefault.jpg'}" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover border border-white/10 shrink-0 shadow-sm">
           <div class="min-w-0 flex-1">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1.5">
               <p class="text-xs sm:text-sm font-bold text-white truncate group-hover:text-amber-300 transition" title="${escapeHtml(song.title)}">
                 ${escapeHtml(song.title)}
               </p>
-              <span class="genre-badge genre-${song.genre || 'Crossover'} text-[8.5px] py-0 px-2 font-mono hidden sm:inline-flex">${escapeHtml(song.genre || 'Crossover')}</span>
+              <span class="genre-badge genre-${song.genre || 'Crossover'} text-[8.5px] py-0 px-1.5 font-mono hidden lg:inline-flex">${escapeHtml(song.genre || 'Crossover')}</span>
               ${song.bpm ? `<span class="px-1.5 py-0.2 rounded bg-purple-950/60 text-purple-300 text-[8.5px] font-mono border border-purple-500/30 hidden md:inline-flex">${song.bpm} BPM</span>` : ''}
             </div>
-            <div class="flex items-center gap-2 text-[10.5px] text-gray-400 truncate mt-0.5">
-              <span class="truncate font-medium text-gray-300">${escapeHtml(song.artist)}</span>
-              <span>•</span>
-              ${badgeHtml}
+            <div class="flex items-center gap-1.5 text-[10.5px] text-gray-400 truncate mt-0.5">
+              <span class="truncate font-medium text-gray-300 max-w-[120px] sm:max-w-none">${escapeHtml(song.artist)}</span>
+              <span class="hidden xs:inline text-gray-600">•</span>
+              <span class="hidden xs:inline">${badgeHtml}</span>
               ${song.requestedBy?.dedication ? `<span class="text-pink-400 italic truncate hidden md:inline">"${escapeHtml(song.requestedBy.dedication)}"</span>` : ''}
             </div>
           </div>
         </div>
 
         <!-- Duración + Acciones -->
-        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <span class="font-mono text-xs text-gray-400 hidden sm:inline">${song.duration || '3:30'}</span>
+        <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+          <span class="font-mono text-xs text-gray-400 hidden lg:inline">${song.duration || '3:30'}</span>
           ${vipButtonHtml}
-          <button onclick="castSongDirect(${origIdx})" class="tactile-btn-gold text-[10px] font-mono font-black py-1 px-2.5 whitespace-nowrap flex items-center gap-1 shadow-[0_0_15px_rgba(245,158,11,0.35)] hover:scale-105 active:scale-95 transition" title="Lanzar esta canción hacia el televisor con animación">
-            <span>🚀</span> <span>LANZAR</span>
+          <button onclick="castSongDirect(${origIdx})" class="tactile-btn-gold text-[10px] font-mono font-black py-1.5 px-2.5 sm:px-3 whitespace-nowrap flex items-center gap-1 shadow-[0_0_12px_rgba(245,158,11,0.25)] hover:scale-105 active:scale-95 transition rounded-xl" title="Hacer sonar inmediatamente en la TV">
+            <span class="text-xs">▶</span> <span>SONAR</span>
           </button>
-          <button onclick="removeQueueItem('${song.id}')" class="text-gray-500 hover:text-red-400 p-1.5 rounded-lg hover:bg-white/10 transition" title="Eliminar de la cola">
+          <button onclick="removeQueueItem('${song.id}')" class="text-gray-500 hover:text-red-400 p-1.5 rounded-lg hover:bg-white/10 transition shrink-0" title="Eliminar de la cola">
             ✕
           </button>
         </div>
@@ -1111,7 +1111,7 @@ function castSongDirect(index) {
     queueIndex: index
   });
 
-  showAdminToast(`🚀 ¡"${song.title}" lanzada al televisor!`, '✨');
+  showAdminToast(`▶ ¡"${song.title}" sonando en la TV!`, '🔥');
 }
 
 function adminCastSongFromSearch(idx) {
@@ -1133,7 +1133,7 @@ function adminCastSongFromSearch(idx) {
     requestedBy: { name: 'DJ / Buscador' }
   });
 
-  showAdminToast(`🚀 ¡"${v.title}" lanzada al televisor!`, '✨');
+  showAdminToast(`▶ ¡"${v.title}" sonando en la TV!`, '🔥');
   clearAdminSearch();
 }
 
