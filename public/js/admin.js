@@ -217,11 +217,11 @@ function updatePlayerTelemetry(data) {
     if (playerTelemetry.isPlaying) {
       playPauseIcon.textContent = '⏸️';
       playPauseText.textContent = 'PAUSAR';
-      playPauseBtn.className = 'tactile-btn-gold px-7 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg flex items-center gap-2';
+      playPauseBtn.className = 'tactile-btn-gold w-full sm:w-auto justify-center px-2.5 sm:px-6 py-2 text-xs sm:text-sm flex items-center gap-1.5 whitespace-nowrap';
     } else {
       playPauseIcon.textContent = '▶️';
       playPauseText.textContent = 'REANUDAR';
-      playPauseBtn.className = 'tactile-btn-dark px-7 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg flex items-center gap-2 border-amber-400 text-amber-400';
+      playPauseBtn.className = 'tactile-btn-dark w-full sm:w-auto justify-center px-2.5 sm:px-6 py-2 text-xs sm:text-sm flex items-center gap-1.5 border-amber-400 text-amber-400 whitespace-nowrap';
     }
   }
 
